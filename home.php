@@ -20,7 +20,7 @@ $breaking_ids = ( is_front_page() && $ticker_on ) ? jagawarta_get_breaking_posts
 		<?php get_template_part( 'template-parts/breaking-ticker', null, array( 'post_ids' => $breaking_ids ) ); ?>
 	<?php endif; ?>
 	<header class="pb-4 border-b border-outline-variant mb-2">
-		<h1 class="text-headline-medium font-serif text-on-surface"><?php single_post_title(); ?></h1>
+		<h1 class="text-headline-medium font-sans text-on-surface"><?php single_post_title(); ?></h1>
 	</header>
 	<?php if ( have_posts() ) : ?>
 		<div class="grid gap-8 sm:gap-10">

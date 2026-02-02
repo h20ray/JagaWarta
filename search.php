@@ -13,7 +13,7 @@ get_header();
 
 <main id="main" class="site-main layout-content layout-section flex flex-col gap-10">
 	<header class="pb-4 border-b border-outline-variant mb-2">
-		<h1 class="text-headline-medium font-serif text-on-surface">
+		<h1 class="text-headline-medium font-sans text-on-surface">
 			<?php
 			printf(
 				/* translators: %s: search query */

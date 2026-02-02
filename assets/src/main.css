@@ -10,13 +10,13 @@
     @apply font-sans text-on-surface bg-surface;
   }
   h1 {
-    @apply text-headline-large font-serif;
+    @apply text-headline-large font-sans tracking-tight mb-3;
   }
   h2 {
-    @apply text-headline-medium font-serif;
+    @apply text-headline-medium font-sans tracking-tight mb-3;
   }
   h3 {
-    @apply text-title-large font-serif;
+    @apply text-title-large font-sans tracking-tight mb-2;
   }
   a:focus-visible {
     @apply outline-2 outline outline-primary outline-offset-2;
@@ -96,6 +96,6 @@
     @apply py-6 sm:py-8;
   }
   .section-heading {
-    @apply text-headline-medium font-serif text-on-surface mb-4 sm:mb-6 pb-2 border-b border-outline-variant;
+    @apply text-headline-medium font-sans tracking-tight text-on-surface mb-4 sm:mb-6 pb-2 border-b border-outline-variant;
   }
 }

@@ -27,12 +27,19 @@ function jagawarta_enqueue_assets(): void {
 	$dir = JAGAWARTA_DIR . '/assets/dist';
 	$uri = JAGAWARTA_URI . '/assets/dist';
 
+	wp_enqueue_style(
+		'jagawarta-google-font',
+		'https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@100..900&display=swap',
+		array(),
+		null
+	);
+
 	$tokens_css = $dir . '/tokens.css';
 	if ( file_exists( $tokens_css ) ) {
 		wp_enqueue_style(
 			'jagawarta-tokens',
 			$uri . '/tokens.css',
-			array(),
+			array( 'jagawarta-google-font' ),
 			(string) filemtime( $tokens_css )
 		);
 	}
@@ -57,7 +64,9 @@ function jagawarta_enqueue_assets(): void {
 		);
 	}
 
-	if ( jagawarta_needs_slider() ) {
+	if ( is_front_page() ) {
+		jagawarta_enqueue_hero_splide( $dir, $uri );
+	} elseif ( jagawarta_needs_slider() ) {
 		jagawarta_enqueue_slider( $dir, $uri );
 	}
 	if ( jagawarta_needs_ticker() ) {
@@ -107,10 +116,29 @@ function jagawarta_needs_slider(): bool {
 			return true;
 		}
 	}
-	if ( is_front_page() && get_theme_mod( 'jagawarta_front_hero_slider', true ) ) {
-		return true;
-	}
 	return false;
+}
+
+function jagawarta_enqueue_hero_splide( string $dir, string $uri ): void {
+	$slider_css = $dir . '/slider.css';
+	$hero_js    = $dir . '/hero-splide.js';
+	if ( file_exists( $slider_css ) ) {
+		wp_enqueue_style(
+			'jagawarta-slider',
+			$uri . '/slider.css',
+			array( 'jagawarta-main' ),
+			(string) filemtime( $slider_css )
+		);
+	}
+	if ( file_exists( $hero_js ) ) {
+		wp_enqueue_script(
+			'jagawarta-hero-splide',
+			$uri . '/hero-splide.js',
+			array(),
+			(string) filemtime( $hero_js ),
+			array( 'strategy' => 'defer' )
+		);
+	}
 }
 
 function jagawarta_enqueue_slider( string $dir, string $uri ): void {

@@ -16,6 +16,7 @@ define( 'JAGAWARTA_URI', get_template_directory_uri() );
 
 require_once JAGAWARTA_DIR . '/inc/helpers.php';
 require_once JAGAWARTA_DIR . '/inc/query/posts.php';
+require_once JAGAWARTA_DIR . '/inc/query/news.php';
 require_once JAGAWARTA_DIR . '/inc/assets.php';
 require_once JAGAWARTA_DIR . '/inc/customizer.php';
 

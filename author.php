@@ -13,7 +13,7 @@ get_header();
 
 <main id="main" class="site-main mx-auto max-w-6xl px-4 py-8">
 	<header class="mb-8 border-b border-outline-variant pb-4">
-		<?php the_archive_title( '<h1 class="text-headline-large font-serif text-on-surface">', '</h1>' ); ?>
+		<?php the_archive_title( '<h1 class="text-headline-large font-sans text-on-surface">', '</h1>' ); ?>
 		<?php the_archive_description( '<p class="mt-2 text-body-medium text-on-surface-variant">', '</p>' ); ?>
 	</header>
 	<?php if ( have_posts() ) : ?>
