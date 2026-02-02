@@ -19,7 +19,7 @@ $related_ids = jagawarta_get_related_posts( get_the_ID(), 3 );
 		<?php get_template_part( 'template-parts/single-content' ); ?>
 		
 		<div class="mx-auto max-w-[726px] px-spacing-4">
-			<?php get_template_part( 'template-parts/author-block' ); ?>
+
 			<?php get_template_part( 'template-parts/single-footer' ); ?>
 		</div>
 	</article>

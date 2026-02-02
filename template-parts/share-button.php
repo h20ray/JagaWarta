@@ -1,7 +1,7 @@
 <?php
 /**
  * Share Button Component (Google Blog Style).
- * Simple copy-link functionality with icon.
+ * Using consistent theme pill pattern.
  *
  * @package JagaWarta
  */
@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $post_url = get_permalink();
 $post_title = get_the_title();
 ?>
-<button type="button" class="share-btn inline-flex items-center gap-spacing-2 px-spacing-4 py-spacing-2 text-label-medium font-medium text-primary hover:bg-surface-high rounded-sm transition-colors duration-short no-underline border-0 bg-transparent cursor-pointer" onclick="navigator.clipboard.writeText('<?php echo esc_js( $post_url ); ?>').then(() => alert('Link copied!'))">
+<button type="button" class="share-btn inline-flex items-center gap-spacing-2 px-spacing-3 py-spacing-1 text-label-medium font-medium text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard no-underline border-0 bg-transparent cursor-pointer" onclick="navigator.clipboard.writeText('<?php echo esc_js( $post_url ); ?>').then(() => alert('<?php esc_attr_e( 'Link copied!', 'jagawarta' ); ?>'))">
 	<!-- Share icon SVG -->
 	<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 		<circle cx="18" cy="5" r="3"></circle>

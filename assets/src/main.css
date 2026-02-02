@@ -40,9 +40,10 @@
 }
 
 @layer components {
+
   /* MD3 surfaces: page/section=surface, card=surface-low, hero/hover=surface-high */
   .prose-article {
-    @apply max-w-none font-sans text-body-medium text-on-surface;
+    @apply max-w-none font-sans text-body-large text-on-surface-variant;
   }
 
   .prose-article a {
@@ -144,15 +145,19 @@
   .js-hero-splide .splide__pagination {
     @apply bottom-4 left-0 right-0 z-10;
   }
+
   .js-hero-splide .splide__pagination__page {
     background-color: color-mix(in srgb, var(--md-color-on-surface-variant) 50%, transparent);
   }
+
   .js-hero-splide .splide__pagination__page:hover {
     @apply bg-on-surface-variant;
   }
+
   .js-hero-splide .splide__pagination__page.is-active {
     @apply bg-primary;
   }
+
   .js-hero-splide .splide__arrow {
     background-color: color-mix(in srgb, var(--md-color-surface-container-high) 90%, transparent);
     @apply text-on-surface hover:bg-surface-highest border-0;
@@ -161,6 +166,7 @@
   .hero-image-wrap {
     @apply aspect-[16/9] min-h-[200px] max-h-[70vh] w-full;
   }
+
   @screen sm {
     .hero-image-wrap {
       max-height: min(70vh, 28rem);

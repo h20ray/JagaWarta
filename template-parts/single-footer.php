@@ -1,7 +1,7 @@
 <?php
 /**
  * Single: Article Footer (Google Blog Style).
- * Categories and tags with "POSTED IN:" heading.
+ * Tags section labeled "POSTED IN:".
  *
  * @package JagaWarta
  */
@@ -10,41 +10,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$cats = get_the_category();
 $tags = get_the_tags();
 
-if ( empty( $cats ) && empty( $tags ) ) {
+if ( ! $tags ) {
 	return;
 }
+
+// Limit to max 4 tags as per Google Blog style request
+$tags = array_slice( $tags, 0, 4 );
 ?>
-<footer class="mt-spacing-12 pt-spacing-6 border-t border-outline-variant">
-	<?php if ( ! empty( $cats ) ) : ?>
-		<div class="mb-spacing-6">
-			<div class="text-label-medium uppercase tracking-wide text-on-surface-variant mb-spacing-3">
-				<?php esc_html_e( 'Posted In:', 'jagawarta' ); ?>
-			</div>
-			<div class="flex flex-wrap gap-3">
-				<?php foreach ( $cats as $cat ) : ?>
-					<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>" class="text-primary hover:underline text-body-medium">
-						<?php echo esc_html( $cat->name ); ?>
-					</a>
-				<?php endforeach; ?>
-			</div>
+<footer class="mt-spacing-12 pt-spacing-8">
+	<div class="flex flex-col sm:flex-row sm:items-baseline gap-spacing-4">
+		<!-- Label: POSTED IN: (16px, Medium, Uppercase) -->
+		<span class="text-[1rem] font-medium uppercase tracking-wide text-on-surface-variant flex-shrink-0">
+			<?php esc_html_e( 'Posted In:', 'jagawarta' ); ?>
+		</span>
+
+		<!-- Tags: Chips (Pills) -->
+		<div class="flex flex-wrap gap-3">
+			<?php foreach ( $tags as $tag ) :
+				// Convert tag name to #Hashtag format (CamelCase)
+				$tag_name = ucwords( $tag->name );
+				$tag_name = str_replace( ' ', '', $tag_name );
+				$tag_text = '#' . $tag_name;
+				?>
+				<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>" 
+				   class="inline-flex items-center px-spacing-5 py-spacing-3 bg-primary-container text-primary rounded-full text-label-large font-medium transition-colors duration-short hover:shadow-elevation-1 no-underline">
+					<?php echo esc_html( $tag_text ); ?>
+				</a>
+			<?php endforeach; ?>
 		</div>
-	<?php endif; ?>
-	
-	<?php if ( ! empty( $tags ) ) : ?>
-		<div>
-			<div class="text-label-medium uppercase tracking-wide text-on-surface-variant mb-spacing-3">
-				<?php esc_html_e( 'Tags:', 'jagawarta' ); ?>
-			</div>
-			<div class="flex flex-wrap gap-3">
-				<?php foreach ( $tags as $tag ) : ?>
-					<a href="<?php echo esc_url( get_tag_link( $tag->term_id ) ); ?>" class="text-primary hover:underline text-body-medium">
-						<?php echo esc_html( $tag->name ); ?>
-					</a>
-				<?php endforeach; ?>
-			</div>
-		</div>
-	<?php endif; ?>
+	</div>
 </footer>

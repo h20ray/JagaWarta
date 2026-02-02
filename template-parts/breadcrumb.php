@@ -1,8 +1,7 @@
 <?php
 /**
- * Breadcrumb Navigation (Google Blog Style)
- * Home > Category > Subcategory hierarchy
- * Uses design tokens, pill-style links (no underlines), SVG chevron separator.
+ * Breadcrumb Navigation (Google Blog Style)  
+ * Uses consistent pill/chip pattern from theme.
  *
  * @package JagaWarta
  */
@@ -50,14 +49,15 @@ $breadcrumb_parts[] = array(
 	foreach ( $breadcrumb_parts as $index => $part ) :
 		if ( $index > 0 ) :
 			?>
-			<!-- Chevron separator SVG (Google style) -->
+			<!-- Chevron separator SVG -->
 			<svg class="breadcrumb-chevron flex-shrink-0 text-on-surface-variant" width="16" height="16" viewBox="0 0 24 24" fill="none" role="presentation" aria-hidden="true">
 				<path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 			<?php
 		endif;
 		?>
-		<a href="<?php echo esc_url( $part['url'] ); ?>" class="inline-flex items-center px-spacing-3 py-spacing-1 text-label-medium font-medium uppercase tracking-wide text-primary hover:bg-surface-high rounded-sm transition-colors duration-short no-underline">
+		<!-- Pill-style link (consistent with theme chip pattern) -->
+		<a href="<?php echo esc_url( $part['url'] ); ?>" class="inline-flex items-center px-spacing-3 py-spacing-1 text-label-medium font-medium uppercase tracking-wide text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard no-underline">
 			<?php echo esc_html( $part['name'] ); ?>
 		</a>
 	<?php endforeach; ?>
