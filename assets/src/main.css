@@ -6,18 +6,23 @@
   html {
     @apply antialiased;
   }
+
   body {
     @apply font-sans text-on-surface bg-surface;
   }
+
   h1 {
     @apply text-headline-large font-sans tracking-tight mb-3;
   }
+
   h2 {
     @apply text-headline-medium font-sans tracking-tight mb-3;
   }
+
   h3 {
     @apply text-title-large font-sans tracking-tight mb-2;
   }
+
   a:focus-visible {
     @apply outline-2 outline outline-primary outline-offset-2;
   }
@@ -28,74 +33,137 @@
     outline: 2px solid var(--md-color-outline);
     outline-offset: 2px;
   }
+
   .focus-ring:focus-visible {
     outline-color: var(--md-color-primary);
   }
 }
 
 @layer components {
+  /* MD3 surfaces: page/section=surface, card=surface-low, hero/hover=surface-high */
   .prose-article {
     @apply max-w-none font-sans text-body-medium text-on-surface;
   }
+
   .prose-article a {
     @apply text-primary underline decoration-outline-variant underline-offset-2;
   }
+
   .prose-article a:hover {
     @apply decoration-primary;
   }
+
   .prose-article a:visited {
     @apply text-on-surface-variant;
   }
+
   .btn {
     @apply rounded-sm px-3 py-1.5 text-label-large font-medium border border-outline-variant bg-surface-high text-on-surface;
     @apply hover:bg-surface-mid transition-colors duration-short ease-standard;
     @apply focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary focus-visible:outline-offset-2;
   }
+
   .btn-filled {
     @apply bg-primary text-on-primary border-0;
     @apply hover:opacity-[0.92];
   }
+
   .btn-outlined {
     @apply bg-transparent border-outline text-primary;
   }
+
   .input {
     @apply rounded-sm border border-outline-variant px-2 py-1 text-body-medium w-full bg-surface-low text-on-surface;
     @apply focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary focus-visible:outline-offset-0;
   }
+
   .jagawarta-img-wrap {
     @apply overflow-hidden rounded-md;
   }
+
   .jagawarta-img-wrap--card {
     @apply aspect-video w-full;
   }
+
   .jagawarta-img-wrap--hero {
     @apply aspect-video w-full;
   }
+
   .jagawarta-img-wrap--single {
     @apply aspect-video w-full;
   }
+
   .jagawarta-img-wrap img {
     @apply w-full h-full object-cover;
   }
+
   .screen-reader-text {
     @apply absolute -left-[9999px] top-auto h-px w-px overflow-hidden;
   }
+
   .skip-link {
     @apply absolute;
   }
+
   .skip-link:focus {
     @apply left-4 top-4 z-[100] h-auto w-auto overflow-auto p-2 no-underline bg-surface-high text-on-surface;
   }
+
   .layout-content {
-    @apply mx-auto w-full max-w-6xl px-4 sm:px-6;
+    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
   }
+
   .layout-section {
-    @apply py-10 sm:py-12;
+    @apply py-spacing-16;
   }
+
+  @screen sm {
+    .layout-section {
+      @apply py-spacing-20;
+    }
+  }
+
   .layout-section-tight {
-    @apply py-6 sm:py-8;
+    @apply py-spacing-6;
   }
+
+  @screen sm {
+    .layout-section-tight {
+      @apply py-spacing-8;
+    }
+  }
+
   .section-heading {
-    @apply text-headline-medium font-sans tracking-tight text-on-surface mb-4 sm:mb-6 pb-2 border-b border-outline-variant;
+    @apply text-headline-large font-sans tracking-tight text-on-surface mb-4 sm:mb-6 pb-2 border-b border-outline-variant;
+  }
+
+  #nav-menu .current-menu-item .nav-link {
+    @apply font-semibold text-primary bg-surface-high;
+  }
+
+  .js-hero-splide .splide__pagination {
+    @apply bottom-4 left-0 right-0 z-10;
+  }
+  .js-hero-splide .splide__pagination__page {
+    background-color: color-mix(in srgb, var(--md-color-on-surface-variant) 50%, transparent);
+  }
+  .js-hero-splide .splide__pagination__page:hover {
+    @apply bg-on-surface-variant;
+  }
+  .js-hero-splide .splide__pagination__page.is-active {
+    @apply bg-primary;
+  }
+  .js-hero-splide .splide__arrow {
+    background-color: color-mix(in srgb, var(--md-color-surface-container-high) 90%, transparent);
+    @apply text-on-surface hover:bg-surface-highest border-0;
+  }
+
+  .hero-image-wrap {
+    @apply aspect-[16/9] min-h-[200px] max-h-[70vh] w-full;
+  }
+  @screen sm {
+    .hero-image-wrap {
+      max-height: min(70vh, 28rem);
+    }
   }
 }

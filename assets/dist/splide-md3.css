@@ -1,0 +1,114 @@
+/* Splide controls styled with MD3 role tokens (no hardcoded colors) */
+
+.js-hero-splide {
+  /* keep layout stable */
+}
+
+.js-hero-splide .splide__arrows {
+  pointer-events: none;
+}
+
+.js-hero-splide .splide__arrow {
+  pointer-events: auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--md-shape-corner-full);
+
+  background: var(--md-color-surface-container-low);
+  color: var(--md-color-on-surface);
+  border: 1px solid var(--md-color-outline-variant);
+
+  display: grid;
+  place-items: center;
+
+  transition:
+    opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+    background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+    transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+}
+
+.js-hero-splide .splide__arrow svg {
+  fill: currentColor;
+}
+
+.js-hero-splide .splide__arrow:hover {
+  background: var(--md-color-surface-container-high);
+}
+
+.js-hero-splide .splide__arrow:focus {
+  outline: 2px solid var(--md-color-outline);
+  outline-offset: 2px;
+}
+
+.js-hero-splide .splide__arrow {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.js-hero-splide .splide__arrow:active {
+  transform: translateY(-50%) scale(0.98);
+}
+
+.js-hero-splide .splide__arrow:disabled {
+  opacity: 0.6;
+}
+
+.js-hero-splide .splide__arrow--prev {
+  left: 1rem;
+}
+
+.js-hero-splide .splide__arrow--next {
+  right: 1rem;
+}
+
+@media (min-width: 1024px) {
+  .js-hero-splide .splide__arrow {
+    opacity: 0;
+  }
+
+  .js-hero-splide:hover .splide__arrow,
+  .js-hero-splide:focus-within .splide__arrow {
+    opacity: 1;
+  }
+}
+
+.js-hero-splide .splide__pagination {
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: color-mix(in srgb, var(--md-color-surface-container-low) 70%, transparent);
+  border: 1px solid var(--md-color-outline-variant);
+  border-radius: var(--md-shape-corner-full);
+  width: fit-content;
+  margin: 0 auto 0.75rem auto;
+}
+
+.js-hero-splide .splide__pagination__page {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--md-shape-corner-full);
+
+  background: var(--md-color-outline-variant);
+  border: 0;
+  opacity: 1;
+
+  transition:
+    transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+    background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+}
+
+.js-hero-splide .splide__pagination__page.is-active {
+  background: var(--md-color-primary);
+  transform: scale(1.2);
+}
+
+.js-hero-splide .splide__pagination__page:focus {
+  outline: 2px solid var(--md-color-outline);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-hero-splide .splide__arrow,
+  .js-hero-splide .splide__pagination__page {
+    transition: none !important;
+  }
+}

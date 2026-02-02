@@ -33,7 +33,11 @@ function jagawarta_setup() {
 		'flex-height' => true,
 		'flex-width'  => true,
 	) );
-	register_nav_menus( array( 'primary' => __( 'Primary', 'jagawarta' ) ) );
+	register_nav_menus( array(
+		'primary'           => __( 'Primary', 'jagawarta' ),
+		'footer-categories' => __( 'Footer Categories', 'jagawarta' ),
+		'footer-links'      => __( 'Footer Links', 'jagawarta' ),
+	) );
 }
 
 require_once JAGAWARTA_DIR . '/inc/blocks/register.php';

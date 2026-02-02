@@ -30,41 +30,39 @@ $date_iso   = get_the_date( DATE_W3C, $featured_id );
 $date_hr    = get_the_date( '', $featured_id );
 $category   = get_the_category( $featured_id );
 $cat        = $category ? $category[0] : null;
+$excerpt    = wp_strip_all_tags( get_the_excerpt( $featured_id ) );
 ?>
-<section class="bg-surface" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
-	<div class="mx-auto max-w-screen-lg px-4 py-6">
-		<article class="rounded-md bg-surface-high ring-1 ring-outline-variant">
-			<a href="<?php echo esc_url( $permalink ); ?>" class="block focus:outline-none">
-				<?php
-				$hero_img = jagawarta_get_post_display_image( $featured_id );
-				if ( ! empty( $hero_img['url'] ) ) :
-					?>
-					<div class="overflow-hidden rounded-t-md">
-						<?php jagawarta_the_post_display_image( $featured_id, array( 'lcp' => true, 'class' => 'object-cover' ) ); ?>
-					</div>
-				<?php endif; ?>
-
-				<div class="p-5">
-					<div class="flex items-center gap-2">
-						<?php if ( $cat ) : ?>
-							<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-[0.75rem] leading-5 text-on-secondary-container">
-								<?php echo esc_html( $cat->name ); ?>
-							</span>
-						<?php endif; ?>
-						<time datetime="<?php echo esc_attr( $date_iso ); ?>" class="text-[0.75rem] leading-5 text-on-surface-variant">
-							<?php echo esc_html( $date_hr ); ?>
-						</time>
-					</div>
-
-					<h2 class="mt-3 text-[1.75rem] leading-tight text-on-surface">
-						<?php echo esc_html( $title ); ?>
-					</h2>
-
-					<p class="mt-3 max-w-prose text-[1rem] leading-7 text-on-surface-variant">
-						<?php echo esc_html( wp_strip_all_tags( get_the_excerpt( $featured_id ) ) ); ?>
-					</p>
+<section class="bg-surface-high" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
+	<div class="w-full overflow-hidden">
+		<?php
+		$hero_img = jagawarta_get_post_display_image( $featured_id );
+		if ( ! empty( $hero_img['url'] ) ) :
+			?>
+			<div class="aspect-[16/9] min-h-[200px] max-h-[70vh] w-full bg-surface-mid">
+				<?php jagawarta_the_post_display_image( $featured_id, array( 'lcp' => true, 'class' => 'h-full w-full object-cover' ) ); ?>
+			</div>
+		<?php endif; ?>
+		<div class="layout-content py-spacing-8 sm:py-spacing-10">
+			<div class="max-w-3xl">
+				<div class="flex flex-wrap items-center gap-spacing-3 mb-spacing-3">
+					<?php if ( $cat ) : ?>
+						<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+					<?php endif; ?>
+					<time datetime="<?php echo esc_attr( $date_iso ); ?>" class="text-label-large text-on-surface-variant">
+						<?php echo esc_html( $date_hr ); ?>
+					</time>
 				</div>
-			</a>
-		</article>
+				<h2 class="text-display-small md:text-display-medium leading-tight text-on-surface">
+					<a href="<?php echo esc_url( $permalink ); ?>" class="hover:text-primary focus:outline-none focus:underline decoration-2 underline-offset-4">
+						<?php echo esc_html( $title ); ?>
+					</a>
+				</h2>
+				<?php if ( $excerpt ) : ?>
+					<p class="mt-spacing-3 line-clamp-2 text-body-large text-on-surface-variant max-w-prose">
+						<?php echo esc_html( $excerpt ); ?>
+					</p>
+				<?php endif; ?>
+			</div>
+		</div>
 	</div>
 </section>

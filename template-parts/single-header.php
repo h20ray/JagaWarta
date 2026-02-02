@@ -1,6 +1,7 @@
 <?php
 /**
- * Single: chip, H1, meta, featured image (LCP).
+ * Single: Google Blog Style Header.
+ * All spacing using design tokens, properly aligned.
  *
  * @package JagaWarta
  */
@@ -8,55 +9,106 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
-$post_id   = get_the_ID();
-$title     = get_the_title( $post_id );
-$date_iso  = get_the_date( DATE_W3C, $post_id );
-$date_hr   = get_the_date( '', $post_id );
-$author_id = (int) get_post_field( 'post_author', $post_id );
-$author    = get_the_author_meta( 'display_name', $author_id );
+$post_id    = get_the_ID();
+$title      = get_the_title( $post_id );
+$date_iso   = get_the_date( DATE_W3C, $post_id );
+$date_hr    = get_the_date( 'M j, Y', $post_id );
+$author_id  = (int) get_post_field( 'post_author', $post_id );
+$author     = get_the_author_meta( 'display_name', $author_id );
 $author_url = get_author_posts_url( $author_id );
-$category  = get_the_category( $post_id );
-$cat       = $category ? $category[0] : null;
-$read_time = jagawarta_read_time_label( $post_id );
+$avatar     = get_avatar_url( $author_id, array( 'size' => 48 ) );
+$read_time  = jagawarta_read_time_label( $post_id );
 ?>
-<header class="bg-surface">
-	<div class="mx-auto max-w-prose px-4 pt-6">
-		<?php if ( $cat ) : ?>
-			<a href="<?php echo esc_url( get_category_link( $cat->term_id ) ); ?>"
-				class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-[0.75rem] leading-5 text-on-secondary-container">
-				<?php echo esc_html( $cat->name ); ?>
-			</a>
-		<?php endif; ?>
-
-		<h1 class="mt-3 text-[2rem] leading-tight text-on-surface">
+<header class="pt-spacing-12 pb-spacing-10 px-spacing-4">
+	<div class="mx-auto max-w-[1260px]">
+		<?php get_template_part( 'template-parts/breadcrumb' ); ?>
+		
+		<!-- H1 Title: 1046px width, 107px left offset -->
+		<h1 class="text-display-large font-normal text-on-surface mb-spacing-4 max-w-[1046px] ml-[107px]" style="letter-spacing: -0.5px;">
 			<?php echo esc_html( $title ); ?>
 		</h1>
 
-		<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.875rem] leading-6 text-on-surface-variant">
-			<span>
-				<a class="text-primary underline-offset-2 hover:underline focus:underline" href="<?php echo esc_url( $author_url ); ?>">
-					<?php echo esc_html( $author ); ?>
-				</a>
-			</span>
-			<span aria-hidden="true">•</span>
-			<time datetime="<?php echo esc_attr( $date_iso ); ?>">
-				<?php echo esc_html( $date_hr ); ?>
-			</time>
-			<?php if ( $read_time ) : ?>
-				<span aria-hidden="true">•</span>
-				<span><?php echo esc_html( $read_time ); ?></span>
-			<?php endif; ?>
+		<?php if ( has_excerpt() ) : ?>
+			<!-- Abstract: 2-column layout with 24px padding on each side of separator = 48px gap -->
+			<div class="flex mb-spacing-6 max-w-[1046px] ml-[107px]">
+				<!-- Date column: 127px width, 24px right padding, border-right -->
+				<aside class="w-[127px] flex-shrink-0 pr-spacing-6 border-r border-outline-variant">
+					<div class="text-body-large font-light text-on-surface-variant leading-relaxed">
+						<time datetime="<?php echo esc_attr( $date_iso ); ?>" class="block">
+							<?php echo esc_html( $date_hr ); ?>
+						</time>
+						<?php if ( $read_time ) : ?>
+							<div class="mt-spacing-1"><?php echo esc_html( $read_time ); ?></div>
+						<?php endif; ?>
+					</div>
+				</aside>
+				
+				<!-- Excerpt column: flex-1 (919px), 24px left padding -->
+				<div class="flex-1 pl-spacing-6 text-body-large font-normal text-on-surface-variant leading-relaxed">
+					<?php the_excerpt(); ?>
+				</div>
+			</div>
+		<?php else : ?>
+			<!-- No excerpt: inline metadata -->
+			<div class="flex flex-wrap items-center gap-x-spacing-4 text-label-large text-on-surface-variant mb-spacing-8 max-w-[1046px] ml-[107px]">
+				<div class="flex items-center gap-spacing-2">
+					<?php if ( $avatar ) : ?>
+						<img src="<?php echo esc_url( $avatar ); ?>" alt="" class="w-8 h-8 rounded-full bg-surface-variant shadow-elevation-1" loading="lazy">
+					<?php endif; ?>
+					<a href="<?php echo esc_url( $author_url ); ?>" class="font-medium text-on-surface hover:text-primary transition-colors duration-short">
+						<?php echo esc_html( $author ); ?>
+					</a>
+				</div>
+				<span aria-hidden="true" class="opacity-40">•</span>
+				<time datetime="<?php echo esc_attr( $date_iso ); ?>">
+					<?php echo esc_html( $date_hr ); ?>
+				</time>
+				<?php if ( $read_time ) : ?>
+					<span class="inline-flex items-center px-spacing-3 py-spacing-1 bg-primary-container text-primary rounded-full text-label-medium font-medium">
+						<?php echo esc_html( $read_time ); ?>
+					</span>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+		
+		<!-- Author Section with Share Button -->
+		<div class="flex flex-wrap items-center justify-between gap-x-spacing-6 gap-y-spacing-4 mb-spacing-8 max-w-[1046px] ml-[107px]">
+			<!-- Author Info -->
+			<div class="flex items-center gap-spacing-3">
+				<?php if ( $avatar ) : ?>
+					<img src="<?php echo esc_url( $avatar ); ?>" alt="<?php echo esc_attr( $author ); ?>" class="w-10 h-10 rounded-full bg-surface-variant shadow-elevation-1" loading="lazy">
+				<?php endif; ?>
+				<div class="flex flex-col">
+					<a href="<?php echo esc_url( $author_url ); ?>" class="text-body-medium font-bold text-on-surface hover:text-primary transition-colors duration-short no-underline">
+						<?php echo esc_html( $author ); ?>
+					</a>
+					<?php
+					$author_title = get_the_author_meta( 'description', $author_id );
+					if ( $author_title ) :
+						?>
+						<span class="text-body-small text-on-surface-variant">
+							<?php echo esc_html( wp_trim_words( $author_title, 10 ) ); ?>
+						</span>
+					<?php endif; ?>
+				</div>
+			</div>
+			
+			<!-- Share Button -->
+			<?php get_template_part( 'template-parts/share-button' ); ?>
 		</div>
 	</div>
 
+	<!-- Featured Image: Aligned with H1 (107px left, 1046px width) -->
 	<?php
 	$header_img = jagawarta_get_post_display_image( $post_id );
 	if ( ! empty( $header_img['url'] ) ) :
 		?>
-		<div class="mx-auto mt-5 max-w-screen-lg px-4">
-			<figure class="overflow-hidden rounded-md bg-surface-low ring-1 ring-outline-variant">
-				<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => true, 'class' => 'object-cover' ) ); ?>
-			</figure>
+		<div class="mx-auto mt-spacing-6 max-w-[1260px] px-spacing-4">
+			<div class="max-w-[1046px] ml-[107px]">
+				<figure class="overflow-hidden rounded-xl shadow-elevation-1">
+					<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => true, 'class' => 'object-cover aspect-video w-full' ) ); ?>
+				</figure>
+			</div>
 		</div>
 	<?php endif; ?>
 </header>

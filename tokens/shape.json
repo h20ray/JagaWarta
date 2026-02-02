@@ -2,7 +2,8 @@
   "shape-corner-none": "0",
   "shape-corner-small": "0.25rem",
   "shape-corner-medium": "0.5rem",
-  "shape-corner-large": "0.75rem",
-  "shape-corner-extra-large": "1rem",
+  "shape-corner-large": "1rem",
+  "shape-corner-extra-large": "1.75rem",
+  "shape-corner-super-large": "2rem",
   "shape-corner-full": "9999px"
 }

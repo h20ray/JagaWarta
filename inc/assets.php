@@ -130,6 +130,15 @@ function jagawarta_enqueue_hero_splide( string $dir, string $uri ): void {
 			(string) filemtime( $slider_css )
 		);
 	}
+	$splide_md3_css = $dir . '/splide-md3.css';
+	if ( file_exists( $splide_md3_css ) ) {
+		wp_enqueue_style(
+			'jagawarta-splide-md3',
+			$uri . '/splide-md3.css',
+			array( 'jagawarta-slider' ),
+			(string) filemtime( $splide_md3_css )
+		);
+	}
 	if ( file_exists( $hero_js ) ) {
 		wp_enqueue_script(
 			'jagawarta-hero-splide',

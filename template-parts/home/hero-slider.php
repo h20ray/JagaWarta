@@ -24,7 +24,7 @@ $splide_opts = array(
 	'speed'      => 450,
 );
 ?>
-<div class="rounded-md bg-surface-high ring-1 ring-outline-variant overflow-hidden">
+<div class="overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
 	<section
 		class="splide js-hero-splide"
 		aria-label="<?php esc_attr_e( 'Featured stories', 'jagawarta' ); ?>"
