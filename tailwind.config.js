@@ -1,0 +1,73 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    './**/*.php',
+    './assets/src/**/*.js',
+    './assets/src/**/*.css',
+  ],
+  theme: {
+    extend: {
+      colors: {
+        background: 'var(--md-color-background)',
+        surface: 'var(--md-color-surface)',
+        'surface-low': 'var(--md-color-surface-container-low)',
+        'surface-mid': 'var(--md-color-surface-container)',
+        'surface-high': 'var(--md-color-surface-container-high)',
+        'on-surface': 'var(--md-color-on-surface)',
+        'on-surface-variant': 'var(--md-color-on-surface-variant)',
+        primary: 'var(--md-color-primary)',
+        'on-primary': 'var(--md-color-on-primary)',
+        'primary-container': 'var(--md-color-primary-container)',
+        'on-primary-container': 'var(--md-color-on-primary-container)',
+        'secondary-container': 'var(--md-color-secondary-container)',
+        'on-secondary-container': 'var(--md-color-on-secondary-container)',
+        'error-container': 'var(--md-color-error-container)',
+        'on-error-container': 'var(--md-color-on-error-container)',
+        outline: 'var(--md-color-outline)',
+        'outline-variant': 'var(--md-color-outline-variant)',
+        scrim: 'var(--md-color-scrim)',
+      },
+      fontFamily: {
+        sans: ['var(--md-sys-font-family-sans)'],
+        serif: ['var(--md-sys-font-family-serif)'],
+      },
+      borderRadius: {
+        sm: 'var(--md-shape-corner-small)',
+        md: 'var(--md-shape-corner-medium)',
+        full: 'var(--md-shape-corner-full)',
+      },
+      fontSize: {
+        'display-large': ['var(--md-sys-typescale-display-large-size)', { lineHeight: 'var(--md-sys-typescale-display-large-line-height)', fontWeight: 'var(--md-sys-typescale-display-large-weight)' }],
+        'display-medium': ['var(--md-sys-typescale-display-medium-size)', { lineHeight: 'var(--md-sys-typescale-display-medium-line-height)', fontWeight: 'var(--md-sys-typescale-display-medium-weight)' }],
+        'display-small': ['var(--md-sys-typescale-display-small-size)', { lineHeight: 'var(--md-sys-typescale-display-small-line-height)', fontWeight: 'var(--md-sys-typescale-display-small-weight)' }],
+        'headline-large': ['var(--md-sys-typescale-headline-large-size)', { lineHeight: 'var(--md-sys-typescale-headline-large-line-height)', fontWeight: 'var(--md-sys-typescale-headline-large-weight)' }],
+        'headline-medium': ['var(--md-sys-typescale-headline-medium-size)', { lineHeight: 'var(--md-sys-typescale-headline-medium-line-height)', fontWeight: 'var(--md-sys-typescale-headline-medium-weight)' }],
+        'headline-small': ['var(--md-sys-typescale-headline-small-size)', { lineHeight: 'var(--md-sys-typescale-headline-small-line-height)', fontWeight: 'var(--md-sys-typescale-headline-small-weight)' }],
+        'title-large': ['var(--md-sys-typescale-title-large-size)', { lineHeight: 'var(--md-sys-typescale-title-large-line-height)', fontWeight: 'var(--md-sys-typescale-title-large-weight)' }],
+        'title-medium': ['var(--md-sys-typescale-title-medium-size)', { lineHeight: 'var(--md-sys-typescale-title-medium-line-height)', fontWeight: 'var(--md-sys-typescale-title-medium-weight)' }],
+        'title-small': ['var(--md-sys-typescale-title-small-size)', { lineHeight: 'var(--md-sys-typescale-title-small-line-height)', fontWeight: 'var(--md-sys-typescale-title-small-weight)' }],
+        'body-large': ['var(--md-sys-typescale-body-large-size)', { lineHeight: 'var(--md-sys-typescale-body-large-line-height)', fontWeight: 'var(--md-sys-typescale-body-large-weight)' }],
+        'body-medium': ['var(--md-sys-typescale-body-medium-size)', { lineHeight: 'var(--md-sys-typescale-body-medium-line-height)', fontWeight: 'var(--md-sys-typescale-body-medium-weight)' }],
+        'body-small': ['var(--md-sys-typescale-body-small-size)', { lineHeight: 'var(--md-sys-typescale-body-small-line-height)', fontWeight: 'var(--md-sys-typescale-body-small-weight)' }],
+        'label-large': ['var(--md-sys-typescale-label-large-size)', { lineHeight: 'var(--md-sys-typescale-label-large-line-height)', fontWeight: 'var(--md-sys-typescale-label-large-weight)' }],
+        'label-medium': ['var(--md-sys-typescale-label-medium-size)', { lineHeight: 'var(--md-sys-typescale-label-medium-line-height)', fontWeight: 'var(--md-sys-typescale-label-medium-weight)' }],
+        'label-small': ['var(--md-sys-typescale-label-small-size)', { lineHeight: 'var(--md-sys-typescale-label-small-line-height)', fontWeight: 'var(--md-sys-typescale-label-small-weight)' }],
+      },
+      boxShadow: {
+        'elevation-0': 'var(--md-sys-elevation-0)',
+        'elevation-1': 'var(--md-sys-elevation-1)',
+        'elevation-2': 'var(--md-sys-elevation-2)',
+        'elevation-3': 'var(--md-sys-elevation-3)',
+      },
+      transitionDuration: {
+        short: 'var(--md-sys-motion-duration-short)',
+        medium: 'var(--md-sys-motion-duration-medium)',
+      },
+      transitionTimingFunction: {
+        standard: 'var(--md-sys-motion-easing-standard)',
+        emphasized: 'var(--md-sys-motion-easing-emphasized)',
+      },
+    },
+  },
+  plugins: [],
+};

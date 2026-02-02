@@ -1,0 +1,17 @@
+/* Breaking ticker — load when ticker block present */
+.breaking-ticker__wrap {
+  overflow: hidden;
+}
+.breaking-ticker__inner {
+  display: flex;
+  width: max-content;
+  animation: jagawarta-ticker 40s linear infinite;
+}
+.breaking-ticker__wrap:hover .breaking-ticker__inner,
+.breaking-ticker__inner.ticker-paused {
+  animation-play-state: paused;
+}
+@keyframes jagawarta-ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

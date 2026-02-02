@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jagawarta/hero",
+  "title": "Hero (Featured)",
+  "category": "theme",
+  "description": "Featured posts hero section.",
+  "textdomain": "jagawarta",
+  "attributes": {
+    "count": {
+      "type": "number",
+      "default": 5
+    },
+    "slider": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "editor_script": null
+}

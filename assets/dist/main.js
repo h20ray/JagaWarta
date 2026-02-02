@@ -1,0 +1,1 @@
+(()=>{(function(){"use strict";let e=document.querySelector("[data-jagawarta-nav]");if(!e)return;let t=e.querySelector("[data-jagawarta-nav-toggle]"),a=e.querySelector("[data-jagawarta-nav-menu]");!t||!a||(t.setAttribute("aria-expanded","false"),t.addEventListener("click",function(){let n=a.hidden===!0;a.hidden=!n,t.setAttribute("aria-expanded",String(n))}))})();})();

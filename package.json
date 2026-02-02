@@ -1,0 +1,26 @@
+{
+  "name": "jagawarta-theme",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "npm run build:tokens && npm run build:css && npm run build:js && npm run build:slider-css && npm run build:ticker-css",
+    "build:tokens": "node build-tokens.mjs",
+    "build:css": "tailwindcss -i ./assets/src/main.css -o ./assets/dist/main.css --minify",
+    "build:js": "node build-js.mjs",
+    "build:slider-css": "node -e \"require('fs').copyFileSync('node_modules/@splidejs/splide/dist/css/splide-core.min.css', 'assets/dist/slider.css')\"",
+    "build:ticker-css": "node -e \"require('fs').copyFileSync('assets/src/ticker.css', 'assets/dist/ticker.css')\"",
+    "dev": "npm run dev:css & npm run dev:js",
+    "dev:css": "tailwindcss -i ./assets/src/main.css -o ./assets/dist/main.css --watch",
+    "dev:js": "node build-js.mjs --watch",
+    "lint:php": "node lint-php.mjs",
+    "lint:design": "node lint-design.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4",
+    "alpinejs": "^3.15.7"
+  }
+}

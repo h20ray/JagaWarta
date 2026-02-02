@@ -1,0 +1,23 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jagawarta/breaking-ticker",
+  "title": "Breaking Ticker",
+  "category": "theme",
+  "description": "Horizontal breaking news ticker.",
+  "textdomain": "jagawarta",
+  "attributes": {
+    "count": {
+      "type": "number",
+      "default": 5
+    },
+    "categorySlug": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  }
+}

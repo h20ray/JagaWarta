@@ -1,0 +1,24 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jagawarta/section-grid",
+  "title": "Section Grid",
+  "category": "theme",
+  "description": "Category section with post list.",
+  "textdomain": "jagawarta",
+  "attributes": {
+    "categorySlug": {
+      "type": "string",
+      "default": ""
+    },
+    "count": {
+      "type": "number",
+      "default": 4
+    }
+  },
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "editorScript": "file:./editor.js"
+}

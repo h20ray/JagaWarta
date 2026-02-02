@@ -1,0 +1,31 @@
+{
+  "fontFamily": {
+    "sans": "ui-sans-serif, system-ui, sans-serif, \"Segoe UI\", Roboto, sans-serif",
+    "serif": "ui-serif, Georgia, Cambria, \"Times New Roman\", Times, serif"
+  },
+  "display": {
+    "large": { "size": "3.5625rem", "lineHeight": "1.12", "weight": "400" },
+    "medium": { "size": "2.8125rem", "lineHeight": "1.16", "weight": "400" },
+    "small": { "size": "2.25rem", "lineHeight": "1.22", "weight": "400" }
+  },
+  "headline": {
+    "large": { "size": "2rem", "lineHeight": "1.25", "weight": "400" },
+    "medium": { "size": "1.75rem", "lineHeight": "1.29", "weight": "400" },
+    "small": { "size": "1.5rem", "lineHeight": "1.33", "weight": "400" }
+  },
+  "title": {
+    "large": { "size": "1.375rem", "lineHeight": "1.27", "weight": "500" },
+    "medium": { "size": "1rem", "lineHeight": "1.375", "weight": "500" },
+    "small": { "size": "0.875rem", "lineHeight": "1.43", "weight": "500" }
+  },
+  "body": {
+    "large": { "size": "1rem", "lineHeight": "1.5", "weight": "400" },
+    "medium": { "size": "0.875rem", "lineHeight": "1.43", "weight": "400" },
+    "small": { "size": "0.8125rem", "lineHeight": "1.38", "weight": "400" }
+  },
+  "label": {
+    "large": { "size": "0.875rem", "lineHeight": "1.43", "weight": "500" },
+    "medium": { "size": "0.75rem", "lineHeight": "1.33", "weight": "500" },
+    "small": { "size": "0.6875rem", "lineHeight": "1.45", "weight": "500" }
+  }
+}

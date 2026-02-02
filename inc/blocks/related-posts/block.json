@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "jagawarta/related-posts",
+  "title": "Related Posts",
+  "category": "theme",
+  "description": "Related posts by category.",
+  "textdomain": "jagawarta",
+  "attributes": {
+    "count": {
+      "type": "number",
+      "default": 3
+    }
+  },
+  "supports": {
+    "html": false
+  },
+  "context": ["postId"]
+}

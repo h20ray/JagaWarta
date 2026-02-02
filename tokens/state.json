@@ -1,0 +1,8 @@
+{
+  "state-layer-hover-opacity": "0.08",
+  "state-layer-focus-opacity": "0.12",
+  "state-layer-pressed-opacity": "0.12",
+  "focus-ring-width": "2px",
+  "focus-ring-color": "primary",
+  "disabled-opacity": "0.38"
+}
