@@ -65,7 +65,7 @@ else :
 					}
 					setup_postdata( $post );
 					?>
-					<div><?php get_template_part( 'template-parts/post-card', null, array( 'post_id' => $pid ) ); ?></div>
+					<div><?php get_template_part( 'template-parts/cards/post-card-categories', null, array( 'post_id' => $pid ) ); ?></div>
 					<?php
 					wp_reset_postdata();
 				}

@@ -58,6 +58,16 @@
     @apply text-on-surface-variant;
   }
 
+  .prose-article figure,
+  .prose-article .wp-block-image {
+    @apply my-spacing-6 overflow-hidden rounded-xl;
+  }
+
+  .prose-article figure img,
+  .prose-article .wp-block-image img {
+    @apply w-full h-auto object-cover;
+  }
+
   .btn {
     @apply rounded-sm px-3 py-1.5 text-label-large font-medium border border-outline-variant bg-surface-high text-on-surface;
     @apply hover:bg-surface-mid transition-colors duration-short ease-standard;

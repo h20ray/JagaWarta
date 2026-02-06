@@ -44,7 +44,7 @@ $breadcrumb_parts[] = array(
 	'url'  => get_category_link( $primary_cat->term_id ),
 );
 ?>
-<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'jagawarta' ); ?>" class="flex items-center gap-spacing-2 ml-[107px] mb-spacing-4" style="min-height: 48px;">
+<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'jagawarta' ); ?>" class="flex items-center gap-spacing-2 ml-0 md:ml-[107px] mb-spacing-4" style="min-height: 48px;">
 	<?php
 	foreach ( $breadcrumb_parts as $index => $part ) :
 		if ( $index > 0 ) :

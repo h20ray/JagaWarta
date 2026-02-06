@@ -1,0 +1,377 @@
+---
+alwaysApply: true
+---
+
+IMPLEMENTABLE MD3 Expressive starter set** tailored for a **modern news website**, optimized for **mobile-first web + desktop newsroom**, **token-only**, **web-native (not Android-app-ish)**.
+
+No metaphors. No hex. No hardcoded values.
+Everything is **role-driven, MD3-compliant, and UX-practical for news**.
+
+---
+
+# MD3 Expressive — News UI Starter (Mobile-First + Desktop)
+
+## 0. Platform Assumptions (Locked)
+
+* **Primary:** Mobile-first web (reading, scrolling, quick navigation)
+* **Secondary:** Desktop newsroom (wide layouts, multi-column, scanning)
+* Interaction model: mouse + keyboard + touch
+* Navigation: web header + responsive drawer (not Android bottom nav)
+
+---
+
+## 1. Color Role Mapping — News-Specific (MD3)
+
+### 1.1 Global surfaces
+
+| Area                             | MD3 role               |
+| -------------------------------- | ---------------------- |
+| App background                   | `background`           |
+| Page base surface                | `surface`              |
+| Card / section container         | `surfaceContainerLow`  |
+| Elevated blocks (hero, breaking) | `surfaceContainerHigh` |
+| Divider / subtle borders         | `outlineVariant`       |
+
+Rule:
+
+* News pages live on **surface containers**, not flat white.
+* Depth is communicated via **container roles**, not shadows everywhere.
+
+---
+
+### 1.2 Hero / Featured Article
+
+| Element                         | Role                                          |
+| ------------------------------- | --------------------------------------------- |
+| Hero container                  | `surfaceContainerHigh`                        |
+| Headline text                   | `onSurface`                                   |
+| Category chip                   | `secondaryContainer` + `onSecondaryContainer` |
+| Image overlay scrim (if needed) | `scrim` (low opacity only)                    |
+
+Rules:
+
+* Hero **must be the LCP**.
+* No color gradients unless derived from tokens.
+* Headline contrast must meet accessibility without text shadows.
+
+---
+
+### 1.3 Section Grids (Politik, Ekonomi, Olahraga, etc.)
+
+| Element              | Role                   |
+| -------------------- | ---------------------- |
+| Section background   | `surfaceContainer`     |
+| Section title        | `onSurface`            |
+| Post card background | `surfaceContainerLow`  |
+| Hover/focus state    | `surfaceContainerHigh` |
+
+Rules:
+
+* Sections are visually separated by **container roles**, not borders.
+* Grid cards never use `primary` background.
+
+---
+
+### 1.4 Article Meta (Byline, Date, Read Time)
+
+| Element     | Role               |
+| ----------- | ------------------ |
+| Meta text   | `onSurfaceVariant` |
+| Author link | `primary`          |
+| Icons       | `onSurfaceVariant` |
+
+Rules:
+
+* Meta must visually recede.
+* No italics for body readability; hierarchy via size + color only.
+
+---
+
+### 1.5 Chips (Category / Tags)
+
+| Type              | Role                                  |
+| ----------------- | ------------------------------------- |
+| Default chip      | `secondaryContainer`                  |
+| On chip text      | `onSecondaryContainer`                |
+| Selected / active | `primaryContainer`                    |
+| Disabled          | `surfaceVariant` + `onSurfaceVariant` |
+
+Rules:
+
+* Chips are **informational**, not primary actions.
+* Rounded but not pill-exaggerated.
+
+---
+
+### 1.6 Breaking News Banner / Ticker
+
+| Element           | Role               |
+| ----------------- | ------------------ |
+| Banner background | `errorContainer`   |
+| Text              | `onErrorContainer` |
+| Divider           | `outline`          |
+
+Rules:
+
+* Used sparingly.
+* Static or cached text only (no live polling in HTML).
+* No animation that affects LCP or CLS.
+
+---
+
+## 2. Typography Tokens — News-Optimized (MD3-Aligned)
+
+### 2.1 Article Page
+
+| Role             | Usage                               |
+| ---------------- | ----------------------------------- |
+| `displaySmall`   | Article headline (mobile hero)      |
+| `headlineMedium` | Article headline (desktop)          |
+| `titleMedium`    | Section headers                     |
+| `bodyLarge`      | Article body                        |
+| `bodyMedium`     | Article body (mobile)               |
+| `labelMedium`    | Meta (date, read time, author role) |
+| `labelSmall`     | Chips, captions                     |
+
+Rules:
+
+* Body text line length: **60–75ch desktop**, **~38–42ch mobile**
+* Body uses **regular weight only**
+* Headlines may use expressive weight but never condensed
+
+---
+
+### 2.2 Homepage
+
+| Role            | Usage          |
+| --------------- | -------------- |
+| `headlineSmall` | Section titles |
+| `titleLarge`    | Hero headline  |
+| `bodyMedium`    | Snippets       |
+| `labelMedium`   | Meta           |
+
+---
+
+## 3. Shape, Elevation, Density
+
+### Shape
+
+| Component | Token                            |
+| --------- | -------------------------------- |
+| Cards     | `shape.corner.medium`            |
+| Chips     | `shape.corner.small`             |
+| Buttons   | `shape.corner.full` (tonal only) |
+| Images    | `shape.corner.medium`            |
+
+Rules:
+
+* No sharp corners on content blocks.
+* Images follow the same radius as their container.
+
+### Elevation
+
+* Default content: **0**
+* Hero / breaking: **low elevation**
+* Hover states: elevation implied via surface role shift, not shadow jump.
+
+### Density
+
+* Mobile: comfortable spacing (reading-first)
+* Desktop: tighter vertical rhythm, wider columns
+
+---
+
+## 4. Motion — Expressive but Editorial
+
+### Motion Tokens (conceptual)
+
+* `durationShort` → hover, focus
+* `durationMedium` → drawer, search expand
+* `easingStandard` → default
+* `easingEmphasized` → hero transitions only
+
+### Rules
+
+* No auto-playing motion.
+* No parallax.
+* Sliders move **content**, not the page.
+* Motion must never delay text rendering.
+
+---
+
+## 5. Component Composition (MD3-ish, Web-Native)
+
+### 5.1 Header / Top App Bar
+
+* Single row
+* Left: logo
+* Center (desktop): section navigation
+* Right: search + menu
+* Uses `surfaceContainerLow`
+
+No sticky animations on scroll for first iteration.
+
+---
+
+### 5.2 Post Card
+
+Structure:
+
+```
+Card (surfaceContainerLow)
+ ├─ Image (optional)
+ ├─ Category chip
+ ├─ Title
+ ├─ Meta (date · read time)
+```
+
+Rules:
+
+* Whole card is clickable.
+* Focus ring visible on keyboard nav.
+* No shadow stack.
+
+---
+
+### 5.3 Article Layout
+
+```
+<article>
+ ├─ Header
+ │   ├─ Category chip
+ │   ├─ H1 headline
+ │   ├─ Meta (author, date, read time)
+ │   └─ Featured image (LCP)
+ ├─ Body
+ ├─ Related posts
+ └─ Footer meta
+</article>
+```
+
+---
+
+## 6. Wireframe Composition (Textual)
+
+### 6.1 Front Page — Mobile
+
+```
+[Top App Bar]
+
+[Hero Article]
+  Image
+  Category
+  Headline
+
+[Breaking Banner] (optional)
+
+[Section: Politik]
+  [Post Card]
+  [Post Card]
+
+[Section: Ekonomi]
+  [Post Card]
+  [Post Card]
+
+[Latest]
+  [Compact List Items]
+```
+
+---
+
+### 6.2 Front Page — Desktop
+
+```
+[Top App Bar]
+
+[Hero | Secondary Featured]
+
+[Breaking Banner]
+
+[Grid: Politik | Ekonomi | Olahraga]
+  Cards in 3–4 columns
+
+[Latest List]
+```
+
+---
+
+### 6.3 Article — Desktop
+
+```
+[Top App Bar]
+
+[Article Header (centered column)]
+[Article Body]
+
+[Related Posts Grid]
+
+[Footer]
+```
+
+---
+
+## 7. Implementation Guardrails (Hard Rules)
+
+* ❌ No hex/rgb values anywhere
+* ❌ No “creative” colors outside MD3 roles
+* ❌ No Android-style bottom navigation
+* ✅ All colors, spacing, motion via tokens
+* ✅ Focus, hover, pressed states defined
+* ✅ LCP = hero image or headline container
+
+---
+
+## 8. Minimal Token Starter (Names Only)
+
+### Color roles
+
+```
+background
+surface
+surfaceContainerLow
+surfaceContainer
+surfaceContainerHigh
+onSurface
+onSurfaceVariant
+primary
+primaryContainer
+onPrimaryContainer
+secondaryContainer
+onSecondaryContainer
+errorContainer
+onErrorContainer
+outline
+outlineVariant
+scrim
+```
+
+### Typography
+
+```
+displaySmall
+headlineMedium
+headlineSmall
+titleLarge
+titleMedium
+bodyLarge
+bodyMedium
+labelMedium
+labelSmall
+```
+
+### Shape
+
+```
+shape.corner.small
+shape.corner.medium
+shape.corner.full
+```
+
+### Motion
+
+```
+durationShort
+durationMedium
+easingStandard
+easingEmphasized
+```

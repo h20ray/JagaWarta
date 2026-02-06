@@ -19,7 +19,7 @@ if ( ! $query || ! $query->have_posts() ) {
 		$query->the_post();
 		?>
 		<li class="flex">
-			<?php get_template_part( 'template-parts/post-card' ); ?>
+			<?php get_template_part( 'template-parts/cards/post-card-categories' ); ?>
 		</li>
 		<?php
 	}
