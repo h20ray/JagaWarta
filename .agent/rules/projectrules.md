@@ -1,0 +1,207 @@
+---
+trigger: always_on
+---
+
+# PROJECT RULES — WordPress Theme (Performance First)
+
+## 0. Goal
+
+Build a **custom WordPress theme** that is:
+
+* Extremely fast
+* Stable under high traffic
+* Dependency-light
+* Easy to maintain
+
+Default mindset: **fast HTML = low server load = effective caching**
+
+---
+
+## 1. Absolute Priorities
+
+1. Performance (rendering + payload size)
+2. Maintainability
+3. UX
+4. Features
+
+If there is a conflict → **performance wins**.
+
+---
+
+## 2. Hard Restrictions (No Exceptions)
+
+* ❌ Public page builders: Elementor, Divi, WPBakery
+* ❌ jQuery and jQuery-based frontend plugins
+* ❌ Bootstrap or large CSS frameworks
+* ❌ Legacy carousels (Owl, Slick)
+* ❌ Global asset enqueue without real usage
+
+---
+
+## 3. Mandatory Stack
+
+* Tailwind CSS (build + purge/JIT)
+* Native PHP templates
+* Custom Gutenberg blocks (ACF blocks or block.json)
+* Vanilla JavaScript first
+* Alpine.js → light interactions only
+* Splide.js → sliders only, **conditionally loaded**
+
+---
+
+## 4. Theme Architecture Rules
+
+* `functions.php` is bootstrap only
+* All logic must live in `inc/`
+* Templates must not contain heavy logic
+* UI built via reusable `template-parts`
+* Queries and data preparation happen before rendering
+
+Required structure:
+
+```
+/inc
+  /assets
+  /blocks
+  /query
+  /helpers
+/templates
+/template-parts
+/assets/src
+/assets/dist
+```
+
+---
+
+## 5. CSS Rules
+
+* Tailwind output must be minimal
+* No global CSS without justification
+* Avoid excessive `@apply`
+* Prefer SVG over icon fonts
+* No unused utilities in production
+
+Target:
+
+* CSS < 50KB gzipped per page
+
+---
+
+## 6. JavaScript Rules
+
+* No JavaScript by default
+* JS activates only if related elements exist
+* All JS must be `defer` or `type="module"`
+* Initialization via `data-*` attributes
+* No heavy libraries for simple behavior
+
+Target:
+
+* JS < 80KB gzipped per page
+
+---
+
+## 7. Asset Loading Rules
+
+* All CSS/JS must be conditionally enqueued
+* Only global assets allowed:
+
+  * base styles
+  * minimal navigation logic
+* Sliders, modals, tabs → load per page or per component
+* Cache busting via build hash or `filemtime()`
+
+---
+
+## 8. HTML & Rendering Rules
+
+* Shallow DOM, simple markup
+* Images:
+
+  * use `srcset` and `sizes`
+  * `loading="lazy"` for non-LCP images
+* Hero / LCP image:
+
+  * never lazy
+  * preload when needed
+* No per-user dynamic HTML on cached pages
+
+---
+
+## 9. Database & Query Rules
+
+* Minimize query count
+* No queries inside component loops
+* Use:
+
+  * `no_found_rows => true` when pagination is not required
+  * explicit meta/term cache control
+* Heavy data must be cache-ready
+
+---
+
+## 10. High Traffic Readiness
+
+* Theme must support:
+
+  * Full page caching
+  * CDN / edge caching
+  * Object cache (Redis/Memcached)
+* Avoid:
+
+  * nonces in cacheable public HTML
+  * real-time counters rendered server-side
+* Dynamic data → lightweight endpoints + short cache TTL
+
+---
+
+## 11. Gutenberg / Block Rules
+
+* Block assets load only if the block exists
+* Server-rendered blocks for dynamic data
+* No large library for a single block
+
+---
+
+## 12. Plugin Philosophy
+
+* Plugins are allowed only for:
+
+  * SEO
+  * Security
+  * Caching
+  * Data management (ACF)
+* UI = theme responsibility
+* Logic = plugin responsibility
+* Plugins must not control layout
+
+---
+
+## 13. Accessibility & SEO (Minimum Viable)
+
+* All interactive elements must be keyboard accessible
+* Minimal, correct ARIA usage
+* Proper heading hierarchy
+* Do not duplicate SEO logic already handled by plugins
+
+---
+
+## 14. LLM / Cursor Behavior Rules
+
+When generating code:
+
+1. Follow WordPress best practices
+2. Separate logic from rendering
+3. Use conditional asset loading
+4. Do not introduce bloat
+5. Explain performance tradeoffs when necessary
+
+---
+
+## 15. Quality Gate (Before Merge)
+
+* No unused assets
+* No N+1 queries
+* Reasonable HTML size
+* Fully cache-compatible
+* JS is progressive, not mandatory

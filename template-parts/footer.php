@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <?php get_template_part( 'template-parts/newsletter-slot', null, array( 'slot' => 'footer' ) ); ?>
-<footer class="border-t border-outline-variant bg-surface-container-highest mt-spacing-24" role="contentinfo">
+<footer class="border-t border-outline-variant bg-surface-container-highest mt-spacing-12" role="contentinfo">
 	<div class="layout-content py-spacing-16">
 		<!-- Footer Grid -->
 		<div class="grid grid-cols-1 md:grid-cols-4 gap-spacing-8 mb-spacing-12">

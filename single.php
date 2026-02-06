@@ -25,9 +25,7 @@ $related_ids = jagawarta_get_related_posts( get_the_ID(), 3 );
 	</article>
 
 	<?php if ( ! empty( $related_ids ) ) : ?>
-		<div class="border-t border-outline-variant mt-spacing-12 pt-spacing-10 px-spacing-4">
-			<?php get_template_part( 'template-parts/related-posts', null, array( 'post_ids' => $related_ids ) ); ?>
-		</div>
+		<?php get_template_part( 'template-parts/related-posts', null, array( 'post_ids' => $related_ids ) ); ?>
 	<?php endif; ?>
 </main>
 

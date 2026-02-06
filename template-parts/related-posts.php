@@ -26,7 +26,7 @@ $related_query = new WP_Query( array(
 ) );
 ?>
 
-<section aria-labelledby="related-heading" class="mx-auto max-w-screen-xl">
+<section aria-labelledby="related-heading" class="mx-auto max-w-[1440px] border-t border-outline-variant mt-spacing-12 pt-spacing-10 px-spacing-4">
 	<h2 id="related-heading" class="sr-only">
 		<?php esc_html_e( 'Related stories', 'jagawarta' ); ?>
 	</h2>
@@ -35,7 +35,7 @@ $related_query = new WP_Query( array(
 		<?php esc_html_e( 'More like this', 'jagawarta' ); ?>
 	</div>
 
-	<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-6">
+	<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-10">
 		<?php while ( $related_query->have_posts() ) : $related_query->the_post(); ?>
 			<?php get_template_part( 'template-parts/cards/post-card-related' ); ?>
 		<?php endwhile; wp_reset_postdata(); ?>
