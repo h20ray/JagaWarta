@@ -45,7 +45,6 @@ module.exports = {
     },
     borderRadius: {
       none: 'var(--md-sys-shape-corner-none)',
-      xs: 'var(--md-sys-shape-corner-extra-small)',
       sm: 'var(--md-sys-shape-corner-small)',
       md: 'var(--md-sys-shape-corner-medium)',
       lg: 'var(--md-sys-shape-corner-large)',

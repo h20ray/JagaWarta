@@ -82,7 +82,7 @@
   --md-sys-shape-corner-small: 0.25rem;
   --md-sys-shape-corner-medium: 0.5rem;
   --md-sys-shape-corner-large: 1rem;
-  --md-sys-shape-corner-extra-large: 1.75rem;
+  --md-sys-shape-corner-extra-large: 0.5rem;
   --md-sys-shape-corner-super-large: 2rem;
   --md-sys-shape-corner-full: 9999px;
   --md-sys-motion-duration-short: 200ms;
@@ -199,7 +199,7 @@
   --md-shape-corner-small: 0.25rem;
   --md-shape-corner-medium: 0.5rem;
   --md-shape-corner-large: 1rem;
-  --md-shape-corner-extra-large: 1.75rem;
+  --md-shape-corner-extra-large: 0.5rem;
   --md-shape-corner-super-large: 2rem;
   --md-shape-corner-full: 9999px;
 }

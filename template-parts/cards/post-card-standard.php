@@ -31,14 +31,13 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 			<div class="overflow-hidden">
 				<?php
 				if ( ! empty( $display['attachment_id'] ) ) :
-					echo wp_get_attachment_image(
+					jagawarta_the_image(
 						$display['attachment_id'],
-						'medium_large',
-						false,
 						array(
-							'class'   => 'w-full object-cover aspect-[16/9]',
-							'loading' => 'lazy',
-							'decoding' => 'async',
+							'lcp'   => false,
+							'size'  => 'medium_large',
+							'sizes' => '(max-width: 1024px) 100vw, 320px',
+							'class' => 'w-full object-cover aspect-[16/9]',
 						)
 					);
 				else :

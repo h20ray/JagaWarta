@@ -117,6 +117,78 @@ function jagawarta_lcp_preload_url( $post = null ): ?string {
 	return $img['url'];
 }
 
+function jagawarta_get_modern_image_sources( int $attachment_id, string $size = 'large' ): array {
+	/**
+	 * Resolve modern image sources (AVIF/WebP) for an attachment + size.
+	 *
+	 * Returns an array with:
+	 * - default_src     string Image URL for the requested size.
+	 * - default_srcset  string Srcset for the requested size, if any.
+	 * - avif_srcset     string AVIF srcset, when matching .avif files exist.
+	 * - webp_srcset     string WebP srcset, when matching .webp files exist.
+	 *
+	 * Advanced providers can short-circuit or extend this via the
+	 * `jagawarta_modern_image_sources` filter.
+	 */
+	$src    = wp_get_attachment_image_url( $attachment_id, $size );
+	$srcset = wp_get_attachment_image_srcset( $attachment_id, $size );
+
+	if ( ! $src ) {
+		$sources = array(
+			'default_src'     => '',
+			'default_srcset'  => '',
+			'avif_srcset'     => '',
+			'webp_srcset'     => '',
+		);
+		return (array) apply_filters( 'jagawarta_modern_image_sources', $sources, $attachment_id, $size );
+	}
+
+	$sources = array(
+		'default_src'     => $src,
+		'default_srcset'  => $srcset ?: '',
+		'avif_srcset'     => '',
+		'webp_srcset'     => '',
+	);
+
+	$upload = wp_get_upload_dir();
+
+	if (
+		! empty( $upload['baseurl'] ) &&
+		! empty( $upload['basedir'] ) &&
+		0 === strpos( $src, $upload['baseurl'] )
+	) {
+		$relative = substr( $src, strlen( $upload['baseurl'] ) );
+		$path     = $upload['basedir'] . $relative;
+
+		if ( preg_match( '/\.(jpe?g|png)$/i', $path ) ) {
+			$avif_path = preg_replace( '/\.(jpe?g|png)$/i', '.avif', $path );
+			$webp_path = preg_replace( '/\.(jpe?g|png)$/i', '.webp', $path );
+
+			if ( $avif_path && file_exists( $avif_path ) ) {
+				if ( $srcset ) {
+					$sources['avif_srcset'] = preg_replace( '/\.(jpe?g|png)(\s+\d+w)/i', '.avif$2', $srcset );
+				} else {
+					$avif_url               = preg_replace( '/\.(jpe?g|png)$/i', '.avif', $src );
+					$sources['avif_srcset'] = $avif_url ? $avif_url . ' 1x' : '';
+				}
+			}
+
+			if ( $webp_path && file_exists( $webp_path ) ) {
+				if ( $srcset ) {
+					$sources['webp_srcset'] = preg_replace( '/\.(jpe?g|png)(\s+\d+w)/i', '.webp$2', $srcset );
+				} else {
+					$webp_url               = preg_replace( '/\.(jpe?g|png)$/i', '.webp', $src );
+					$sources['webp_srcset'] = $webp_url ? $webp_url . ' 1x' : '';
+				}
+			}
+		}
+	}
+
+	$sources = (array) apply_filters( 'jagawarta_modern_image_sources', $sources, $attachment_id, $size );
+
+	return $sources;
+}
+
 function jagawarta_the_post_display_image( $post = null, array $args = array() ): void {
 	$img = jagawarta_get_post_display_image( $post );
 	if ( empty( $img['url'] ) ) {
@@ -129,35 +201,99 @@ function jagawarta_the_post_display_image( $post = null, array $args = array() )
 	}
 	$loading = ! empty( $args['lcp'] ) ? 'eager' : 'lazy';
 	$class   = trim( 'w-full h-auto ' . (string) $args['class'] );
-	echo '<img src="' . esc_url( $img['url'] ) . '" alt="" loading="' . esc_attr( $loading ) . '" class="' . esc_attr( $class ) . '" />';
+
+	$html = '<img src="' . esc_url( $img['url'] ) . '" alt="" loading="' . esc_attr( $loading ) . '" class="' . esc_attr( $class ) . '" />';
+
+	/**
+	 * Filter the fallback <img> tag for non-attachment display images.
+	 *
+	 * This is used when `jagawarta_get_post_display_image()` resolves to an
+	 * external URL or a non-library image, where the theme cannot safely guess
+	 * AVIF/WebP variants. Consumers can replace the HTML (e.g. with <picture>)
+	 * or add attributes.
+	 *
+	 * @param string $html Final HTML to output for the image.
+	 * @param array  $img  Array from jagawarta_get_post_display_image().
+	 * @param array  $args Arguments passed to jagawarta_the_post_display_image().
+	 */
+	echo apply_filters( 'jagawarta_external_image_tag', $html, $img, $args );
 }
 
+/**
+ * Output a responsive image element for a library attachment.
+ *
+ * Uses jagawarta_get_modern_image_sources() to prefer AVIF/WebP via <picture>
+ * when sidecar files exist, falling back to a plain <img> with srcset/sizes.
+ */
 function jagawarta_the_image( int $attachment_id, array $args = array() ): void {
 	$args = wp_parse_args( $args, array(
 		'lcp'   => false,
 		'sizes' => '(max-width: 768px) 100vw, 768px',
 		'class' => '',
+		'size'  => 'large',
 	) );
-	$lcp = (bool) $args['lcp'];
+	$lcp   = (bool) $args['lcp'];
 	$sizes = (string) $args['sizes'];
 	$class = (string) $args['class'];
-	$src = wp_get_attachment_image_url( $attachment_id, 'large' );
-	$srcset = wp_get_attachment_image_srcset( $attachment_id, 'large' );
-	$alt = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
-	if ( ! $src ) {
+	$size  = (string) $args['size'];
+
+	$sources = jagawarta_get_modern_image_sources( $attachment_id, $size );
+
+	if ( empty( $sources['default_src'] ) ) {
 		return;
 	}
+
+	$src    = (string) $sources['default_src'];
+	$srcset = (string) $sources['default_srcset'];
+	$alt = get_post_meta( $attachment_id, '_wp_attachment_image_alt', true );
 	$loading = $lcp ? 'eager' : 'lazy';
+	$fetchpriority = $lcp ? 'high' : 'auto';
 	$img_class = trim( 'w-full h-auto ' . $class );
+
+	$has_avif = ! empty( $sources['avif_srcset'] );
+	$has_webp = ! empty( $sources['webp_srcset'] );
+
+	if ( ! $has_avif && ! $has_webp ) {
+		?>
+		<img
+			src="<?php echo esc_url( $src ); ?>"
+			<?php if ( $srcset ) : ?>srcset="<?php echo esc_attr( $srcset ); ?>"<?php endif; ?>
+			sizes="<?php echo esc_attr( $sizes ); ?>"
+			alt="<?php echo esc_attr( $alt ?: '' ); ?>"
+			loading="<?php echo esc_attr( $loading ); ?>"
+			fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>"
+			class="<?php echo esc_attr( $img_class ); ?>"
+		/>
+		<?php
+		return;
+	}
+
 	?>
-	<img
-		src="<?php echo esc_url( $src ); ?>"
-		<?php if ( $srcset ) : ?>srcset="<?php echo esc_attr( $srcset ); ?>"<?php endif; ?>
-		sizes="<?php echo esc_attr( $sizes ); ?>"
-		alt="<?php echo esc_attr( $alt ?: '' ); ?>"
-		loading="<?php echo esc_attr( $loading ); ?>"
-		class="<?php echo esc_attr( $img_class ); ?>"
-	/>
+	<picture>
+		<?php if ( $has_avif ) : ?>
+			<source
+				type="image/avif"
+				srcset="<?php echo esc_attr( (string) $sources['avif_srcset'] ); ?>"
+				sizes="<?php echo esc_attr( $sizes ); ?>"
+			/>
+		<?php endif; ?>
+		<?php if ( $has_webp ) : ?>
+			<source
+				type="image/webp"
+				srcset="<?php echo esc_attr( (string) $sources['webp_srcset'] ); ?>"
+				sizes="<?php echo esc_attr( $sizes ); ?>"
+			/>
+		<?php endif; ?>
+		<img
+			src="<?php echo esc_url( $src ); ?>"
+			<?php if ( $srcset ) : ?>srcset="<?php echo esc_attr( $srcset ); ?>"<?php endif; ?>
+			sizes="<?php echo esc_attr( $sizes ); ?>"
+			alt="<?php echo esc_attr( $alt ?: '' ); ?>"
+			loading="<?php echo esc_attr( $loading ); ?>"
+			fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>"
+			class="<?php echo esc_attr( $img_class ); ?>"
+		/>
+	</picture>
 	<?php
 }
 

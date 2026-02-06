@@ -23,6 +23,13 @@ function jagawarta_head_lcp_preload(): void {
 	echo '<link rel="preload" as="image" href="' . esc_url( $url ) . '" />' . "\n";
 }
 
+function jagawarta_asset_version( string $path ): string {
+	if ( ! file_exists( $path ) ) {
+		return JAGAWARTA_VERSION;
+	}
+	return substr( md5_file( $path ), 0, 8 );
+}
+
 function jagawarta_enqueue_assets(): void {
 	$dir = JAGAWARTA_DIR . '/assets/dist';
 	$uri = JAGAWARTA_URI . '/assets/dist';
@@ -40,7 +47,7 @@ function jagawarta_enqueue_assets(): void {
 			'jagawarta-tokens',
 			$uri . '/tokens.css',
 			array( 'jagawarta-google-font' ),
-			(string) filemtime( $tokens_css )
+			jagawarta_asset_version( $tokens_css )
 		);
 	}
 	$main_css = $dir . '/main.css';
@@ -49,7 +56,7 @@ function jagawarta_enqueue_assets(): void {
 			'jagawarta-main',
 			$uri . '/main.css',
 			array( 'jagawarta-tokens' ),
-			(string) filemtime( $main_css )
+			jagawarta_asset_version( $main_css )
 		);
 	}
 
@@ -59,7 +66,7 @@ function jagawarta_enqueue_assets(): void {
 			'jagawarta-main',
 			$uri . '/main.js',
 			array(),
-			(string) filemtime( $main_js ),
+			jagawarta_asset_version( $main_js ),
 			array( 'strategy' => 'defer' )
 		);
 	}
@@ -94,7 +101,7 @@ function jagawarta_enqueue_ticker( string $dir, string $uri ): void {
 			'jagawarta-ticker',
 			$uri . '/ticker.css',
 			array( 'jagawarta-main' ),
-			(string) filemtime( $ticker_css )
+			jagawarta_asset_version( $ticker_css )
 		);
 	}
 	$alpine_js = $dir . '/alpine.js';
@@ -103,7 +110,7 @@ function jagawarta_enqueue_ticker( string $dir, string $uri ): void {
 			'jagawarta-alpine',
 			$uri . '/alpine.js',
 			array(),
-			(string) filemtime( $alpine_js ),
+			jagawarta_asset_version( $alpine_js ),
 			array( 'strategy' => 'defer' )
 		);
 	}
@@ -127,7 +134,7 @@ function jagawarta_enqueue_hero_splide( string $dir, string $uri ): void {
 			'jagawarta-slider',
 			$uri . '/slider.css',
 			array( 'jagawarta-main' ),
-			(string) filemtime( $slider_css )
+			jagawarta_asset_version( $slider_css )
 		);
 	}
 	$splide_md3_css = $dir . '/splide-md3.css';
@@ -136,7 +143,7 @@ function jagawarta_enqueue_hero_splide( string $dir, string $uri ): void {
 			'jagawarta-splide-md3',
 			$uri . '/splide-md3.css',
 			array( 'jagawarta-slider' ),
-			(string) filemtime( $splide_md3_css )
+			jagawarta_asset_version( $splide_md3_css )
 		);
 	}
 	if ( file_exists( $hero_js ) ) {
@@ -144,7 +151,7 @@ function jagawarta_enqueue_hero_splide( string $dir, string $uri ): void {
 			'jagawarta-hero-splide',
 			$uri . '/hero-splide.js',
 			array(),
-			(string) filemtime( $hero_js ),
+			jagawarta_asset_version( $hero_js ),
 			array( 'strategy' => 'defer' )
 		);
 	}
@@ -158,7 +165,7 @@ function jagawarta_enqueue_slider( string $dir, string $uri ): void {
 			'jagawarta-slider',
 			$uri . '/slider.css',
 			array( 'jagawarta-main' ),
-			(string) filemtime( $slider_css )
+			jagawarta_asset_version( $slider_css )
 		);
 	}
 	if ( file_exists( $slider_js ) ) {
@@ -166,7 +173,7 @@ function jagawarta_enqueue_slider( string $dir, string $uri ): void {
 			'jagawarta-slider',
 			$uri . '/slider.js',
 			array(),
-			(string) filemtime( $slider_js ),
+			jagawarta_asset_version( $slider_js ),
 			array( 'strategy' => 'defer' )
 		);
 	}

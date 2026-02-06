@@ -29,14 +29,13 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :
 				if ( ! empty( $display['attachment_id'] ) ) :
-					echo wp_get_attachment_image(
+					jagawarta_the_image(
 						$display['attachment_id'],
-						'thumbnail',
-						false,
 						array(
-							'class'   => 'h-20 w-28 object-cover',
-							'loading' => 'lazy',
-							'decoding' => 'async',
+							'lcp'   => false,
+							'size'  => 'thumbnail',
+							'sizes' => '112px',
+							'class' => 'h-20 w-28 object-cover',
 						)
 					);
 				else :
