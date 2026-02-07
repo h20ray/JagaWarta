@@ -111,8 +111,6 @@ module.exports = {
       'elevation-1': 'var(--md-sys-elevation-1)',
       'elevation-2': 'var(--md-sys-elevation-2)',
       'elevation-3': 'var(--md-sys-elevation-3)',
-      'elevation-4': 'var(--md-sys-elevation-4)',
-      'elevation-5': 'var(--md-sys-elevation-5)',
     },
     transitionDuration: {
       short: 'var(--md-sys-motion-duration-short)',
@@ -126,6 +124,43 @@ module.exports = {
       accelerated: 'var(--md-sys-motion-easing-accelerated)',
     },
     extend: {
+      transitionDuration: {
+        expand: 'var(--md-sys-motion-duration-expand)',
+      },
+      transitionDelay: {
+        short: 'var(--md-sys-motion-delay-short)',
+      },
+      maxWidth: {
+        'content-max': 'var(--md-sys-layout-content-max)',
+        'article-width': 'var(--md-sys-layout-article-width)',
+        'page-max': 'var(--md-sys-layout-page-max)',
+        'wide-max': 'var(--md-sys-layout-wide-max)',
+        'search-width': 'var(--md-sys-layout-search-width)',
+      },
+      width: {
+        'sidebar-width': 'var(--md-sys-layout-sidebar-width)',
+        'search-width': 'var(--md-sys-layout-search-width)',
+      },
+      marginLeft: {
+        'article-offset': 'var(--md-sys-layout-article-offset)',
+      },
+      minHeight: {
+        'hero-min': 'var(--md-sys-layout-hero-min-height)',
+        'slot-newsletter': 'var(--md-sys-layout-slot-newsletter-min)',
+        'slot-ad': 'var(--md-sys-layout-slot-ad-min)',
+      },
+      maxHeight: {
+        'hero-max': 'var(--md-sys-layout-hero-max-height)',
+        'results-max': 'var(--md-sys-layout-results-max-height)',
+      },
+      height: {
+        'hero-mobile': 'var(--md-sys-layout-hero-mobile)',
+        'hero-sm': 'var(--md-sys-layout-hero-sm)',
+        'hero-lg': 'var(--md-sys-layout-hero-lg)',
+      },
+      zIndex: {
+        overlay: 'var(--md-sys-z-overlay)',
+      },
       spacing: {
         'spacing-0': 'var(--md-sys-spacing-0)',
         'spacing-px': 'var(--md-sys-spacing-px)',

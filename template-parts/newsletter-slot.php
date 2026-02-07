@@ -10,4 +10,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 $slot = isset( $args['slot'] ) ? sanitize_key( (string) $args['slot'] ) : 'footer';
 ?>
-<div class="jagawarta-newsletter-slot my-6 min-h-[60px]" data-newsletter-slot="<?php echo esc_attr( $slot ); ?>" aria-hidden="true"></div>
+<div class="jagawarta-newsletter-slot my-6 min-h-slot-newsletter" data-newsletter-slot="<?php echo esc_attr( $slot ); ?>" aria-hidden="true"></div>

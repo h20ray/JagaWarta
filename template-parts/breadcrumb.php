@@ -44,19 +44,17 @@ $breadcrumb_parts[] = array(
 	'url'  => get_category_link( $primary_cat->term_id ),
 );
 ?>
-<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'jagawarta' ); ?>" class="flex items-center gap-spacing-2 ml-0 md:ml-[107px] mb-spacing-4" style="min-height: 48px;">
+<nav aria-label="<?php esc_attr_e( 'Breadcrumb', 'jagawarta' ); ?>" class="layout-article-inner flex items-center gap-spacing-2 mb-spacing-4 min-h-12">
 	<?php
 	foreach ( $breadcrumb_parts as $index => $part ) :
 		if ( $index > 0 ) :
 			?>
-			<!-- Chevron separator SVG -->
 			<svg class="breadcrumb-chevron flex-shrink-0 text-on-surface-variant" width="16" height="16" viewBox="0 0 24 24" fill="none" role="presentation" aria-hidden="true">
 				<path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 			</svg>
 			<?php
 		endif;
 		?>
-		<!-- Pill-style link (consistent with theme chip pattern) -->
 		<a href="<?php echo esc_url( $part['url'] ); ?>" class="inline-flex items-center px-spacing-3 py-spacing-1 text-label-medium font-medium uppercase tracking-wide text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard no-underline">
 			<?php echo esc_html( $part['name'] ); ?>
 		</a>

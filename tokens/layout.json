@@ -1,0 +1,18 @@
+{
+  "layout-content-max": "726px",
+  "layout-article-width": "1046px",
+  "layout-article-offset": "107px",
+  "layout-sidebar-width": "127px",
+  "layout-page-max": "1260px",
+  "layout-wide-max": "1440px",
+  "layout-search-width": "600px",
+  "layout-hero-min-height": "200px",
+  "layout-hero-max-height": "70vh",
+  "layout-hero-mobile": "22rem",
+  "layout-hero-sm": "26rem",
+  "layout-hero-lg": "30rem",
+  "layout-results-max-height": "80vh",
+  "layout-slot-newsletter-min": "60px",
+  "layout-slot-ad-min": "90px",
+  "z-overlay": "100"
+}

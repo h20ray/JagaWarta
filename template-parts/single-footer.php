@@ -21,12 +21,9 @@ $tags = array_slice( $tags, 0, 4 );
 ?>
 <footer class="mt-spacing-12 pt-spacing-8">
 	<div class="flex flex-col sm:flex-row sm:items-baseline gap-spacing-4">
-		<!-- Label: POSTED IN: (16px, Medium, Uppercase) -->
-		<span class="text-[1rem] font-medium uppercase tracking-wide text-on-surface-variant flex-shrink-0">
+		<span class="text-body-large font-medium uppercase tracking-wide text-on-surface-variant flex-shrink-0">
 			<?php esc_html_e( 'Posted In:', 'jagawarta' ); ?>
 		</span>
-
-		<!-- Tags: Chips (Pills) -->
 		<div class="flex flex-wrap gap-3">
 			<?php foreach ( $tags as $tag ) :
 				// Convert tag name to #Hashtag format (CamelCase)

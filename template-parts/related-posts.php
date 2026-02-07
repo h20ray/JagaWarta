@@ -1,8 +1,6 @@
 <?php
 /**
  * Single: Related Posts (Google Blog Style).
- * - 3 Column Grid
- * - ~42px gap (using gap-10 / 2.5rem or gap-11)
  *
  * @package JagaWarta
  */
@@ -26,7 +24,7 @@ $related_query = new WP_Query( array(
 ) );
 ?>
 
-<section aria-labelledby="related-heading" class="mx-auto max-w-[1440px] border-t border-outline-variant mt-spacing-12 pt-spacing-10 px-spacing-4">
+<section aria-labelledby="related-heading" class="mx-auto max-w-wide-max border-t border-outline-variant mt-spacing-12 pt-spacing-10 px-spacing-4">
 	<h2 id="related-heading" class="sr-only">
 		<?php esc_html_e( 'Related stories', 'jagawarta' ); ?>
 	</h2>

@@ -26,7 +26,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="relative">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="block focus:outline-none">
-		<div class="relative h-[22rem] sm:h-[26rem] lg:h-[30rem]">
+		<div class="relative h-hero-mobile sm:h-hero-sm lg:h-hero-lg">
 			<?php
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :
@@ -53,26 +53,26 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 			<div class="absolute inset-0 bg-scrim/45"></div>
 
 			<div class="absolute inset-0 flex items-end">
-				<div class="w-full min-h-[10rem] p-5 sm:min-h-[12rem] sm:p-6 lg:min-h-[14rem] lg:p-8">
+				<div class="w-full min-h-40 p-spacing-5 sm:min-h-48 sm:p-spacing-6 lg:min-h-56 lg:p-spacing-8">
 					<div class="flex flex-wrap items-center gap-2">
 						<?php if ( $cat ) : ?>
-							<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-[0.75rem] leading-5 text-on-secondary-container">
+							<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
 								<?php echo esc_html( $cat->name ); ?>
 							</span>
 						<?php endif; ?>
 					</div>
 
-					<h2 class="mt-3 max-w-3xl text-[2rem] leading-tight text-on-surface line-clamp-3 sm:text-[2.5rem] lg:text-[3rem]">
+					<h2 class="mt-3 max-w-3xl text-headline-large text-on-surface line-clamp-3 sm:text-display-small lg:text-display-medium">
 						<?php echo esc_html( $title ); ?>
 					</h2>
 
 					<?php if ( $excerpt ) : ?>
-						<p class="mt-3 max-w-prose text-[1rem] leading-7 text-on-surface-variant line-clamp-2">
+						<p class="mt-3 max-w-prose text-body-large text-on-surface-variant line-clamp-2">
 							<?php echo esc_html( $excerpt ); ?>
 						</p>
 					<?php endif; ?>
 
-					<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.875rem] leading-6 text-on-surface-variant">
+					<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-1 text-body-medium text-on-surface-variant">
 						<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_human ); ?></time>
 						<?php if ( $read_time ) : ?>
 							<span aria-hidden="true">•</span>

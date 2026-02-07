@@ -1,7 +1,6 @@
 <?php
 /**
- * Single: Google Blog Style Header.
- * All spacing using design tokens, properly aligned.
+ * Single: Article header (Google Blog style).
  *
  * @package JagaWarta
  */
@@ -20,18 +19,16 @@ $avatar     = get_avatar_url( $author_id, array( 'size' => 48 ) );
 $read_time  = jagawarta_read_time_label( $post_id );
 ?>
 <header class="pt-spacing-12 pb-spacing-10 px-spacing-4">
-	<div class="mx-auto max-w-[1260px]">
+	<div class="mx-auto max-w-page-max">
 		<?php get_template_part( 'template-parts/breadcrumb' ); ?>
-		
-		<!-- H1 Title: 1046px width, 107px left offset -->
-		<h1 class="text-display-large font-normal text-on-surface mb-spacing-4 max-w-[1046px] ml-0 md:ml-[107px]" style="letter-spacing: -0.5px;">
+
+		<h1 class="layout-article-inner text-display-large font-normal text-on-surface mb-spacing-4 tracking-tight">
 			<?php echo esc_html( $title ); ?>
 		</h1>
 
 		<?php if ( has_excerpt() ) : ?>
-			<!-- Abstract: 2-column layout with 24px padding on each side of separator = 48px gap -->
-			<div class="flex flex-col md:flex-row mb-spacing-6 max-w-[1046px] ml-0 md:ml-[107px]">
-				<aside class="w-full md:w-[127px] flex-shrink-0 pr-0 md:pr-spacing-6 border-r-0 md:border-r border-outline-variant">
+			<div class="layout-article-inner flex flex-col md:flex-row mb-spacing-6">
+				<aside class="w-full md:w-sidebar-width flex-shrink-0 pr-0 md:pr-spacing-6 border-r-0 md:border-r border-outline-variant">
 					<div class="text-label-large font-light text-on-surface-variant leading-relaxed">
 						<time datetime="<?php echo esc_attr( $date_iso ); ?>" class="block">
 							<?php echo esc_html( $date_hr ); ?>
@@ -49,8 +46,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 				</div>
 			</div>
 		<?php else : ?>
-			<!-- No excerpt: inline metadata (date and read time only, author appears below) -->
-			<div class="flex flex-wrap items-center gap-x-spacing-4 text-label-large text-on-surface-variant mb-spacing-8 max-w-[1046px] ml-0 md:ml-[107px]">
+			<div class="layout-article-inner flex flex-wrap items-center gap-x-spacing-4 text-label-large text-on-surface-variant mb-spacing-8">
 				<time datetime="<?php echo esc_attr( $date_iso ); ?>">
 					<?php echo esc_html( $date_hr ); ?>
 				</time>
@@ -62,9 +58,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 			</div>
 		<?php endif; ?>
 		
-		<!-- Author Section with View Count and Share Button -->
-		<div class="flex flex-wrap items-center justify-between gap-x-spacing-6 gap-y-spacing-4 mb-spacing-8 max-w-[1046px] ml-0 md:ml-[107px]">
-			<!-- Author Info -->
+		<div class="layout-article-inner flex flex-wrap items-center justify-between gap-x-spacing-6 gap-y-spacing-4 mb-spacing-8">
 			<div class="flex items-center gap-spacing-3">
 				<?php if ( $avatar ) : ?>
 					<img src="<?php echo esc_url( $avatar ); ?>" alt="<?php echo esc_attr( $author ); ?>" class="w-10 h-10 rounded-full bg-surface-variant shadow-elevation-1" loading="lazy">
@@ -83,10 +77,8 @@ $read_time  = jagawarta_read_time_label( $post_id );
 					<?php endif; ?>
 				</div>
 			</div>
-			
-			<!-- View Count and Share -->
+
 			<div class="flex items-center gap-spacing-4">
-				<!-- View Count (same pill style as share button) -->
 				<?php
 				$view_count = jagawarta_view_count_display( $post_id );
 				if ( $view_count ) :
@@ -99,20 +91,18 @@ $read_time  = jagawarta_read_time_label( $post_id );
 						<span><?php echo esc_html( $view_count ); ?></span>
 					</span>
 				<?php endif; ?>
-				
-				<!-- Share Button -->
+
 				<?php get_template_part( 'template-parts/share-button' ); ?>
 			</div>
 		</div>
 	</div>
 
-	<!-- Featured Image: Aligned with H1 (107px left, 1046px width) -->
 	<?php
 	$header_img = jagawarta_get_post_display_image( $post_id );
 	if ( ! empty( $header_img['url'] ) ) :
 		?>
-		<div class="mx-auto mt-spacing-6 max-w-[1260px] px-spacing-4">
-			<div class="max-w-[1046px] ml-0 md:ml-[107px]">
+		<div class="mx-auto mt-spacing-6 max-w-page-max px-spacing-4">
+			<div class="layout-article-inner">
 				<figure class="overflow-hidden rounded-xl shadow-elevation-1">
 					<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => true, 'class' => 'object-cover aspect-video w-full' ) ); ?>
 				</figure>

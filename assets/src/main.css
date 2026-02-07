@@ -30,8 +30,8 @@
 
 @layer utilities {
   .focus-ring {
-    outline: 2px solid var(--md-color-outline);
-    outline-offset: 2px;
+    outline: var(--md-sys-focus-ring-width) solid var(--md-color-outline);
+    outline-offset: var(--md-sys-focus-ring-width);
   }
 
   .focus-ring:focus-visible {
@@ -84,7 +84,10 @@
 
   .btn-filled {
     @apply bg-primary text-on-primary border-0;
-    @apply hover:opacity-[0.92];
+  }
+
+  .btn-filled:hover {
+    opacity: var(--md-sys-button-hover-opacity);
   }
 
   .btn-outlined {
@@ -125,11 +128,21 @@
   }
 
   .skip-link:focus {
-    @apply left-4 top-4 z-[100] h-auto w-auto overflow-auto p-2 no-underline bg-surface-high text-on-surface;
+    @apply left-4 top-4 z-overlay h-auto w-auto overflow-auto p-2 no-underline bg-surface-high text-on-surface;
   }
 
   .layout-content {
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  .layout-article-inner {
+    max-width: var(--md-sys-layout-article-width);
+    margin-left: 0;
+  }
+  @screen md {
+    .layout-article-inner {
+      margin-left: var(--md-sys-layout-article-offset);
+    }
   }
 
   body.admin-bar #site-header {
@@ -185,13 +198,20 @@
     @apply text-on-surface hover:bg-surface-highest border-0;
   }
 
+  #search-wrapper.search-border-fade {
+    transition: border-color var(--md-sys-motion-delay-short) var(--md-sys-motion-easing-standard);
+  }
+  #search-wrapper.search-border-fade #search-placeholder-text {
+    transition-duration: var(--md-sys-motion-delay-short);
+  }
+
   .hero-image-wrap {
-    @apply aspect-[16/9] min-h-[200px] max-h-[70vh] w-full;
+    @apply aspect-[16/9] min-h-hero-min max-h-hero-max w-full;
   }
 
   @screen sm {
     .hero-image-wrap {
-      max-height: min(70vh, 28rem);
+      max-height: min(var(--md-sys-layout-hero-max-height), var(--md-sys-spacing-28));
     }
   }
 }

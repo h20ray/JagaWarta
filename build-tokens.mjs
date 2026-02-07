@@ -140,6 +140,12 @@ function emitNonColorVars() {
   for (const [k, v] of Object.entries(elevation)) {
     lines.push(`  --md-sys-${k}: ${v};`);
   }
+  const layout = loadJson(tokensDir, 'layout.json');
+  if (layout) {
+    for (const [k, v] of Object.entries(layout)) {
+      lines.push(`  --md-sys-${k}: ${v};`);
+    }
+  }
   return `:root {\n${lines.join('\n')}\n}\n`;
 }
 

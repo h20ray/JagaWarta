@@ -88,6 +88,8 @@
   --md-sys-motion-duration-short: 200ms;
   --md-sys-motion-duration-medium: 300ms;
   --md-sys-motion-duration-long: 500ms;
+  --md-sys-motion-duration-expand: 700ms;
+  --md-sys-motion-delay-short: 100ms;
   --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
   --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
   --md-sys-motion-easing-decelerated: cubic-bezier(0, 0, 0, 1);
@@ -133,10 +135,27 @@
   --md-sys-focus-ring-width: 2px;
   --md-sys-focus-ring-color: var(--md-sys-color-primary);
   --md-sys-disabled-opacity: 0.38;
+  --md-sys-button-hover-opacity: 0.92;
   --md-sys-elevation-0: none;
   --md-sys-elevation-1: 0 1px 2px 0 rgba(0, 0, 0, 0.05), 0 1px 3px -1px rgba(0, 0, 0, 0.1);
   --md-sys-elevation-2: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
   --md-sys-elevation-3: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+  --md-sys-layout-content-max: 726px;
+  --md-sys-layout-article-width: 1046px;
+  --md-sys-layout-article-offset: 107px;
+  --md-sys-layout-sidebar-width: 127px;
+  --md-sys-layout-page-max: 1260px;
+  --md-sys-layout-wide-max: 1440px;
+  --md-sys-layout-search-width: 600px;
+  --md-sys-layout-hero-min-height: 200px;
+  --md-sys-layout-hero-max-height: 70vh;
+  --md-sys-layout-hero-mobile: 22rem;
+  --md-sys-layout-hero-sm: 26rem;
+  --md-sys-layout-hero-lg: 30rem;
+  --md-sys-layout-results-max-height: 80vh;
+  --md-sys-layout-slot-newsletter-min: 60px;
+  --md-sys-layout-slot-ad-min: 90px;
+  --md-sys-z-overlay: 100;
 }
 
 [data-theme="dark"] {

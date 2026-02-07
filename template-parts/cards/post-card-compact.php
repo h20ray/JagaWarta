@@ -52,17 +52,17 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 		<div class="min-w-0">
 			<div class="flex flex-wrap items-center gap-2">
 				<?php if ( $cat ) : ?>
-					<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-[0.75rem] leading-5 text-on-secondary-container">
+					<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
 						<?php echo esc_html( $cat->name ); ?>
 					</span>
 				<?php endif; ?>
 			</div>
 
-			<h3 class="mt-1 text-[1rem] leading-6 text-on-surface line-clamp-2 group-hover:underline">
+			<h3 class="mt-1 text-body-large text-on-surface line-clamp-2 group-hover:underline">
 				<?php echo esc_html( $title ); ?>
 			</h3>
 
-			<div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-[0.75rem] leading-5 text-on-surface-variant">
+			<div class="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-label-small text-on-surface-variant">
 				<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_human ); ?></time>
 				<?php if ( $read_time ) : ?>
 					<span aria-hidden="true">•</span>

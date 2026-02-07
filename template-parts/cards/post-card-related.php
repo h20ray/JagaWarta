@@ -16,7 +16,7 @@ $date_iso = get_the_date( DATE_W3C );
 $date_hr  = function_exists( 'jagawarta_format_date' ) ? jagawarta_format_date( get_the_ID() ) : get_the_date();
 $author   = get_the_author();
 ?>
-<article class="group relative flex flex-col h-full min-w-0 overflow-hidden rounded-md bg-surface-low shadow-[0_1px_3px_0_rgba(60,64,67,0.1),0_1px_2px_0_rgba(60,64,67,0.06)] transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-[0_4px_8px_0_rgba(60,64,67,0.15),0_8px_16px_2px_rgba(60,64,67,0.15)]">
+<article class="group relative flex flex-col h-full min-w-0 overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3">
 	<a href="<?php the_permalink(); ?>" class="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-md" aria-label="<?php the_title_attribute(); ?>">
 		<div class="overflow-hidden rounded-t-md aspect-video bg-surface-low shrink-0">
 			<?php jagawarta_the_post_display_image( get_the_ID(), array( 'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105' ) ); ?>
@@ -47,7 +47,7 @@ $author   = get_the_author();
 			
 			<!-- Sliding Arrow Icon -->
 			<div aria-hidden="true" class="absolute bottom-spacing-10 right-spacing-10 flex text-on-surface transition-all duration-short ease-in group-hover:right-spacing-5 group-hover:text-primary">
-				<svg viewBox="0 0 32 32" class="w-[18px] h-[18px] fill-current" xmlns="http://www.w3.org/2000/svg">
+				<svg viewBox="0 0 32 32" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
 					<polygon points="16,0 13.2,2.8 24.3,14 0,14 0,18 24.3,18 13.2,29.2 16,32 32,16"/>
 				</svg>
 			</div>

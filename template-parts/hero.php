@@ -38,7 +38,7 @@ $excerpt    = wp_strip_all_tags( get_the_excerpt( $featured_id ) );
 		$hero_img = jagawarta_get_post_display_image( $featured_id );
 		if ( ! empty( $hero_img['url'] ) ) :
 			?>
-			<div class="aspect-[16/9] min-h-[200px] max-h-[70vh] w-full bg-surface-mid">
+			<div class="aspect-[16/9] min-h-hero-min max-h-hero-max w-full bg-surface-mid">
 				<?php jagawarta_the_post_display_image( $featured_id, array( 'lcp' => true, 'class' => 'h-full w-full object-cover' ) ); ?>
 			</div>
 		<?php endif; ?>

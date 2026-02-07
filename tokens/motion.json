@@ -1,9 +1,1 @@
-{
-  "motion-duration-short": "200ms",
-  "motion-duration-medium": "300ms",
-  "motion-duration-long": "500ms",
-  "motion-easing-standard": "cubic-bezier(0.2, 0, 0, 1)",
-  "motion-easing-emphasized": "cubic-bezier(0.2, 0, 0, 1)",
-  "motion-easing-decelerated": "cubic-bezier(0, 0, 0, 1)",
-  "motion-easing-accelerated": "cubic-bezier(0.3, 0, 1, 1)"
-}
+{"motion-duration-short":"200ms","motion-duration-medium":"300ms","motion-duration-long":"500ms","motion-duration-expand":"700ms","motion-delay-short":"100ms","motion-easing-standard":"cubic-bezier(0.2, 0, 0, 1)","motion-easing-emphasized":"cubic-bezier(0.2, 0, 0, 1)","motion-easing-decelerated":"cubic-bezier(0, 0, 0, 1)","motion-easing-accelerated":"cubic-bezier(0.3, 0, 1, 1)"}

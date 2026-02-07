@@ -18,25 +18,25 @@ if ( empty( $ids ) ) {
 }
 ?>
 <section class="bg-surface" aria-labelledby="first-grid-heading">
-	<div class="mx-auto max-w-screen-xl px-4 pb-8">
+	<div class="mx-auto max-w-screen-xl px-spacing-4 pb-spacing-8">
 		<div class="flex items-end justify-between">
-			<h2 id="first-grid-heading" class="text-[1.125rem] leading-6 text-on-surface">
+			<h2 id="first-grid-heading" class="text-title-large text-on-surface">
 				<?php echo esc_html( $title ); ?>
 			</h2>
 
 			<a href="<?php echo esc_url( get_post_type_archive_link( 'post' ) ); ?>"
-				class="text-[0.875rem] leading-6 text-primary underline-offset-2 hover:underline focus:underline">
+				class="text-body-medium text-primary underline-offset-2 hover:underline focus:underline">
 				<?php esc_html_e( 'View all', 'jagawarta' ); ?>
 			</a>
 		</div>
 
-		<div class="mt-4 grid gap-3 lg:hidden">
+		<div class="mt-spacing-4 grid gap-spacing-3 lg:hidden">
 			<?php foreach ( $ids as $post_id ) : ?>
 				<?php get_template_part( 'template-parts/cards/post-card-compact', null, array( 'post_id' => $post_id ) ); ?>
 			<?php endforeach; ?>
 		</div>
 
-		<div class="mt-4 hidden gap-4 lg:grid lg:grid-cols-3">
+		<div class="mt-spacing-4 hidden gap-spacing-4 lg:grid lg:grid-cols-3">
 			<?php foreach ( $ids as $post_id ) : ?>
 				<?php get_template_part( 'template-parts/cards/post-card-home', null, array( 'post_id' => $post_id ) ); ?>
 			<?php endforeach; ?>
