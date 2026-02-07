@@ -28,7 +28,7 @@ $term_link = get_category_link( $category->term_id );
 			}
 			setup_postdata( $post );
 			?>
-			<li class="flex"><?php get_template_part( 'template-parts/cards/post-card-categories' ); ?></li>
+			<li class="flex"><?php get_template_part( 'template-parts/cards/card-categories' ); ?></li>
 			<?php
 			wp_reset_postdata();
 		}

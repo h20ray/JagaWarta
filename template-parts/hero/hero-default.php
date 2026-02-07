@@ -1,6 +1,6 @@
 <?php
 /**
- * Home hero — single featured post. LCP-friendly, no slider.
+ * Single featured hero (no slider). Expects $args['featured_id'] or first post.
  *
  * @package JagaWarta
  */

@@ -79,6 +79,23 @@ function jagawarta_enqueue_assets(): void {
 	if ( jagawarta_needs_ticker() ) {
 		jagawarta_enqueue_ticker( $dir, $uri );
 	}
+
+	if ( is_archive() ) {
+		$load_more_js = $dir . '/load-more.js';
+		if ( file_exists( $load_more_js ) ) {
+			wp_enqueue_script(
+				'jagawarta-load-more',
+				$uri . '/load-more.js',
+				array(),
+				jagawarta_asset_version( $load_more_js ),
+				array( 'strategy' => 'defer' )
+			);
+			wp_localize_script( 'jagawarta-load-more', 'jagawarta_vars', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( 'jagawarta_nonce' ),
+			) );
+		}
+	}
 }
 
 function jagawarta_needs_ticker(): bool {

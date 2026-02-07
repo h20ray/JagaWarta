@@ -1,7 +1,6 @@
 <?php
 /**
- * Compact Overlay Card (right column)
- * Expects: $args['post_id'] (int)
+ * Compact overlay card (e.g. right column on home). Expects $args['post_id'].
  *
  * @package JagaWarta
  */
@@ -52,19 +51,19 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 
 			<div class="absolute inset-0 flex items-end">
 				<div class="w-full p-spacing-4 sm:p-spacing-5 lg:p-spacing-6">
-					<div class="flex flex-wrap items-center gap-2">
+					<div class="flex flex-wrap items-center gap-spacing-2">
 						<?php if ( $cat ) : ?>
-							<span class="inline-flex items-center rounded-sm bg-secondary-container px-2 py-1 text-label-small text-on-secondary-container">
+							<span class="inline-flex items-center rounded-sm bg-secondary-container px-spacing-2 py-spacing-1 text-label-small text-on-secondary-container">
 								<?php echo esc_html( $cat->name ); ?>
 							</span>
 						<?php endif; ?>
 					</div>
 
-					<h3 class="mt-2 text-title-large text-on-surface line-clamp-3">
+					<h3 class="mt-spacing-2 text-title-large text-on-surface line-clamp-3">
 						<?php echo esc_html( $title ); ?>
 					</h3>
 
-					<div class="mt-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-label-small text-on-surface-variant">
+					<div class="mt-spacing-2 flex flex-wrap items-center gap-x-spacing-2 gap-y-spacing-1 text-label-small text-on-surface-variant">
 						<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_human ); ?></time>
 						<?php if ( $read_time ) : ?>
 							<span aria-hidden="true">•</span>

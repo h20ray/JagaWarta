@@ -1,7 +1,6 @@
 <?php
 /**
- * Post card for "More like this" section (Google blog Related stories style).
- * Uses loop context (the_post() already called in related-posts).
+ * Card for "More like this" section. Expects global $post.
  *
  * @package JagaWarta
  */
@@ -22,16 +21,16 @@ $author   = get_the_author();
 			<?php jagawarta_the_post_display_image( get_the_ID(), array( 'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105' ) ); ?>
 		</div>
 
-		<div class="relative flex flex-col flex-grow px-spacing-10 pt-spacing-5 pb-spacing-10">
+		<div class="relative flex flex-col flex-grow px-spacing-10 pt-spacing-4 pb-spacing-10">
 			<?php if ( $cat ) : ?>
-				<div class="mb-spacing-3">
+				<div class="mb-spacing-4">
 					<span class="text-label-large font-medium uppercase tracking-wide text-on-surface-variant">
 						<?php echo esc_html( $cat->name ); ?>
 					</span>
 				</div>
 			<?php endif; ?>
 
-			<h3 class="mb-spacing-3 text-title-large font-normal leading-tight text-on-surface group-hover:text-primary transition-colors duration-short">
+			<h3 class="mb-spacing-4 text-title-large font-normal leading-tight text-on-surface group-hover:text-primary transition-colors duration-short">
 				<?php the_title(); ?>
 			</h3>
 
@@ -44,12 +43,9 @@ $author   = get_the_author();
 					<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_hr ); ?></time>
 				</span>
 			</div>
-			
-			<!-- Sliding Arrow Icon -->
+
 			<div aria-hidden="true" class="absolute bottom-spacing-10 right-spacing-10 flex text-on-surface transition-all duration-short ease-in group-hover:right-spacing-5 group-hover:text-primary">
-				<svg viewBox="0 0 32 32" class="w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg">
-					<polygon points="16,0 13.2,2.8 24.3,14 0,14 0,18 24.3,18 13.2,29.2 16,32 32,16"/>
-				</svg>
+				<?php jagawarta_svg_arrow_right(); ?>
 			</div>
 		</div>
 	</a>

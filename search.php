@@ -29,7 +29,7 @@ get_header();
 			while ( have_posts() ) {
 				the_post();
 				?>
-				<li class="flex"><?php get_template_part( 'template-parts/cards/post-card-categories' ); ?></li>
+				<li class="flex"><?php get_template_part( 'template-parts/cards/card-categories' ); ?></li>
 				<?php
 			}
 			?>

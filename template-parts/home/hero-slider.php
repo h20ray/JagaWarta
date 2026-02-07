@@ -33,7 +33,7 @@ $splide_opts = array(
 			<ul class="splide__list">
 				<?php foreach ( $ids as $i => $post_id ) : ?>
 					<li class="splide__slide">
-						<?php get_template_part( 'template-parts/cards/post-card-overlay', null, array(
+						<?php get_template_part( 'template-parts/cards/card-overlay', null, array(
 							'post_id' => $post_id,
 							'is_lcp'  => ( 0 === $i ),
 						) ); ?>

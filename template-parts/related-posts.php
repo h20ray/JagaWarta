@@ -35,7 +35,7 @@ $related_query = new WP_Query( array(
 
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-10">
 		<?php while ( $related_query->have_posts() ) : $related_query->the_post(); ?>
-			<?php get_template_part( 'template-parts/cards/post-card-related' ); ?>
+			<?php get_template_part( 'template-parts/cards/card-related' ); ?>
 		<?php endwhile; wp_reset_postdata(); ?>
 	</div>
 </section>

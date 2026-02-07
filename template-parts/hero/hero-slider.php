@@ -1,6 +1,6 @@
 <?php
 /**
- * Hero slider or grid — multiple featured posts. Load only when theme mod slider/grid is on.
+ * Hero slider or grid (block/front). Expects $args['post_ids'], $args['slider'].
  *
  * @package JagaWarta
  */
@@ -16,7 +16,7 @@ if ( empty( $post_ids ) ) {
 
 if ( $slider ) :
 	?>
-	<section class="hero hero--slider -mx-4 sm:-mx-6" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
+	<section class="hero hero--slider -mx-spacing-4 sm:-mx-spacing-6" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
 		<div data-jagawarta-hero-slider class="splide">
 			<div class="splide__track">
 				<ul class="splide__list">
@@ -29,7 +29,7 @@ if ( $slider ) :
 						setup_postdata( $post );
 						?>
 						<li class="splide__slide">
-							<?php get_template_part( 'template-parts/post-card-large' ); ?>
+							<?php get_template_part( 'template-parts/cards/card-hero' ); ?>
 						</li>
 						<?php
 						wp_reset_postdata();
@@ -44,19 +44,19 @@ else :
 	$first_id = $post_ids[0];
 	$rest     = array_slice( $post_ids, 1, 4 );
 	?>
-	<section class="hero grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
+	<section class="hero grid gap-spacing-4 sm:gap-spacing-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-spacing-8" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
 		<div class="min-w-0 lg:col-span-2">
 			<?php
 			$post = get_post( $first_id );
 			if ( $post ) {
 				setup_postdata( $post );
-				get_template_part( 'template-parts/post-card-large' );
+				get_template_part( 'template-parts/cards/card-hero' );
 				wp_reset_postdata();
 			}
 			?>
 		</div>
 		<?php if ( ! empty( $rest ) ) : ?>
-			<div class="grid min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-1">
+			<div class="grid min-w-0 gap-spacing-4 sm:grid-cols-2 lg:grid-cols-1">
 				<?php
 				foreach ( $rest as $pid ) {
 					$post = get_post( $pid );
@@ -65,7 +65,7 @@ else :
 					}
 					setup_postdata( $post );
 					?>
-					<div><?php get_template_part( 'template-parts/cards/post-card-categories', null, array( 'post_id' => $pid ) ); ?></div>
+					<div><?php get_template_part( 'template-parts/cards/card-categories', null, array( 'post_id' => $pid ) ); ?></div>
 					<?php
 					wp_reset_postdata();
 				}

@@ -1,6 +1,6 @@
 <?php
 /**
- * Large post card — hero. Expects global $post.
+ * Hero slide card. Expects global $post.
  *
  * @package JagaWarta
  */

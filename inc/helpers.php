@@ -118,18 +118,6 @@ function jagawarta_lcp_preload_url( $post = null ): ?string {
 }
 
 function jagawarta_get_modern_image_sources( int $attachment_id, string $size = 'large' ): array {
-	/**
-	 * Resolve modern image sources (AVIF/WebP) for an attachment + size.
-	 *
-	 * Returns an array with:
-	 * - default_src     string Image URL for the requested size.
-	 * - default_srcset  string Srcset for the requested size, if any.
-	 * - avif_srcset     string AVIF srcset, when matching .avif files exist.
-	 * - webp_srcset     string WebP srcset, when matching .webp files exist.
-	 *
-	 * Advanced providers can short-circuit or extend this via the
-	 * `jagawarta_modern_image_sources` filter.
-	 */
 	$src    = wp_get_attachment_image_url( $attachment_id, $size );
 	$srcset = wp_get_attachment_image_srcset( $attachment_id, $size );
 
@@ -390,3 +378,19 @@ function jagawarta_the_category_chip( $category = null, array $args = array() ):
 		);
 	}
 }
+
+function jagawarta_svg_arrow_right( string $class = 'w-5 h-5 fill-current' ): void {
+	echo '<svg viewBox="0 0 32 32" class="' . esc_attr( $class ) . '" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><polygon points="16,0 13.2,2.8 24.3,14 0,14 0,18 24.3,18 13.2,29.2 16,32 32,16"/></svg>';
+}
+
+function jagawarta_clean_archive_title( $title ) {
+	if ( is_category() ) {
+		$title = single_cat_title( '', false );
+	} elseif ( is_tag() ) {
+		$title = single_tag_title( '', false );
+	} elseif ( is_author() ) {
+		$title = get_the_author();
+	}
+	return $title;
+}
+add_filter( 'get_the_archive_title', 'jagawarta_clean_archive_title' );

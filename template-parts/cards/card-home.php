@@ -1,6 +1,6 @@
 <?php
 /**
- * Post card for home (e.g. Latest stories). Expects $args['post_id'].
+ * Card for home (e.g. Latest stories). Expects $args['post_id'].
  *
  * @package JagaWarta
  */
@@ -34,7 +34,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 		</div>
 
 		<div class="flex flex-col flex-grow p-spacing-6">
-			<div class="flex flex-wrap items-center gap-x-spacing-2 gap-y-1 text-label-medium text-on-surface-variant mb-spacing-3">
+			<div class="flex flex-wrap items-center gap-x-spacing-2 gap-y-spacing-1 text-label-medium text-on-surface-variant mb-spacing-3">
 				<?php if ( $cat ) : ?>
 					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'medium' ) ); ?>
 				<?php endif; ?>

@@ -132,7 +132,7 @@
   }
 
   .layout-content {
-    @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+    @apply mx-auto w-full max-w-page-max px-6 sm:px-8;
   }
 
   .layout-article-inner {

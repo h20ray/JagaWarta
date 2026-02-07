@@ -32,13 +32,13 @@ if ( empty( $ids ) ) {
 
 		<div class="mt-spacing-4 grid gap-spacing-3 lg:hidden">
 			<?php foreach ( $ids as $post_id ) : ?>
-				<?php get_template_part( 'template-parts/cards/post-card-compact', null, array( 'post_id' => $post_id ) ); ?>
+				<?php get_template_part( 'template-parts/cards/card-compact', null, array( 'post_id' => $post_id ) ); ?>
 			<?php endforeach; ?>
 		</div>
 
 		<div class="mt-spacing-4 hidden gap-spacing-4 lg:grid lg:grid-cols-3">
 			<?php foreach ( $ids as $post_id ) : ?>
-				<?php get_template_part( 'template-parts/cards/post-card-home', null, array( 'post_id' => $post_id ) ); ?>
+				<?php get_template_part( 'template-parts/cards/card-home', null, array( 'post_id' => $post_id ) ); ?>
 			<?php endforeach; ?>
 		</div>
 	</div>

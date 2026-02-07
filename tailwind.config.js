@@ -2,6 +2,8 @@
 module.exports = {
   content: [
     './**/*.php',
+    './template-parts/**/*.php',
+    './inc/**/*.php',
     './assets/src/**/*.js',
     './assets/src/**/*.css',
   ],
@@ -160,6 +162,10 @@ module.exports = {
       },
       zIndex: {
         overlay: 'var(--md-sys-z-overlay)',
+      },
+      aspectRatio: {
+        'hero-category': '1.925 / 1',
+        'card-below-hero': '2.21 / 1',
       },
       spacing: {
         'spacing-0': 'var(--md-sys-spacing-0)',

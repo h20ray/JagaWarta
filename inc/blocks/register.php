@@ -41,11 +41,11 @@ function render_hero( array $attributes, string $content, WP_Block $block ): str
 	$post_ids = jagawarta_get_featured_posts( $count );
 	ob_start();
 	if ( ! empty( $post_ids ) && $slider ) {
-		get_template_part( 'template-parts/hero-slider', null, array( 'post_ids' => $post_ids, 'slider' => true ) );
+		get_template_part( 'template-parts/hero/hero-slider', null, array( 'post_ids' => $post_ids, 'slider' => true ) );
 	} elseif ( ! empty( $post_ids ) ) {
-		get_template_part( 'template-parts/hero', null, array( 'featured_id' => (int) $post_ids[0] ) );
+		get_template_part( 'template-parts/hero/hero-default', null, array( 'featured_id' => (int) $post_ids[0] ) );
 	} else {
-		get_template_part( 'template-parts/hero', null, array() );
+		get_template_part( 'template-parts/hero/hero-default', null, array() );
 	}
 	return ob_get_clean();
 }

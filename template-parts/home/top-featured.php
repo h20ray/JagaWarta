@@ -21,11 +21,11 @@ $side_ids   = isset( $args['side_ids'] ) ? array_map( 'intval', (array) $args['s
 
 			<div class="grid gap-4 lg:grid-rows-2">
 				<?php if ( ! empty( $side_ids[0] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/post-card-compact-overlay', null, array( 'post_id' => $side_ids[0] ) ); ?>
+					<?php get_template_part( 'template-parts/cards/card-compact-overlay', null, array( 'post_id' => $side_ids[0] ) ); ?>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $side_ids[1] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/post-card-compact-overlay', null, array( 'post_id' => $side_ids[1] ) ); ?>
+					<?php get_template_part( 'template-parts/cards/card-compact-overlay', null, array( 'post_id' => $side_ids[1] ) ); ?>
 				<?php endif; ?>
 			</div>
 		</div>
