@@ -37,6 +37,14 @@
   .focus-ring:focus-visible {
     outline-color: var(--md-color-primary);
   }
+
+  /* Hide native search cancel button aggressively */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
 }
 
 @layer components {
@@ -122,6 +130,10 @@
 
   .layout-content {
     @apply mx-auto w-full max-w-6xl px-6 sm:px-8;
+  }
+
+  body.admin-bar #site-header {
+    top: var(--wp-admin--admin-bar--height, 0px);
   }
 
   .layout-section {

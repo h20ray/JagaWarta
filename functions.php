@@ -19,6 +19,7 @@ require_once JAGAWARTA_DIR . '/inc/query/posts.php';
 require_once JAGAWARTA_DIR . '/inc/query/news.php';
 require_once JAGAWARTA_DIR . '/inc/assets.php';
 require_once JAGAWARTA_DIR . '/inc/customizer.php';
+require_once JAGAWARTA_DIR . '/inc/ajax-search.php';
 
 add_action( 'after_setup_theme', 'jagawarta_setup' );
 function jagawarta_setup() {
