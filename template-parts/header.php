@@ -9,11 +9,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<header id="site-header" class="sticky top-0 z-50 bg-surface shadow-elevation-2 transition-shadow duration-short ease-standard h-16" role="banner" data-jagawarta-header>
+<header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface shadow-elevation-2 transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav>
 	<div class="w-full h-full px-4 md:px-12 flex items-center justify-between pointer-events-auto relative">
 		<div id="header-main-content" class="w-full h-full flex items-center justify-between">
 			<div class="flex items-center gap-8 md:gap-12 flex-1 justify-start">
-				<button type="button" data-jagawarta-nav-toggle class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary header-transition" aria-controls="nav-menu" aria-expanded="false" aria-label="<?php esc_attr_e( 'Menu', 'jagawarta' ); ?>">
+				<button type="button" data-jagawarta-nav-toggle class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary header-transition" aria-controls="mobile-nav-panel" aria-expanded="false" aria-label="<?php esc_attr_e( 'Menu', 'jagawarta' ); ?>">
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
 				</button>
 				<div id="header-logo" class="flex-shrink-0 relative z-50">
@@ -26,7 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php endif; ?>
 				</div>
 				<nav id="header-nav" class="hidden md:flex transition-all duration-expand ease-[cubic-bezier(0.2,0.0,0,1.0)] transform translate-x-0" aria-label="<?php esc_attr_e( 'Primary', 'jagawarta' ); ?>">
-					<ul id="nav-menu" data-jagawarta-nav-menu class="flex items-center gap-1 list-none m-0 p-0" role="menubar">
+					<ul class="jw-nav-menu flex items-center gap-1 list-none m-0 p-0" role="menubar">
 						<?php
 						if ( has_nav_menu( 'primary' ) ) {
 							wp_nav_menu( array(
@@ -34,17 +34,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 								'container'      => false,
 								'items_wrap'     => '%3$s',
 								'depth'          => 1,
-								'link_before'    => '<span class="nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block">',
+								'link_before'    => '<span class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block">',
 								'link_after'     => '</span>',
 							) );
 						} else {
 							$categories = get_categories( array( 'number' => 5, 'orderby' => 'count', 'order' => 'DESC' ) );
 							$is_front   = is_front_page();
 							if ( $categories ) {
-								echo '<li><a href="' . esc_url( home_url( '/' ) ) . '" class="nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ( $is_front ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html__( 'Home', 'jagawarta' ) . '</a></li>';
+								echo '<li><a href="' . esc_url( home_url( '/' ) ) . '" class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ( $is_front ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html__( 'Home', 'jagawarta' ) . '</a></li>';
 								foreach ( $categories as $cat ) {
 									$active = is_category( $cat->term_id );
-									echo '<li><a href="' . esc_url( get_category_link( $cat->term_id ) ) . '" class="nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ( $active ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html( $cat->name ) . '</a></li>';
+									echo '<li><a href="' . esc_url( get_category_link( $cat->term_id ) ) . '" class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ( $active ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html( $cat->name ) . '</a></li>';
 								}
 							}
 						}
@@ -70,6 +70,36 @@ if ( ! defined( 'ABSPATH' ) ) {
 					</form>
 				</div>
 			</div>
+		</div>
+
+		<div data-jagawarta-nav-scrim class="jw-nav-scrim md:hidden" hidden aria-hidden="true"></div>
+		<div id="mobile-nav-panel" data-jagawarta-nav-panel class="jw-mobile-nav-panel md:hidden" hidden aria-hidden="true">
+			<nav class="jw-mobile-nav-inner" aria-label="<?php esc_attr_e( 'Mobile', 'jagawarta' ); ?>">
+				<ul data-jagawarta-nav-menu class="jw-nav-menu jw-mobile-nav-list" role="menu">
+					<?php
+					if ( has_nav_menu( 'primary' ) ) {
+						wp_nav_menu( array(
+							'theme_location' => 'primary',
+							'container'      => false,
+							'items_wrap'     => '%3$s',
+							'depth'          => 1,
+							'link_before'    => '<span class="jw-nav-link">',
+							'link_after'     => '</span>',
+						) );
+					} else {
+						$categories = get_categories( array( 'number' => 8, 'orderby' => 'count', 'order' => 'DESC' ) );
+						$is_front   = is_front_page();
+						if ( $categories ) {
+							echo '<li role="none"><a role="menuitem" href="' . esc_url( home_url( '/' ) ) . '" class="jw-nav-link' . ( $is_front ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html__( 'Home', 'jagawarta' ) . '</a></li>';
+							foreach ( $categories as $cat ) {
+								$active = is_category( $cat->term_id );
+								echo '<li role="none"><a role="menuitem" href="' . esc_url( get_category_link( $cat->term_id ) ) . '" class="jw-nav-link' . ( $active ? ' font-semibold text-primary bg-surface-high' : '' ) . '">' . esc_html( $cat->name ) . '</a></li>';
+							}
+						}
+					}
+					?>
+				</ul>
+			</nav>
 		</div>
 
 	<script>

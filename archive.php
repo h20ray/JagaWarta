@@ -15,19 +15,19 @@ $cat_name = is_category() ? single_cat_title( '', false ) : get_the_archive_titl
 set_query_var( 'breadcrumb_context', 'archive' );
 ?>
 
-<main id="main" class="site-main layout-content max-w-page-max flex flex-col text-on-surface pt-spacing-12">
+<main id="main" class="jw-archive site-main layout-content max-w-page-max flex flex-col text-on-surface">
 	<?php get_template_part( 'template-parts/breadcrumb' ); ?>
-	<header class="flex flex-col mt-spacing-4 max-w-content-max pt-0 pb-spacing-10">
+	<header class="jw-archive-header flex flex-col max-w-content-max pt-0">
 		<div class="mb-spacing-2">
-			<?php the_archive_title( '<h1 class="text-display-small md:text-display-medium font-bold tracking-tight text-on-surface">', '</h1>' ); ?>
+			<?php the_archive_title( '<h1 class="jw-archive-title tracking-tight text-on-surface">', '</h1>' ); ?>
 		</div>
 		
 		<?php if ( get_the_archive_description() ) : ?>
-			<div class="text-body-large text-on-surface-variant max-w-content-max">
+			<div class="jw-archive-desc text-on-surface-variant max-w-content-max">
 				<?php the_archive_description(); ?>
 			</div>
 		<?php else : ?>
-			<p class="text-body-large text-on-surface-variant max-w-content-max">
+			<p class="jw-archive-desc text-on-surface-variant max-w-content-max">
 				<?php printf( esc_html__( 'Latest news and updates about %s at JagaWarta.', 'jagawarta' ), esc_html( $cat_name ) ); ?>
 			</p>
 		<?php endif; ?>
@@ -56,8 +56,8 @@ set_query_var( 'breadcrumb_context', 'archive' );
 		}
 		?>
 
-		<div class="flex items-center gap-spacing-4 pt-spacing-16 pb-spacing-6">
-			<h2 class="text-headline-medium md:text-headline-large font-bold text-on-surface">
+		<div class="jw-archive-section flex items-center gap-spacing-4">
+			<h2 class="jw-archive-section-title text-on-surface">
 				<?php printf( esc_html__( 'Latest %s news', 'jagawarta' ), esc_html( $cat_name ) ); ?>
 			</h2>
 			<div class="h-px bg-outline-variant flex-grow"></div>

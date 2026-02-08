@@ -22,7 +22,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 	<div class="mx-auto max-w-page-max">
 		<?php get_template_part( 'template-parts/breadcrumb' ); ?>
 
-		<h1 class="layout-article-inner text-display-large font-normal text-on-surface mb-spacing-4 tracking-tight">
+		<h1 class="layout-article-inner jw-article-title font-normal text-on-surface mb-spacing-4 tracking-tight">
 			<?php echo esc_html( $title ); ?>
 		</h1>
 

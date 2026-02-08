@@ -11,6 +11,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'wp_enqueue_scripts', 'jagawarta_enqueue_assets', 5 );
 add_action( 'wp_head', 'jagawarta_head_lcp_preload', 1 );
+add_action( 'wp_head', 'jagawarta_font_preconnect', 0 );
+
+function jagawarta_font_preconnect(): void {
+	echo '<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />' . "\n";
+	echo '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />' . "\n";
+}
 
 function jagawarta_head_lcp_preload(): void {
 	if ( ! is_singular( 'post' ) ) {

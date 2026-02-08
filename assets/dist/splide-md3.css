@@ -61,6 +61,21 @@
   right: 1rem;
 }
 
+@media (max-width: 640px) {
+  .js-hero-splide .splide__arrow {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .js-hero-splide .splide__arrow--prev {
+    left: 0.5rem;
+  }
+
+  .js-hero-splide .splide__arrow--next {
+    right: 0.5rem;
+  }
+}
+
 @media (min-width: 1024px) {
   .js-hero-splide .splide__arrow {
     opacity: 0;

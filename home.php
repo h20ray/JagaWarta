@@ -23,14 +23,16 @@ $breaking_ids = ( is_front_page() && $ticker_on ) ? jagawarta_get_breaking_posts
 		<h1 class="text-headline-medium font-sans text-on-surface"><?php single_post_title(); ?></h1>
 	</header>
 	<?php if ( have_posts() ) : ?>
-		<div class="grid gap-8 sm:gap-10">
+		<ol class="jw-post-list" role="list">
 			<?php
+			$index = 1;
 			while ( have_posts() ) {
 				the_post();
-				get_template_part( 'template-parts/content', get_post_type() );
+				get_template_part( 'template-parts/cards/card-list-item', null, array( 'index' => $index ) );
+				$index++;
 			}
 			?>
-		</div>
+		</ol>
 		<?php get_template_part( 'template-parts/pagination' ); ?>
 	<?php else : ?>
 		<?php get_template_part( 'template-parts/content', 'none' ); ?>
