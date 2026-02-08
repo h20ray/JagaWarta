@@ -31,20 +31,17 @@ $cat       = $category ? $category[0] : null;
 
 		</div>
 
-		<?php if ( has_post_thumbnail() ) : ?>
-			<div class="overflow-hidden rounded-b-md aspect-card-below-hero bg-surface-low shrink-0 mt-auto">
-				<?php
-				the_post_thumbnail(
-					'medium_large',
-					array(
-						'class'   => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105',
-						'loading' => 'lazy',
-						'alt'     => get_the_title(),
-					)
-				);
-				?>
-			</div>
-		<?php endif; ?>
+		<div class="overflow-hidden rounded-b-md aspect-card-below-hero bg-surface-low shrink-0 mt-auto">
+			<?php
+			jagawarta_the_post_display_image(
+				$post_id,
+				array(
+					'lcp'   => false,
+					'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105',
+				)
+			);
+			?>
+		</div>
 
 	</a>
 </article>

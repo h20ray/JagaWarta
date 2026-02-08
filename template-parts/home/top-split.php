@@ -20,12 +20,12 @@ if ( empty( $slider_ids ) ) {
 ?>
 <section class="bg-surface" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
 	<div class="mx-auto max-w-screen-xl px-4 py-6">
-		<div class="grid gap-4 lg:grid-cols-[2fr,1fr]">
-			<div>
+		<div class="jw-top-split grid gap-4 lg:grid-cols-[2fr,1fr]">
+			<div class="jw-top-split-main">
 				<?php get_template_part( 'template-parts/home/hero-slider', null, array( 'ids' => $slider_ids ) ); ?>
 			</div>
 
-			<div class="grid gap-4 lg:grid-rows-2">
+			<div class="jw-top-split-side grid gap-4 lg:grid-rows-2">
 				<?php if ( ! empty( $side_ids[0] ) ) : ?>
 					<?php get_template_part( 'template-parts/cards/card-compact-overlay', null, array( 'post_id' => $side_ids[0] ) ); ?>
 				<?php endif; ?>

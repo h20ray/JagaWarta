@@ -21,7 +21,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 	? jagawarta_read_time_label( $post_id )
 	: '';
 ?>
-<article class="relative overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
+<article class="jw-card jw-card--overlay relative overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="block h-full focus:outline-none">
 		<div class="relative h-spacing-56 sm:h-spacing-64 lg:h-full">
 			<?php

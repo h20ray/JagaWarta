@@ -23,9 +23,9 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 	? jagawarta_read_time_label( $post_id )
 	: '';
 ?>
-<article class="relative">
+<article class="jw-card jw-card--hero jw-hero-card relative">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="block focus:outline-none">
-		<div class="relative h-hero-mobile sm:h-hero-sm lg:h-hero-lg">
+		<div class="jw-hero-media relative h-hero-mobile sm:h-hero-sm lg:h-hero-lg">
 			<?php
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :
@@ -49,11 +49,11 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 				<div class="h-full w-full bg-surface-high"></div>
 			<?php endif; ?>
 
-			<div class="absolute inset-0 bg-scrim/45"></div>
+			<div class="jw-hero-overlay absolute inset-0"></div>
 
 			<div class="absolute inset-0 flex items-end">
-				<div class="w-full min-h-40 p-spacing-5 sm:min-h-48 sm:p-spacing-6 lg:min-h-56 lg:p-spacing-8">
-					<div class="flex flex-wrap items-center gap-spacing-2">
+				<div class="jw-hero-content w-full min-h-40 p-spacing-4 sm:min-h-48 sm:p-spacing-6 lg:min-h-56 lg:p-spacing-8">
+					<div class="jw-hero-eyebrow flex flex-wrap items-center gap-spacing-2">
 						<?php if ( $cat ) : ?>
 							<span class="inline-flex items-center rounded-sm bg-secondary-container px-spacing-2 py-spacing-1 text-label-small text-on-secondary-container">
 								<?php echo esc_html( $cat->name ); ?>
@@ -61,17 +61,17 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 						<?php endif; ?>
 					</div>
 
-					<h2 class="mt-spacing-3 max-w-3xl text-headline-large text-on-surface line-clamp-3 sm:text-display-small lg:text-display-medium">
+					<h2 class="jw-hero-title mt-spacing-2 max-w-3xl text-on-surface line-clamp-3">
 						<?php echo esc_html( $title ); ?>
 					</h2>
 
 					<?php if ( $excerpt ) : ?>
-						<p class="mt-spacing-3 max-w-prose text-body-large text-on-surface-variant line-clamp-2">
+						<p class="jw-hero-excerpt mt-spacing-2 max-w-prose text-on-surface-variant line-clamp-2">
 							<?php echo esc_html( $excerpt ); ?>
 						</p>
 					<?php endif; ?>
 
-					<div class="mt-spacing-3 flex flex-wrap items-center gap-x-spacing-3 gap-y-spacing-1 text-body-medium text-on-surface-variant">
+					<div class="jw-hero-meta mt-spacing-2 flex flex-wrap items-center gap-x-spacing-3 gap-y-spacing-1 text-on-surface-variant">
 						<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_human ); ?></time>
 						<?php if ( $read_time ) : ?>
 							<span aria-hidden="true">•</span>

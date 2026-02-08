@@ -10,11 +10,11 @@
 
 .js-hero-splide .splide__arrow {
   pointer-events: auto;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.25rem;
+  height: 2.25rem;
   border-radius: var(--md-shape-corner-full);
 
-  background: var(--md-color-surface-container-low);
+  background: color-mix(in srgb, var(--md-color-surface-container-low) 80%, transparent);
   color: var(--md-color-on-surface);
   border: 1px solid var(--md-color-outline-variant);
 
@@ -54,25 +54,25 @@
 }
 
 .js-hero-splide .splide__arrow--prev {
-  left: 1rem;
+  left: 0.75rem;
 }
 
 .js-hero-splide .splide__arrow--next {
-  right: 1rem;
+  right: 0.75rem;
 }
 
 @media (max-width: 640px) {
   .js-hero-splide .splide__arrow {
-    width: 2rem;
-    height: 2rem;
+    width: 1.9rem;
+    height: 1.9rem;
   }
 
   .js-hero-splide .splide__arrow--prev {
-    left: 0.5rem;
+    left: 0.4rem;
   }
 
   .js-hero-splide .splide__arrow--next {
-    right: 0.5rem;
+    right: 0.4rem;
   }
 }
 
@@ -89,8 +89,8 @@
 
 .js-hero-splide .splide__pagination {
   gap: 0.5rem;
-  padding: 0.75rem 1rem;
-  background: color-mix(in srgb, var(--md-color-surface-container-low) 70%, transparent);
+  padding: 0.5rem 0.75rem;
+  background: color-mix(in srgb, var(--md-color-surface-container-low) 60%, transparent);
   border: 1px solid var(--md-color-outline-variant);
   border-radius: var(--md-shape-corner-full);
   width: fit-content;
@@ -98,8 +98,8 @@
 }
 
 .js-hero-splide .splide__pagination__page {
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: var(--md-shape-corner-full);
 
   background: var(--md-color-outline-variant);

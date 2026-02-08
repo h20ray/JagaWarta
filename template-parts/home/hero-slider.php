@@ -24,9 +24,9 @@ $splide_opts = array(
 	'speed'      => 450,
 );
 ?>
-<div class="overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
+<div class="jw-hero-slider overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
 	<section
-		class="splide js-hero-splide"
+		class="splide js-hero-splide jw-hero-splide"
 		aria-label="<?php esc_attr_e( 'Featured stories', 'jagawarta' ); ?>"
 		data-splide="<?php echo esc_attr( wp_json_encode( $splide_opts ) ); ?>">
 		<div class="splide__track">

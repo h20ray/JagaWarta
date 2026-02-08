@@ -1,5 +1,23 @@
 (function () {
   'use strict';
+  const fallbackImages = () => {
+    document.addEventListener(
+      'error',
+      (event) => {
+        const target = event.target;
+        if (!target || target.tagName !== 'IMG') return;
+        const fallback = target.getAttribute('data-jw-fallback');
+        if (!fallback || target.getAttribute('data-jw-fallback-applied') === 'true') return;
+        target.setAttribute('data-jw-fallback-applied', 'true');
+        target.removeAttribute('srcset');
+        target.src = fallback;
+      },
+      true
+    );
+  };
+
+  fallbackImages();
+
   const nav = document.querySelector('[data-jagawarta-nav]');
   if (!nav) return;
   const toggle = nav.querySelector('[data-jagawarta-nav-toggle]');

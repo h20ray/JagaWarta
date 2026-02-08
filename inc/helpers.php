@@ -84,6 +84,14 @@ function jagawarta_image_onerror_attr(): string {
 	return 'this.onerror=null;this.src=\'' . esc_url( $fallback ) . '\';this.srcset=\'\';';
 }
 
+function jagawarta_image_fallback_attr(): string {
+	$fallback = jagawarta_default_image_url();
+	if ( empty( $fallback ) ) {
+		return '';
+	}
+	return 'data-jw-fallback="' . esc_url( $fallback ) . '"';
+}
+
 function jagawarta_get_post_display_image( $post = null ): array {
 	$post = get_post( $post );
 	if ( ! $post ) {
@@ -92,7 +100,9 @@ function jagawarta_get_post_display_image( $post = null ): array {
 	if ( has_post_thumbnail( $post ) ) {
 		$id = (int) get_post_thumbnail_id( $post );
 		$url = wp_get_attachment_image_url( $id, 'large' );
-		return array( 'attachment_id' => $id, 'url' => $url ?: '' );
+		if ( $url ) {
+			return array( 'attachment_id' => $id, 'url' => $url );
+		}
 	}
 	$content = $post->post_content;
 	if ( ! empty( $content ) && preg_match( '/<img[^>]+src=(["\'])([^"\']+)\1/', $content, $m ) ) {
@@ -138,8 +148,9 @@ function jagawarta_the_post_display_image( $post = null, array $args = array() )
 	$loading = ! empty( $args['lcp'] ) ? 'eager' : 'lazy';
 	$class   = trim( 'w-full h-auto ' . (string) $args['class'] );
 	$onerror = jagawarta_image_onerror_attr();
+	$fallback = jagawarta_image_fallback_attr();
 
-	$html = '<img src="' . esc_url( $img['url'] ) . '" alt="" loading="' . esc_attr( $loading ) . '" class="' . esc_attr( $class ) . '"' . ( $onerror ? ' onerror="' . esc_attr( $onerror ) . '"' : '' ) . ' />';
+	$html = '<img src="' . esc_url( $img['url'] ) . '" alt="" loading="' . esc_attr( $loading ) . '" class="' . esc_attr( $class ) . '"' . ( $onerror ? ' onerror="' . esc_attr( $onerror ) . '"' : '' ) . ( $fallback ? ' ' . $fallback : '' ) . ' />';
 
 	echo apply_filters( 'jagawarta_external_image_tag', $html, $img, $args );
 }
@@ -163,6 +174,7 @@ function jagawarta_the_image( int $attachment_id, array $args = array() ): void 
 	$fetchpriority = ! empty( $args['lcp'] ) ? 'high' : 'auto';
 	$class  = trim( 'w-full h-auto ' . (string) $args['class'] );
 	$onerror = jagawarta_image_onerror_attr();
+	$fallback = jagawarta_image_fallback_attr();
 	?>
 	<img
 		src="<?php echo esc_url( $src ); ?>"
@@ -173,6 +185,7 @@ function jagawarta_the_image( int $attachment_id, array $args = array() ): void 
 		fetchpriority="<?php echo esc_attr( $fetchpriority ); ?>"
 		class="<?php echo esc_attr( $class ); ?>"
 		<?php if ( $onerror ) : ?>onerror="<?php echo esc_attr( $onerror ); ?>"<?php endif; ?>
+		<?php if ( $fallback ) : ?> <?php echo $fallback; ?><?php endif; ?>
 	/>
 	<?php
 }
