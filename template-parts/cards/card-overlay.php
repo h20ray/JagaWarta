@@ -25,7 +25,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="jw-card jw-card--hero jw-hero-card relative">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="block focus:outline-none">
-		<div class="jw-hero-media relative h-hero-mobile sm:h-hero-sm lg:h-hero-lg">
+		<div class="jw-hero-media relative aspect-video w-full min-h-hero-min max-h-hero-max">
 			<?php
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :

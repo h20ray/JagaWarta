@@ -315,15 +315,15 @@
   @screen sm {
     .jw-archive-title {
       font-size: var(--md-sys-typescale-display-small-size);
-      line-height: var(--md-sys-typescale-display-small-line-height);
-      font-weight: 600;
+      line-height: 1.15;
+      font-weight: 500;
     }
   }
 
   @screen md {
     .jw-archive-title {
       font-size: var(--md-sys-typescale-display-medium-size);
-      line-height: var(--md-sys-typescale-display-medium-line-height);
+      line-height: 1.15;
     }
   }
 
@@ -355,14 +355,6 @@
     font-size: var(--md-sys-typescale-headline-medium-size);
     line-height: var(--md-sys-typescale-headline-medium-line-height);
     font-weight: 500;
-  }
-
-  @screen md {
-    .jw-archive-section-title {
-      font-size: var(--md-sys-typescale-headline-large-size);
-      line-height: var(--md-sys-typescale-headline-large-line-height);
-      font-weight: 600;
-    }
   }
 
   .jw-archive-hero-body {
@@ -411,6 +403,15 @@
   .jw-hero-media {
     border-radius: var(--md-sys-shape-corner-large);
     overflow: hidden;
+  }
+
+  .jw-hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    vertical-align: middle;
   }
 
   .jw-hero-overlay {
@@ -482,7 +483,7 @@
   }
 
   .jw-top-split {
-    align-items: stretch;
+    align-items: start;
   }
 
   .jw-top-split-main,
@@ -491,32 +492,50 @@
     flex-direction: column;
   }
 
-  .jw-top-split-main > * {
-    height: 100%;
-  }
-
-  .jw-top-split .jw-hero-slider,
-  .jw-top-split .jw-hero-splide,
-  .jw-top-split .splide__track,
-  .jw-top-split .splide__list,
-  .jw-top-split .splide__slide,
-  .jw-top-split .jw-hero-card,
-  .jw-top-split .jw-hero-media {
-    height: 100%;
-  }
-
-  @screen lg {
-    .jw-top-split .jw-hero-media {
-      min-height: 100%;
-    }
-  }
-
   .jw-card--hero {
     background: var(--md-color-surface-container-low);
   }
 
   .jw-card--overlay {
     background: var(--md-color-surface-container-low);
+  }
+
+  .jw-card--bento {
+    @apply group relative flex flex-col overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3;
+  }
+
+  .jw-bento-media {
+    flex: 0 0 42%;
+    min-width: 42%;
+    background: var(--md-color-surface-container-low);
+  }
+
+  .jw-bento-content {
+    @apply flex flex-col flex-grow px-spacing-4 py-spacing-3;
+  }
+
+  @screen sm {
+    .jw-card--bento > a {
+      flex-direction: column;
+    }
+
+    .jw-bento-media {
+      flex-basis: auto;
+      min-width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  @screen lg {
+    .jw-card--bento > a {
+      flex-direction: row;
+    }
+
+    .jw-bento-media {
+      flex: 0 0 45%;
+      min-width: 45%;
+      aspect-ratio: auto;
+    }
   }
 
   .jw-post-list {
