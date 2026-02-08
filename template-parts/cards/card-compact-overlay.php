@@ -23,7 +23,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="jw-card jw-card--overlay relative overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="block h-full focus:outline-none">
-		<div class="relative h-spacing-56 sm:h-spacing-64 lg:h-full">
+		<div class="relative h-spacing-56 sm:h-spacing-64 lg:h-full jw-media-wrap">
 			<?php
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :
@@ -48,17 +48,14 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 			<?php endif; ?>
 
 			<div class="absolute inset-0 bg-scrim/45"></div>
+			<?php if ( $cat ) : ?>
+				<div class="jw-chip-overlay">
+					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+				</div>
+			<?php endif; ?>
 
 			<div class="absolute inset-0 flex items-end">
 				<div class="w-full p-spacing-4 sm:p-spacing-5 lg:p-spacing-6">
-					<div class="flex flex-wrap items-center gap-spacing-2">
-						<?php if ( $cat ) : ?>
-							<span class="inline-flex items-center rounded-sm bg-secondary-container px-spacing-2 py-spacing-1 text-label-small text-on-secondary-container">
-								<?php echo esc_html( $cat->name ); ?>
-							</span>
-						<?php endif; ?>
-					</div>
-
 					<h3 class="mt-spacing-2 text-title-large text-on-surface line-clamp-3">
 						<?php echo esc_html( $title ); ?>
 					</h3>

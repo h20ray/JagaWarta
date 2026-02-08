@@ -25,10 +25,6 @@ $cat       = $category ? $category[0] : null;
 			<?php the_title(); ?>
 		</a>
 		<div class="jw-post-list-meta">
-			<?php if ( $cat ) : ?>
-				<span class="jw-post-list-meta-item"><?php echo esc_html( $cat->name ); ?></span>
-				<span class="jw-post-list-sep" aria-hidden="true">·</span>
-			<?php endif; ?>
 			<?php if ( $author ) : ?>
 				<span class="jw-post-list-meta-item"><?php echo esc_html( $author ); ?></span>
 				<span class="jw-post-list-sep" aria-hidden="true">·</span>

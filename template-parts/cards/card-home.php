@@ -24,20 +24,22 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="group flex flex-col h-full overflow-hidden rounded-xl bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3 hover:-translate-y-1">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="flex flex-col h-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xl" aria-label="<?php echo esc_attr( $title ); ?>">
-		<div class="overflow-hidden rounded-t-xl aspect-[16/9] bg-surface-low shrink-0">
+		<div class="overflow-hidden rounded-t-xl aspect-[16/9] bg-surface-low shrink-0 jw-media-wrap">
 			<?php
 			jagawarta_the_post_display_image( $post_id, array(
 				'lcp'   => false,
 				'class' => 'h-full w-full object-cover transition-transform duration-medium ease-emphasized group-hover:scale-105',
 			) );
 			?>
+			<?php if ( $cat ) : ?>
+				<div class="jw-chip-overlay">
+					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="flex flex-col flex-grow p-spacing-6">
 			<div class="flex flex-wrap items-center gap-x-spacing-2 gap-y-spacing-1 text-label-medium text-on-surface-variant mb-spacing-3">
-				<?php if ( $cat ) : ?>
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'medium' ) ); ?>
-				<?php endif; ?>
 				<time datetime="<?php echo esc_attr( $date_iso ); ?>">
 					<?php echo esc_html( $date_human ); ?>
 				</time>

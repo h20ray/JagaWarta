@@ -504,6 +504,47 @@
     @apply group relative flex flex-col overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3;
   }
 
+  .jw-media-wrap {
+    position: relative;
+  }
+
+  .jw-chip-overlay {
+    position: absolute;
+    top: var(--md-sys-spacing-2);
+    left: var(--md-sys-spacing-2);
+    z-index: 2;
+  }
+
+  .jw-chip-overlay .jw-chip {
+    box-shadow: var(--md-sys-elevation-1);
+  }
+
+  .jw-chip {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 999px;
+  }
+
+  .jw-chip--sm {
+    height: 32px;
+    padding: 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--md {
+    height: 36px;
+    padding: 0 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--lg {
+    height: 40px;
+    padding: 0 16px;
+    letter-spacing: 0.02em;
+  }
+
   .jw-bento-media {
     flex: 0 0 42%;
     min-width: 42%;

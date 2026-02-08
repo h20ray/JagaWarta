@@ -19,8 +19,13 @@ $author    = $author_id ? get_the_author_meta( 'display_name', $author_id ) : ''
 ?>
 <article class="group relative flex flex-col h-full min-w-0 overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3">
 	<a href="<?php the_permalink(); ?>" class="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-md" aria-label="<?php the_title_attribute(); ?>">
-		<div class="overflow-hidden rounded-t-md aspect-video bg-surface-low shrink-0">
+		<div class="overflow-hidden rounded-t-md aspect-video bg-surface-low shrink-0 jw-media-wrap">
 			<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => false, 'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105' ) ); ?>
+			<?php if ( $cat ) : ?>
+				<div class="jw-chip-overlay">
+					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="relative flex flex-col flex-grow px-spacing-10 pt-spacing-10 pb-spacing-10">

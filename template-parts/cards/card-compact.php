@@ -23,7 +23,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="group rounded-md bg-surface-low ring-1 ring-outline-variant transition duration-short ease-standard hover:bg-surface-high focus-within:bg-surface-high">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="flex gap-spacing-3 p-spacing-3 focus:outline-none">
-		<div class="shrink-0 overflow-hidden rounded-md bg-surface-mid ring-1 ring-outline-variant">
+		<div class="shrink-0 overflow-hidden rounded-md bg-surface-mid ring-1 ring-outline-variant jw-media-wrap">
 			<?php
 			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
 			if ( ! empty( $display['url'] ) ) :
@@ -46,17 +46,14 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 				?>
 				<div class="h-spacing-20 w-spacing-28 bg-surface-high"></div>
 			<?php endif; ?>
+			<?php if ( $cat ) : ?>
+				<div class="jw-chip-overlay">
+					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="min-w-0">
-			<div class="flex flex-wrap items-center gap-spacing-2">
-				<?php if ( $cat ) : ?>
-					<span class="inline-flex items-center rounded-sm bg-secondary-container px-spacing-2 py-spacing-1 text-label-small text-on-secondary-container">
-						<?php echo esc_html( $cat->name ); ?>
-					</span>
-				<?php endif; ?>
-			</div>
-
 			<h3 class="mt-spacing-1 text-body-large text-on-surface line-clamp-2 group-hover:underline">
 				<?php echo esc_html( $title ); ?>
 			</h3>

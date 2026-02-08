@@ -24,20 +24,22 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 ?>
 <article class="jw-card jw-card--bento">
 	<a href="<?php echo esc_url( $permalink ); ?>" class="flex h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md">
-		<div class="jw-bento-media">
+		<div class="jw-bento-media jw-media-wrap">
 			<?php
 			jagawarta_the_post_display_image( $post_id, array(
 				'lcp'   => false,
 				'class' => 'h-full w-full object-cover transition-transform duration-medium ease-emphasized group-hover:scale-105',
 			) );
 			?>
+			<?php if ( $cat ) : ?>
+				<div class="jw-chip-overlay">
+					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+				</div>
+			<?php endif; ?>
 		</div>
 
 		<div class="jw-bento-content">
 			<div class="flex flex-wrap items-center gap-x-spacing-2 gap-y-spacing-1 text-label-small text-on-surface-variant">
-				<?php if ( $cat ) : ?>
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small' ) ); ?>
-				<?php endif; ?>
 				<time datetime="<?php echo esc_attr( $date_iso ); ?>">
 					<?php echo esc_html( $date_human ); ?>
 				</time>

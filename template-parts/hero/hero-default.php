@@ -38,16 +38,18 @@ $excerpt    = wp_strip_all_tags( get_the_excerpt( $featured_id ) );
 		$hero_img = jagawarta_get_post_display_image( $featured_id );
 		if ( ! empty( $hero_img['url'] ) ) :
 			?>
-			<div class="aspect-[16/9] min-h-hero-min max-h-hero-max w-full bg-surface-mid">
+			<div class="aspect-[16/9] min-h-hero-min max-h-hero-max w-full bg-surface-mid jw-media-wrap relative">
 				<?php jagawarta_the_post_display_image( $featured_id, array( 'lcp' => true, 'class' => 'h-full w-full object-cover' ) ); ?>
+				<?php if ( $cat ) : ?>
+					<div class="jw-chip-overlay">
+						<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 		<div class="layout-content py-spacing-8 sm:py-spacing-10">
 			<div class="max-w-3xl">
 				<div class="flex flex-wrap items-center gap-spacing-3 mb-spacing-3">
-					<?php if ( $cat ) : ?>
-						<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
-					<?php endif; ?>
 					<time datetime="<?php echo esc_attr( $date_iso ); ?>" class="text-label-large text-on-surface-variant">
 						<?php echo esc_html( $date_hr ); ?>
 					</time>

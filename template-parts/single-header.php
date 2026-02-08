@@ -34,9 +34,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 							<?php echo esc_html( $date_hr ); ?>
 						</time>
 						<?php if ( $read_time ) : ?>
-							<span class="inline-flex items-center px-spacing-3 py-spacing-1 bg-primary-container text-primary rounded-full text-label-medium font-medium mt-spacing-2">
-								<?php echo esc_html( $read_time ); ?>
-							</span>
+							<span class="block mt-spacing-2"><?php jagawarta_the_read_time_pill( $post_id ); ?></span>
 						<?php endif; ?>
 					</div>
 				</aside>
@@ -51,9 +49,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 					<?php echo esc_html( $date_hr ); ?>
 				</time>
 				<?php if ( $read_time ) : ?>
-					<span class="inline-flex items-center px-spacing-3 py-spacing-1 bg-primary-container text-primary rounded-full text-label-medium font-medium">
-						<?php echo esc_html( $read_time ); ?>
-					</span>
+					<?php jagawarta_the_read_time_pill( $post_id ); ?>
 				<?php endif; ?>
 			</div>
 		<?php endif; ?>

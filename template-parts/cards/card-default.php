@@ -16,12 +16,18 @@ $author_id = (int) get_post_field( 'post_author', $post_id );
 $author    = $author_id ? get_the_author_meta( 'display_name', $author_id ) : '';
 $excerpt   = trim( get_the_excerpt( $post_id ) );
 $has_thumb = has_post_thumbnail( $post_id );
+$category  = get_the_category( $post_id );
 ?>
 <article class="jw-card group">
 	<a href="<?php the_permalink(); ?>" class="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-md" aria-label="<?php the_title_attribute(); ?>">
 		<?php if ( $has_thumb ) : ?>
-			<div class="jw-card-media">
+			<div class="jw-card-media jw-media-wrap">
 				<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => false, 'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105' ) ); ?>
+				<?php if ( $category ) : ?>
+					<div class="jw-chip-overlay">
+						<?php jagawarta_the_category_chip( $category[0], array( 'size' => 'small', 'show_link' => false ) ); ?>
+					</div>
+				<?php endif; ?>
 			</div>
 		<?php endif; ?>
 

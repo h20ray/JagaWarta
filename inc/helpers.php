@@ -191,97 +191,115 @@ function jagawarta_the_image( int $attachment_id, array $args = array() ): void 
 }
 
 /**
- * Get category color scheme based on category slug
- * Returns MD3 color role classes for background and text
+ * Get category chip color: preset classes or CSS var references (tokenized).
  *
- * @param WP_Term|null $category Category term object
- * @return array Array with 'bg' and 'text' classes
+ * @param WP_Term|null $category Category term object.
+ * @return array{bg: string, text: string, css_vars: array{bg: string, fg: string}|null}
  */
 function jagawarta_get_category_colors( $category = null ): array {
-	if ( ! $category || ! isset( $category->slug ) ) {
-		return array(
-			'bg'   => 'bg-primary-container',
-			'text' => 'text-on-primary-container',
-		);
-	}
-	
-	// Define category color mapping using MD3 roles
-	$color_map = array(
-		'nasional'     => array( 'bg' => 'bg-primary-container', 'text' => 'text-on-primary-container' ),
-		'daerah'       => array( 'bg' => 'bg-secondary-container', 'text' => 'text-on-secondary-container' ),
-		'politik'      => array( 'bg' => 'bg-tertiary-container', 'text' => 'text-on-tertiary-container' ),
-		'ekonomi'      => array( 'bg' => 'bg-primary-container', 'text' => 'text-on-primary-container' ),
-		'olahraga'     => array( 'bg' => 'bg-secondary-container', 'text' => 'text-on-secondary-container' ),
-		'teknologi'    => array( 'bg' => 'bg-tertiary-container', 'text' => 'text-on-tertiary-container' ),
-		'gaya-hidup'   => array( 'bg' => 'bg-primary-container', 'text' => 'text-on-primary-container' ),
-		'breaking'     => array( 'bg' => 'bg-error-container', 'text' => 'text-on-error-container' ),
+	$default = array(
+		'bg'       => 'bg-primary-container',
+		'text'     => 'text-on-primary-container',
+		'css_vars' => null,
 	);
-	
-	$slug = $category->slug;
-	
-	// Return mapped colors or default to rotating based on term ID
-	if ( isset( $color_map[ $slug ] ) ) {
-		return $color_map[ $slug ];
+	if ( ! $category || ! isset( $category->term_id ) ) {
+		return $default;
 	}
-	
-	// Fallback: rotate through color roles based on ID
-	$colors = array(
-		array( 'bg' => 'bg-primary-container', 'text' => 'text-on-primary-container' ),
-		array( 'bg' => 'bg-secondary-container', 'text' => 'text-on-secondary-container' ),
-		array( 'bg' => 'bg-tertiary-container', 'text' => 'text-on-tertiary-container' ),
+	$term_id = (int) $category->term_id;
+	if ( ! function_exists( 'jagawarta_category_container_pair' ) || ! defined( 'JAGAWARTA_CHIP_COLOR_META' ) ) {
+		return $default;
+	}
+	$meta = get_term_meta( $term_id, JAGAWARTA_CHIP_COLOR_META, true );
+	$preset_map = array(
+		'primary'   => array( 'bg' => 'bg-primary-container', 'text' => 'text-on-primary-container' ),
+		'secondary' => array( 'bg' => 'bg-secondary-container', 'text' => 'text-on-secondary-container' ),
+		'tertiary'  => array( 'bg' => 'bg-tertiary-container', 'text' => 'text-on-tertiary-container' ),
+		'error'     => array( 'bg' => 'bg-error-container', 'text' => 'text-on-error-container' ),
 	);
-	
-	$index = $category->term_id % count( $colors );
-	return $colors[ $index ];
+	if ( isset( $preset_map[ $meta ] ) ) {
+		$preset_map[ $meta ]['css_vars'] = null;
+		return $preset_map[ $meta ];
+	}
+	$hex_meta = get_term_meta( $term_id, 'jagawarta_chip_color_hex', true );
+	$hex = ( $meta === 'hex' && $hex_meta ) ? sanitize_hex_color( $hex_meta ) : '';
+	$pair = jagawarta_category_container_pair( $term_id, $hex ?: '' );
+	return array(
+		'bg'       => '',
+		'text'     => '',
+		'css_vars' => array(
+			'bg' => 'var(--jw-cat-' . $term_id . '-bg)',
+			'fg' => 'var(--jw-cat-' . $term_id . '-fg)',
+		),
+	);
 }
 
 /**
- * Output a category chip/badge with color coding
+ * Output a category chip/badge with color (preset or tokenized CSS vars).
  *
- * @param WP_Term|null $category Category term object
- * @param array $args Optional arguments (size, show_link)
+ * @param WP_Term|null $category Category term object.
+ * @param array        $args     size, show_link.
  */
 function jagawarta_the_category_chip( $category = null, array $args = array() ): void {
 	if ( ! $category ) {
 		return;
 	}
-	
 	$args = wp_parse_args( $args, array(
-		'size'      => 'medium', // 'small', 'medium', 'large'
+		'size'      => 'medium',
 		'show_link' => true,
 	) );
-	
 	$colors = jagawarta_get_category_colors( $category );
-	
 	$size_classes = array(
-		'small'  => 'px-2 py-0.5 text-label-small rounded-md',
-		'medium' => 'px-3 py-1 text-label-medium rounded-lg',
-		'large'  => 'px-4 py-1.5 text-label-large rounded-xl',
+		'small'  => 'jw-chip jw-chip--sm text-label-small',
+		'medium' => 'jw-chip jw-chip--md text-label-medium',
+		'large'  => 'jw-chip jw-chip--lg text-label-large',
 	);
-	
 	$size_class = isset( $size_classes[ $args['size'] ] ) ? $size_classes[ $args['size'] ] : $size_classes['medium'];
-	
-	$chip_classes = sprintf(
-		'inline-flex items-center gap-1 %s %s %s font-medium uppercase tracking-wide transition-all duration-short ease-standard',
-		$colors['bg'],
-		$colors['text'],
-		$size_class
-	);
-	
-	if ( $args['show_link'] ) {
-		printf(
-			'<a href="%s" class="%s hover:shadow-elevation-1">%s</a>',
-			esc_url( get_category_link( $category->term_id ) ),
-			esc_attr( $chip_classes ),
-			esc_html( $category->name )
+	$base_class = 'inline-flex items-center whitespace-nowrap shrink-0 font-medium uppercase tracking-wide transition-all duration-short ease-standard leading-none ' . $size_class;
+	if ( ! empty( $colors['css_vars'] ) && is_array( $colors['css_vars'] ) ) {
+		$style = sprintf(
+			'background-color: %s; color: %s;',
+			esc_attr( $colors['css_vars']['bg'] ),
+			esc_attr( $colors['css_vars']['fg'] )
 		);
+		$chip_attr = $base_class . ' hover:shadow-elevation-1';
 	} else {
-		printf(
-			'<span class="%s">%s</span>',
-			esc_attr( $chip_classes ),
-			esc_html( $category->name )
-		);
+		$style = '';
+		$chip_attr = $base_class . ' ' . $colors['bg'] . ' ' . $colors['text'] . ' hover:shadow-elevation-1';
 	}
+	$attr = $style ? ' style="' . esc_attr( $style ) . '"' : '';
+	$url = get_category_link( $category->term_id );
+	$name = esc_html( $category->name );
+	if ( $args['show_link'] ) {
+		printf( '<a href="%s" class="%s"%s>%s</a>', esc_url( $url ), esc_attr( $chip_attr ), $attr, $name );
+	} else {
+		printf( '<span class="%s"%s>%s</span>', esc_attr( trim( $chip_attr ) ), $attr, $name );
+	}
+}
+
+/**
+ * Output read-time pill; uses primary category chip color when available.
+ *
+ * @param int $post_id Post ID.
+ */
+function jagawarta_the_read_time_pill( int $post_id ): void {
+	$label = jagawarta_read_time_label( $post_id );
+	if ( ! $label ) {
+		return;
+	}
+	$base_class = 'inline-flex items-center px-spacing-3 py-spacing-1 rounded-full text-label-medium font-medium';
+	$categories = get_the_category( $post_id );
+	$primary_cat = ! empty( $categories ) ? $categories[0] : null;
+	if ( $primary_cat && function_exists( 'jagawarta_get_category_colors' ) ) {
+		$colors = jagawarta_get_category_colors( $primary_cat );
+		if ( ! empty( $colors['css_vars'] ) && is_array( $colors['css_vars'] ) ) {
+			$style = sprintf( 'background-color: %s; color: %s;', esc_attr( $colors['css_vars']['bg'] ), esc_attr( $colors['css_vars']['fg'] ) );
+			printf( '<span class="%s" style="%s">%s</span>', esc_attr( $base_class ), esc_attr( $style ), esc_html( $label ) );
+			return;
+		}
+		printf( '<span class="%s">%s</span>', esc_attr( $base_class . ' ' . $colors['bg'] . ' ' . $colors['text'] ), esc_html( $label ) );
+		return;
+	}
+	printf( '<span class="%s">%s</span>', esc_attr( $base_class . ' bg-primary-container text-primary' ), esc_html( $label ) );
 }
 
 function jagawarta_svg_arrow_right( string $class = 'w-5 h-5 fill-current' ): void {
