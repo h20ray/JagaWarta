@@ -57,8 +57,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<form role="search" method="get" class="flex items-center w-full h-full" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 						<label for="header-search" class="sr-only"><?php esc_html_e( 'Search', 'jagawarta' ); ?></label>
 						<div id="search-wrapper" class="relative flex items-center h-10 rounded-full border border-outline-variant bg-surface-container-low px-4 py-1.5 cursor-text hover:bg-surface-container w-auto transition-[background-color,box-shadow,padding,width,height] duration-short ease-[cubic-bezier(0.2,0.0,0,1.0)]">
-							<svg id="search-icon" class="h-5 w-5 text-on-surface-variant flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/>							</svg>
-							<span id="search-placeholder-text" class="ml-3 text-body-medium text-on-surface-variant select-none whitespace-nowrap transition-opacity duration-medium">Search</span>
+							<svg id="search-icon" class="h-5 w-5 text-on-surface-variant flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>							<span id="search-placeholder-text" class="ml-3 text-body-medium text-on-surface-variant select-none whitespace-nowrap transition-opacity duration-medium">Search</span>
 							<input type="search" id="header-search" name="s" class="absolute inset-0 w-full h-full bg-transparent pl-14 pr-12 text-body-medium text-on-surface placeholder-transparent outline-none opacity-0 pointer-events-none transition-opacity duration-medium delay-short" placeholder="<?php esc_attr_e( 'Search', 'jagawarta' ); ?>" autocomplete="off" />
 							<button type="button" id="search-close-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-variant outline-none focus:outline-none focus:bg-surface-variant transition-all opacity-0" onmousedown="event.preventDefault();">
 								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
@@ -69,6 +68,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					</form>
 				</div>
+			</div>
+			<div class="flex items-center gap-2 ml-3">
+				<?php get_template_part( 'template-parts/components/dark-mode-toggle' ); ?>
 			</div>
 		</div>
 

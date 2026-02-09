@@ -45,6 +45,28 @@
   input[type="search"]::-webkit-search-results-decoration {
     display: none;
   }
+
+  /* Dark mode toggle button */
+  .dark-mode-toggle {
+    @apply flex items-center justify-center w-10 h-10 rounded-full text-on-surface;
+    @apply hover:bg-surface-high focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary;
+    @apply transition-colors duration-short ease-standard cursor-pointer;
+    border: none;
+    background: transparent;
+  }
+
+  .dark-mode-toggle svg {
+    @apply w-5 h-5;
+    transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  }
+
+  .dark-mode-toggle:hover svg {
+    transform: scale(1.1);
+  }
+
+  .dark-mode-toggle:active svg {
+    transform: scale(0.95);
+  }
 }
 
 @layer components {

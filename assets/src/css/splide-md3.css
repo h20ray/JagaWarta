@@ -53,7 +53,8 @@
 }
 
 .js-hero-splide .splide__arrow {
-  top: 50%;
+  /* move further down so it visually aligns with hero content */
+  top: 60%;
   transform: translateY(-50%);
 }
 
@@ -75,12 +76,6 @@
 
 @media (max-width: 640px) {
   .js-hero-splide .splide__arrow {
-    top: auto;
-    bottom: 0.85rem;
-    transform: none;
-  }
-
-  .js-hero-splide .splide__arrow {
     width: 2rem;
     height: 2rem;
   }
@@ -90,11 +85,11 @@
   }
 
   .js-hero-splide .splide__arrow--next {
-    right: 0.4rem;
+    right: 1rem;
   }
 
   .js-hero-splide .splide__arrow:active {
-    transform: scale(0.98);
+    transform: translateY(-50%) scale(0.98);
   }
 }
 
@@ -112,43 +107,7 @@
 }
 
 .js-hero-splide .splide__pagination {
-  position: absolute;
-  left: 50%;
-  bottom: 0.75rem;
-  transform: translateX(-50%);
-  z-index: 2;
-
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: color-mix(in srgb, var(--md-color-surface-container-low) 60%, transparent);
-  border: 1px solid var(--md-color-outline-variant);
-  border-radius: var(--md-shape-corner-full);
-  width: fit-content;
-  margin: 0;
-}
-
-.js-hero-splide .splide__pagination__page {
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: var(--md-shape-corner-full);
-
-  background: var(--md-color-outline-variant);
-  border: 0;
-  opacity: 1;
-
-  transition:
-    transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
-    background var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-}
-
-.js-hero-splide .splide__pagination__page.is-active {
-  background: var(--md-color-primary);
-  transform: scale(1.2);
-}
-
-.js-hero-splide .splide__pagination__page:focus {
-  outline: 2px solid var(--md-color-outline);
-  outline-offset: 2px;
+  display: none !important;
 }
 
 .js-hero-splide .splide__track,
@@ -179,32 +138,6 @@
 @media (min-width: 1024px) {
   .js-hero-splide {
     height: var(--md-sys-layout-hero-lg);
-  }
-}
-
-@media (max-width: 640px) {
-  .js-hero-splide .splide__pagination {
-    bottom: 0.35rem;
-    padding: 0.35rem 0.55rem;
-  }
-
-  .js-hero-splide .splide__pagination__page {
-    width: 0.32rem;
-    height: 0.32rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .js-hero-splide .splide__pagination {
-    bottom: 1rem;
-    opacity: 1;
-    transition:
-      opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
-  }
-
-  .js-hero-splide:hover .splide__pagination,
-  .js-hero-splide:focus-within .splide__pagination {
-    opacity: 0;
   }
 }
 
