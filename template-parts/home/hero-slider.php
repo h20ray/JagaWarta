@@ -1,7 +1,10 @@
 <?php
 /**
- * Hero Slider (manual)
- * Expects: $args['ids'] = array<int>
+ * Home hero featured (no slider).
+ * Expects: $args['ids'] = array<int> post IDs.
+ *
+ * Delegates to `template-parts/hero/hero-slider` in non-slider mode
+ * so the hero layout stays consistent with the block version.
  *
  * @package JagaWarta
  */
@@ -9,37 +12,18 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+
 $ids = isset( $args['ids'] ) ? array_values( array_filter( array_map( 'intval', (array) $args['ids'] ) ) ) : array();
+
 if ( empty( $ids ) ) {
 	return;
 }
-$splide_opts = array(
-	'type'       => 'slide',
-	'perPage'    => 1,
-	'pagination' => true,
-	'arrows'     => true,
-	'drag'       => true,
-	'rewind'     => true,
-	'autoplay'   => false,
-	'speed'      => 450,
+
+get_template_part(
+	'template-parts/hero/hero-slider',
+	null,
+	array(
+		'post_ids' => $ids,
+		'slider'   => false,
+	)
 );
-?>
-<div class="jw-hero-slider overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
-	<section
-		class="splide js-hero-splide jw-hero-splide"
-		aria-label="<?php esc_attr_e( 'Featured stories', 'jagawarta' ); ?>"
-		data-splide="<?php echo esc_attr( wp_json_encode( $splide_opts ) ); ?>">
-		<div class="splide__track">
-			<ul class="splide__list">
-				<?php foreach ( $ids as $i => $post_id ) : ?>
-					<li class="splide__slide">
-						<?php get_template_part( 'template-parts/cards/card-overlay', null, array(
-							'post_id' => $post_id,
-							'is_lcp'  => ( 0 === $i ),
-						) ); ?>
-					</li>
-				<?php endforeach; ?>
-			</ul>
-		</div>
-	</section>
-</div>

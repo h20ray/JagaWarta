@@ -2,16 +2,26 @@
 
 .js-hero-splide {
   /* keep layout stable */
+  width: 100%;
+  position: relative;
+  height: var(--md-sys-layout-hero-mobile);
+  min-height: var(--md-sys-layout-hero-min-height);
+  max-height: var(--md-sys-layout-hero-max-height);
+  overflow: hidden;
+  border-radius: var(--md-sys-shape-corner-large);
 }
 
 .js-hero-splide .splide__arrows {
   pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 3;
 }
 
 .js-hero-splide .splide__arrow {
   pointer-events: auto;
-  width: 2.25rem;
-  height: 2.25rem;
+  width: 2.4rem;
+  height: 2.4rem;
   border-radius: var(--md-shape-corner-full);
 
   background: color-mix(in srgb, var(--md-color-surface-container-low) 80%, transparent);
@@ -29,6 +39,8 @@
 
 .js-hero-splide .splide__arrow svg {
   fill: currentColor;
+  width: 1rem;
+  height: 1rem;
 }
 
 .js-hero-splide .splide__arrow:hover {
@@ -54,17 +66,23 @@
 }
 
 .js-hero-splide .splide__arrow--prev {
-  left: 0.75rem;
+  left: 1rem;
 }
 
 .js-hero-splide .splide__arrow--next {
-  right: 0.75rem;
+  right: 1rem;
 }
 
 @media (max-width: 640px) {
   .js-hero-splide .splide__arrow {
-    width: 1.9rem;
-    height: 1.9rem;
+    top: auto;
+    bottom: 0.85rem;
+    transform: none;
+  }
+
+  .js-hero-splide .splide__arrow {
+    width: 2rem;
+    height: 2rem;
   }
 
   .js-hero-splide .splide__arrow--prev {
@@ -74,11 +92,17 @@
   .js-hero-splide .splide__arrow--next {
     right: 0.4rem;
   }
+
+  .js-hero-splide .splide__arrow:active {
+    transform: scale(0.98);
+  }
 }
 
 @media (min-width: 1024px) {
   .js-hero-splide .splide__arrow {
     opacity: 0;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .js-hero-splide:hover .splide__arrow,
@@ -88,13 +112,19 @@
 }
 
 .js-hero-splide .splide__pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 0.75rem;
+  transform: translateX(-50%);
+  z-index: 2;
+
   gap: 0.5rem;
   padding: 0.5rem 0.75rem;
   background: color-mix(in srgb, var(--md-color-surface-container-low) 60%, transparent);
   border: 1px solid var(--md-color-outline-variant);
   border-radius: var(--md-shape-corner-full);
   width: fit-content;
-  margin: 0 auto 0.75rem auto;
+  margin: 0;
 }
 
 .js-hero-splide .splide__pagination__page {
@@ -119,6 +149,63 @@
 .js-hero-splide .splide__pagination__page:focus {
   outline: 2px solid var(--md-color-outline);
   outline-offset: 2px;
+}
+
+.js-hero-splide .splide__track,
+.js-hero-splide .splide__list {
+  height: 100%;
+}
+
+.js-hero-splide .splide__slide {
+  height: 100%;
+}
+
+.js-hero-splide .jw-hero-card {
+  height: 100%;
+}
+
+.js-hero-splide .jw-hero-media {
+  height: 100%;
+  min-height: var(--md-sys-layout-hero-min-height);
+  max-height: var(--md-sys-layout-hero-max-height);
+}
+
+@media (min-width: 640px) {
+  .js-hero-splide {
+    height: var(--md-sys-layout-hero-sm);
+  }
+}
+
+@media (min-width: 1024px) {
+  .js-hero-splide {
+    height: var(--md-sys-layout-hero-lg);
+  }
+}
+
+@media (max-width: 640px) {
+  .js-hero-splide .splide__pagination {
+    bottom: 0.35rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .js-hero-splide .splide__pagination__page {
+    width: 0.32rem;
+    height: 0.32rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .js-hero-splide .splide__pagination {
+    bottom: 1rem;
+    opacity: 1;
+    transition:
+      opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  }
+
+  .js-hero-splide:hover .splide__pagination,
+  .js-hero-splide:focus-within .splide__pagination {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

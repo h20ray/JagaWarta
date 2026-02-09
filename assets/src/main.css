@@ -417,9 +417,9 @@
   .jw-hero-overlay {
     background: linear-gradient(
       180deg,
-      color-mix(in srgb, var(--md-color-scrim) 10%, transparent) 0%,
-      color-mix(in srgb, var(--md-color-scrim) 25%, transparent) 45%,
-      color-mix(in srgb, var(--md-color-scrim) 55%, transparent) 100%
+      color-mix(in srgb, var(--md-color-scrim) 18%, transparent) 0%,
+      color-mix(in srgb, var(--md-color-scrim) 40%, transparent) 45%,
+      color-mix(in srgb, var(--md-color-scrim) 70%, transparent) 100%
     );
   }
 
@@ -501,7 +501,7 @@
   }
 
   .jw-card--bento {
-    @apply group relative flex flex-col overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3;
+    @apply relative flex flex-col overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3;
   }
 
   .jw-media-wrap {
@@ -615,27 +615,6 @@
 
   .jw-post-list-sep {
     @apply text-on-surface-variant;
-  }
-
-  .js-hero-splide .splide__pagination {
-    @apply bottom-4 left-0 right-0 z-10;
-  }
-
-  .js-hero-splide .splide__pagination__page {
-    background-color: color-mix(in srgb, var(--md-color-on-surface-variant) 50%, transparent);
-  }
-
-  .js-hero-splide .splide__pagination__page:hover {
-    @apply bg-on-surface-variant;
-  }
-
-  .js-hero-splide .splide__pagination__page.is-active {
-    @apply bg-primary;
-  }
-
-  .js-hero-splide .splide__arrow {
-    background-color: color-mix(in srgb, var(--md-color-surface-container-high) 90%, transparent);
-    @apply text-on-surface hover:bg-surface-highest border-0;
   }
 
   #search-wrapper.search-border-fade {

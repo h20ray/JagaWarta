@@ -77,10 +77,8 @@ function jagawarta_enqueue_assets(): void {
 		);
 	}
 
-	if ( is_front_page() ) {
+	if ( jagawarta_needs_slider() ) {
 		jagawarta_enqueue_hero_splide( $dir, $uri );
-	} elseif ( jagawarta_needs_slider() ) {
-		jagawarta_enqueue_slider( $dir, $uri );
 	}
 	if ( jagawarta_needs_ticker() ) {
 		jagawarta_enqueue_ticker( $dir, $uri );
@@ -140,6 +138,10 @@ function jagawarta_enqueue_ticker( string $dir, string $uri ): void {
 }
 
 function jagawarta_needs_slider(): bool {
+	if ( is_front_page() && get_theme_mod( 'jagawarta_front_hero_slider', true ) ) {
+		return true;
+	}
+
 	if ( is_singular() ) {
 		$post = get_post();
 		if ( $post && has_block( 'jagawarta/hero', $post ) ) {

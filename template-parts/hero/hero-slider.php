@@ -15,12 +15,29 @@ if ( empty( $post_ids ) ) {
 }
 
 if ( $slider ) :
+	$slider_options = array(
+		'type'        => 'loop',
+		'perPage'     => 1,
+		'perMove'     => 1,
+		'gap'         => 0,
+		'padding'     => 0,
+		'arrows'      => true,
+		'pagination'  => true,
+		'autoplay'    => false,
+		'pauseOnHover'=> true,
+		'drag'        => true,
+		'speed'       => 650,
+		'easing'      => 'cubic-bezier(0.2, 0.0, 0, 1.0)',
+		'trimSpace'   => true,
+		'rewind'      => true,
+	);
 	?>
-	<section class="hero hero--slider -mx-spacing-4 sm:-mx-spacing-6" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
-		<div data-jagawarta-hero-slider class="splide">
+	<section class="hero hero--slider" aria-label="<?php esc_attr_e( 'Featured', 'jagawarta' ); ?>">
+		<div class="splide js-hero-splide jw-hero-slider" data-splide="<?php echo esc_attr( wp_json_encode( $slider_options ) ); ?>">
 			<div class="splide__track">
 				<ul class="splide__list">
 					<?php
+					$slide_index = 0;
 					foreach ( $post_ids as $pid ) {
 						$post = get_post( $pid );
 						if ( ! $post ) {
@@ -29,10 +46,20 @@ if ( $slider ) :
 						setup_postdata( $post );
 						?>
 						<li class="splide__slide">
-							<?php get_template_part( 'template-parts/cards/card-hero' ); ?>
+							<?php
+							get_template_part(
+								'template-parts/cards/card-overlay',
+								null,
+								array(
+									'post_id' => $pid,
+									'is_lcp'  => 0 === $slide_index,
+								)
+							);
+							?>
 						</li>
 						<?php
 						wp_reset_postdata();
+						$slide_index++;
 					}
 					?>
 				</ul>

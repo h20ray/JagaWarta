@@ -23,7 +23,7 @@ $read_time = function_exists( 'jagawarta_read_time_label' )
 	: '';
 ?>
 <article class="jw-card jw-card--bento">
-	<a href="<?php echo esc_url( $permalink ); ?>" class="flex h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md">
+	<a href="<?php echo esc_url( $permalink ); ?>" class="group flex h-full w-full focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md">
 		<div class="jw-bento-media jw-media-wrap">
 			<?php
 			jagawarta_the_post_display_image( $post_id, array(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Front page — Top split (slider + side cards) + Latest stories.
+ * Front page — Top featured split (hero + side cards) + Latest stories.
  *
  * @package JagaWarta
  */
@@ -10,9 +10,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 get_header();
 
-$slider_ids = jagawarta_get_featured_slider_ids( 5 );
+$hero_count = (int) get_theme_mod( 'jagawarta_hero_count', 5 );
+$hero_count = max( 1, min( $hero_count, 10 ) );
+
+$slider_ids = jagawarta_get_featured_slider_ids( $hero_count );
 if ( empty( $slider_ids ) ) {
-	$slider_ids = jagawarta_get_latest_ids_excluding( 5, array() );
+	$slider_ids = jagawarta_get_latest_ids_excluding( $hero_count, array() );
 }
 $side_ids     = jagawarta_get_latest_ids_excluding( 2, $slider_ids );
 $exclude_ids  = array_unique( array_merge( $slider_ids, $side_ids ) );

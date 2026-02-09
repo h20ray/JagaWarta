@@ -1,6 +1,7 @@
 <?php
 /**
- * Top Featured Section
+ * Top Featured Section (no slider).
+ *
  * Expects: $args['slider_ids'] = array<int>, $args['side_ids'] = array<int> (2 posts)
  *
  * @package JagaWarta
