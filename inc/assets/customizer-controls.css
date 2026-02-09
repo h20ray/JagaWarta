@@ -1,0 +1,51 @@
+/* Customizer Color Grid */
+.jagawarta-color-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.jagawarta-color-preset {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 0;
+    position: relative;
+}
+
+.jagawarta-color-preset:hover,
+.jagawarta-color-preset:focus {
+    transform: scale(1.1);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    outline: none;
+}
+
+.jagawarta-color-preset.selected {
+    border-color: #555;
+    /* Dark gray border to indicate selection */
+    transform: scale(1.1);
+    box-shadow: inset 0 0 0 2px white, 0 3px 6px rgba(0, 0, 0, 0.16);
+    /* White ring inside dark border */
+}
+
+/* Custom Color Input */
+.jagawarta-custom-color-wrap {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+.jagawarta-custom-color-wrap label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.jagawarta-custom-color-input {
+    width: 100%;
+}

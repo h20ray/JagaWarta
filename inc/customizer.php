@@ -11,11 +11,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once get_template_directory() . '/inc/palette-generator.php';
 
+require_once get_template_directory() . '/inc/class-jagawarta-preset-color-control.php';
+
 add_action( 'customize_register', 'jagawarta_customize_register' );
 add_action( 'customize_save_after', 'jagawarta_generate_palette_on_save' );
-add_action( 'wp_head', 'jagawarta_output_palette_css', 5 );
+add_action( 'wp_head', 'jagawarta_output_palette_css', 100 ); // Priority 100 to override main CSS
 
 function jagawarta_customize_register( WP_Customize_Manager $wp_customize ): void {
+	// Register custom control type
+	$wp_customize->register_control_type( 'JagaWarta_Preset_Color_Control' );
+
 	$wp_customize->add_panel( 'jagawarta_options', array(
 		'title'    => __( 'JagaWarta Options', 'jagawarta' ),
 		'priority' => 30,
@@ -100,7 +105,7 @@ function jagawarta_customize_register( WP_Customize_Manager $wp_customize ): voi
 	// Colors Section (Seed-based MD3 Palette)
 	$wp_customize->add_section( 'jagawarta_colors', array(
 		'title'       => __( 'Colors (MD3 Palette)', 'jagawarta' ),
-		'description' => __( 'Select seed colors to generate a complete Material Design 3 palette. Leave optional seeds empty to use derived colors from primary.<br><strong>After publishing:</strong> Press Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac) to see changes.', 'jagawarta' ),
+		'description' => __( 'Select a primary brand color. All other system colors will be automatically generated from this seed.<br><strong>After publishing:</strong> Press Ctrl+Shift+R (Windows) or Cmd+Shift+R (Mac) to see changes.', 'jagawarta' ),
 		'panel'       => 'jagawarta_options',
 		'priority'    => 20,
 	) );
@@ -111,71 +116,46 @@ function jagawarta_customize_register( WP_Customize_Manager $wp_customize ): voi
 		'sanitize_callback' => 'sanitize_hex_color',
 		'transport'         => 'refresh',
 	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'jagawarta_seed_primary', array(
-		'label'       => __( 'Primary Seed', 'jagawarta' ),
-		'description' => __( 'Main brand color. All other colors derive from this if left empty.', 'jagawarta' ),
+
+	$wp_customize->add_control( new JagaWarta_Preset_Color_Control( $wp_customize, 'jagawarta_seed_primary', array(
+		'label'       => __( 'Primary Brand Color', 'jagawarta' ),
+		'description' => __( 'Choose from curated presets or set a custom color.', 'jagawarta' ),
 		'section'     => 'jagawarta_colors',
+		'presets'     => array(
+			'#1e3a5f', // JagaWarta Blue
+			'#1b6ef3', // Google Blue
+			'#4285f4', // Pixel Blue
+			'#3f51b5', // Material Indigo
+			'#673ab7', // Deep Purple
+			'#006d40', // Android Green
+			'#1b5e20', // Forest Green
+			'#009688', // Teal
+			'#b3261e', // YouTube Red
+			'#b71c1c', // Brick Red
+			'#e91e63', // Hot Pink
+			'#ff9800', // Orange
+			'#ff5722', // Deep Orange
+			'#795548', // Brown
+			'#607d8b', // Blue Grey
+		),
 	) ) );
 
-	// Neutral seed (optional)
-	$wp_customize->add_setting( 'jagawarta_seed_neutral', array(
-		'default'           => '',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'jagawarta_seed_neutral', array(
-		'label'       => __( 'Neutral Seed (Optional)', 'jagawarta' ),
-		'description' => __( 'Grayscale palette. Leave empty for automatic generation.', 'jagawarta' ),
-		'section'     => 'jagawarta_colors',
-	) ) );
-
-	// Secondary seed (optional)
-	$wp_customize->add_setting( 'jagawarta_seed_secondary', array(
-		'default'           => '',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'jagawarta_seed_secondary', array(
-		'label'       => __( 'Secondary Seed (Optional)', 'jagawarta' ),
-		'description' => __( 'Supporting color. Leave empty for analogous to primary.', 'jagawarta' ),
-		'section'     => 'jagawarta_colors',
-	) ) );
-
-	// Tertiary seed (optional)
-	$wp_customize->add_setting( 'jagawarta_seed_tertiary', array(
-		'default'           => '',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'jagawarta_seed_tertiary', array(
-		'label'       => __( 'Tertiary Seed (Optional)', 'jagawarta' ),
-		'description' => __( 'Accent color. Leave empty for complementary to primary.', 'jagawarta' ),
-		'section'     => 'jagawarta_colors',
-	) ) );
-
-	// Error seed (optional)
-	$wp_customize->add_setting( 'jagawarta_seed_error', array(
-		'default'           => '',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'transport'         => 'refresh',
-	) );
-	$wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, 'jagawarta_seed_error', array(
-		'label'       => __( 'Error Seed (Optional)', 'jagawarta' ),
-		'description' => __( 'Error/warning color. Leave empty for MD3 standard.', 'jagawarta' ),
-		'section'     => 'jagawarta_colors',
-	) ) );
+	// Optional seeds (Neutral, Secondary, Tertiary, Error) have been removed from UI
+	// to simplify the experience, but we keep their settings in the DB generation logic below
+	// in case we need to restore them later or for advanced users.
 }
 
 /**
  * Generate and store palette when Customizer is saved.
  */
 function jagawarta_generate_palette_on_save(): void {
+	// Only Primary is exposed in UI now. Others are left empty to trigger auto-generation.
 	$seeds = array(
 		'primary'   => get_theme_mod( 'jagawarta_seed_primary', '#1e3a5f' ),
-		'neutral'   => get_theme_mod( 'jagawarta_seed_neutral', '' ),
-		'secondary' => get_theme_mod( 'jagawarta_seed_secondary', '' ),
-		'tertiary'  => get_theme_mod( 'jagawarta_seed_tertiary', '' ),
-		'error'     => get_theme_mod( 'jagawarta_seed_error', '' ),
+		'neutral'   => '', // Auto
+		'secondary' => '', // Auto
+		'tertiary'  => '', // Auto
+		'error'     => '', // Auto
 	);
 
 	$palette = jagawarta_generate_full_palette( $seeds );
