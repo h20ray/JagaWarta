@@ -18,7 +18,7 @@ if ($slider):
 ?>
 	<section class="hero hero--slider" aria-label="<?php esc_attr_e('Featured', 'jagawarta'); ?>">
 		<div
-			class="jw-hero-slider"
+			class="jw-hero-slider transition-shadow duration-medium ease-emphasized"
 			data-hero-slider="true"
 			data-hero-slider-autoplay="false"
 		>

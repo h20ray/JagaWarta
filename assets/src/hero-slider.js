@@ -1,117 +1,67 @@
-function initHeroSlider() {
-	const roots = document.querySelectorAll('[data-hero-slider="true"]');
-	if (!roots.length) return;
+import Splide from '@splidejs/splide';
 
-	roots.forEach((root) => {
-		const slides = Array.from(root.querySelectorAll('[data-hero-slide]'));
-		if (slides.length <= 1) {
-			// Nothing to slide, let markup render as-is.
-			return;
+document.addEventListener('DOMContentLoaded', () => {
+	const el = document.querySelector('[data-hero-slider="true"]');
+	if (el) {
+		// 1. Setup Classes for Splide Requirements
+		if (!el.classList.contains('splide')) {
+			el.classList.add('splide');
 		}
 
-		let current = 0;
-
-		const prevButton = root.querySelector('[data-hero-slider-prev]');
-		const nextButton = root.querySelector('[data-hero-slider-next]');
-		const dotsContainer = root.querySelector('[data-hero-slider-dots]');
-
-		// Create dots
-		if (dotsContainer) {
-			dotsContainer.innerHTML = ''; // Clear existing
-			slides.forEach((_, index) => {
-				const dot = document.createElement('button');
-				dot.type = 'button';
-				dot.classList.add('jw-hero-slider__dot');
-				dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
-				dot.addEventListener('click', (e) => {
-					e.preventDefault();
-					showSlide(index);
-				});
-				dotsContainer.appendChild(dot);
-			});
+		const viewport = el.querySelector('.jw-hero-slider__viewport');
+		if (viewport && !viewport.classList.contains('splide__track')) {
+			viewport.classList.add('splide__track');
 		}
-		const dots = dotsContainer ? Array.from(dotsContainer.children) : [];
 
-		function showSlide(index) {
-			if (!slides.length) return;
-
-			const max = slides.length - 1;
-			const nextIndex = Math.max(0, Math.min(index, max));
-
-			slides.forEach((slideEl, idx) => {
-				const isActive = idx === nextIndex;
-				if (isActive) {
-					// CSS transition handles visibility/opacity
-					slideEl.setAttribute('aria-hidden', 'false');
-				} else {
-					slideEl.setAttribute('aria-hidden', 'true');
+		const list = el.querySelector('.jw-hero-slider__list');
+		if (list) {
+			if (!list.classList.contains('splide__list')) {
+				list.classList.add('splide__list');
+			}
+			const slides = list.querySelectorAll('.jw-hero-slider__slide');
+			slides.forEach(slide => {
+				if (!slide.classList.contains('splide__slide')) {
+					slide.classList.add('splide__slide');
 				}
 			});
-
-			// Update dots
-			if (dots.length) {
-				dots.forEach((dot, idx) => {
-					if (idx === nextIndex) {
-						dot.classList.add('jw-hero-slider__dot--active');
-						dot.setAttribute('aria-current', 'true');
-					} else {
-						dot.classList.remove('jw-hero-slider__dot--active');
-						dot.removeAttribute('aria-current');
-					}
-				});
-			}
-
-			current = nextIndex;
 		}
 
-		function goNext() {
-			const nextIndex = current + 1 >= slides.length ? 0 : current + 1;
-			showSlide(nextIndex);
-		}
-
-		function goPrev() {
-			const nextIndex = current - 1 < 0 ? slides.length - 1 : current - 1;
-			showSlide(nextIndex);
-		}
-
-		if (prevButton) {
-			prevButton.addEventListener('click', (event) => {
-				event.preventDefault();
-				goPrev();
-			});
-		}
-
-		if (nextButton) {
-			nextButton.addEventListener('click', (event) => {
-				event.preventDefault();
-				goNext();
-			});
-		}
-
-		// Keyboard navigation: left/right arrows when focus is inside the slider.
-		root.addEventListener('keydown', (event) => {
-			const key = event.key;
-			if (key !== 'ArrowLeft' && key !== 'ArrowRight') return;
-
-			const activeElement = document.activeElement;
-			if (!activeElement || !root.contains(activeElement)) return;
-
-			event.preventDefault();
-			if (key === 'ArrowLeft') {
-				goPrev();
-			} else if (key === 'ArrowRight') {
-				goNext();
+		// 2. Initialize Splide
+		// We disable default arrows to use our custom PHP-rendered ones
+		const slider = new Splide(el, {
+			type: 'loop',
+			perPage: 1,
+			perMove: 1,
+			gap: '1rem',
+			padding: { right: '0' },
+			arrows: false,
+			pagination: true, // Let Splide generate dots
+			autoplay: false,
+			interval: 5000,
+			pauseOnHover: true,
+			classes: {
+				pagination: 'splide__pagination jw-hero-slider__dots',
+				page: 'splide__pagination__page jw-hero-slider__dot',
+			},
+			breakpoints: {
+				768: {
+					gap: '1rem',
+					padding: { right: '2rem' }
+				}
 			}
 		});
 
-		// Ensure the initially marked active slide is respected.
-		const initialIndexAttr = slides.findIndex((slideEl) => slideEl.getAttribute('aria-hidden') === 'false');
-		if (initialIndexAttr >= 0) {
-			showSlide(initialIndexAttr);
-		} else {
-			showSlide(0);
-		}
-	});
-}
+		slider.mount();
 
-document.addEventListener('DOMContentLoaded', initHeroSlider);
+		// 3. Bind Custom Arrows
+		const prevBtn = el.querySelector('[data-hero-slider-prev]');
+		const nextBtn = el.querySelector('[data-hero-slider-next]');
+
+		if (prevBtn) {
+			prevBtn.addEventListener('click', () => slider.go('<'));
+		}
+		if (nextBtn) {
+			nextBtn.addEventListener('click', () => slider.go('>'));
+		}
+	}
+});

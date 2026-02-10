@@ -32,7 +32,7 @@ $category  = get_the_category( $post_id );
 		<?php endif; ?>
 
 		<div class="jw-card-content">
-			<h3 class="text-title-large font-normal leading-tight text-on-surface group-hover:text-primary transition-colors duration-short">
+			<h3 class="text-title-large font-normal leading-tight text-on-surface line-clamp-3 group-hover:text-primary transition-colors duration-short">
 				<?php the_title(); ?>
 			</h3>
 

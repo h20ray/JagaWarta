@@ -5,67 +5,70 @@
  * @package JagaWarta
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
-$post_id   = isset( $args['post_id'] ) ? (int) $args['post_id'] : get_the_ID();
-$permalink = get_permalink( $post_id );
-$title     = get_the_title( $post_id );
-$date_iso  = get_the_date( DATE_W3C, $post_id );
-$date_human = get_the_date( '', $post_id );
+$post_id = isset($args['post_id']) ? (int)$args['post_id'] : get_the_ID();
+$permalink = get_permalink($post_id);
+$title = get_the_title($post_id);
+$date_iso = get_the_date(DATE_W3C, $post_id);
+$date_human = get_the_date('', $post_id);
 
-$category = get_the_category( $post_id );
-$cat      = $category ? $category[0] : null;
+$category = get_the_category($post_id);
+$cat = $category ? $category[0] : null;
 
-$read_time = function_exists( 'jagawarta_read_time_label' )
-	? jagawarta_read_time_label( $post_id )
+$read_time = function_exists('jagawarta_read_time_label')
+	? jagawarta_read_time_label($post_id)
 	: '';
 ?>
 <article class="jw-card jw-card--overlay relative overflow-hidden rounded-md bg-surface-high ring-1 ring-outline-variant">
-	<a href="<?php echo esc_url( $permalink ); ?>" class="block h-full focus:outline-none">
+	<a href="<?php echo esc_url($permalink); ?>" class="block h-full focus:outline-none">
 		<div class="relative h-spacing-56 sm:h-spacing-64 lg:h-full jw-media-wrap">
 			<?php
-			$display = function_exists( 'jagawarta_get_post_display_image' ) ? jagawarta_get_post_display_image( $post_id ) : array( 'attachment_id' => 0, 'url' => '' );
-			if ( ! empty( $display['url'] ) ) :
-				if ( ! empty( $display['attachment_id'] ) ) :
-					jagawarta_the_image(
-						$display['attachment_id'],
-						array(
-							'lcp'   => false,
-							'size'  => 'medium_large',
-							'sizes' => '(max-width: 1024px) 100vw, 320px',
-							'class' => 'h-full w-full object-cover',
-						)
-					);
-				else :
-					?>
-					<img src="<?php echo esc_url( $display['url'] ); ?>" alt="" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+$display = function_exists('jagawarta_get_post_display_image') ? jagawarta_get_post_display_image($post_id) : array('attachment_id' => 0, 'url' => '');
+if (!empty($display['url'])):
+	if (!empty($display['attachment_id'])):
+		jagawarta_the_image(
+			$display['attachment_id'],
+			array(
+			'lcp' => false,
+			'size' => 'medium_large',
+			'sizes' => '(max-width: 1024px) 100vw, 320px',
+			'class' => 'h-full w-full object-cover',
+		)
+		);
+	else:
+?>
+					<img src="<?php echo esc_url($display['url']); ?>" alt="" loading="lazy" decoding="async" class="h-full w-full object-cover" />
 					<?php
-				endif;
-			else :
-				?>
+	endif;
+else:
+?>
 				<div class="h-full w-full bg-surface-high"></div>
-			<?php endif; ?>
+			<?php
+endif; ?>
 
 			<div class="absolute inset-0 bg-scrim/45"></div>
-			<?php if ( $cat ) : ?>
+			<?php if ($cat): ?>
 				<div class="jw-chip-overlay">
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
+					<?php jagawarta_the_category_chip($cat, array('size' => 'small', 'show_link' => false)); ?>
 				</div>
-			<?php endif; ?>
+			<?php
+endif; ?>
 
 			<div class="absolute inset-0 flex items-end">
 				<div class="w-full p-spacing-4 sm:p-spacing-5 lg:p-spacing-6">
-					<h3 class="mt-spacing-2 text-title-large text-on-surface line-clamp-3">
-						<?php echo esc_html( $title ); ?>
+					<h3 class="mt-spacing-2 text-title-large text-on-surface">
+						<?php echo esc_html($title); ?>
 					</h3>
 
 					<div class="mt-spacing-2 flex flex-wrap items-center gap-x-spacing-2 gap-y-spacing-1 text-label-small text-on-surface-variant">
-						<time datetime="<?php echo esc_attr( $date_iso ); ?>"><?php echo esc_html( $date_human ); ?></time>
-						<?php if ( $read_time ) : ?>
+						<time datetime="<?php echo esc_attr($date_iso); ?>"><?php echo esc_html($date_human); ?></time>
+						<?php if ($read_time): ?>
 							<span aria-hidden="true">•</span>
-							<span><?php echo esc_html( $read_time ); ?></span>
-						<?php endif; ?>
+							<span><?php echo esc_html($read_time); ?></span>
+						<?php
+endif; ?>
 					</div>
 				</div>
 			</div>

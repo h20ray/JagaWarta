@@ -11,7 +11,9 @@ const watch = process.argv.includes('--watch');
 
 async function build() {
   if (!existsSync(srcDir)) return;
+  console.log('Building JS in:', srcDir);
   const entries = readdirSync(srcDir).filter((f) => f.endsWith('.js'));
+  console.log('Found entries:', entries);
   const entryPoints = entries.map((e) => join(srcDir, e));
   if (entryPoints.length === 0) return;
 
@@ -31,4 +33,7 @@ async function build() {
   }
 }
 
-build().catch(() => process.exit(1));
+build().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

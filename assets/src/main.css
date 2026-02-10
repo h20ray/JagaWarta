@@ -48,15 +48,15 @@
 
   /* Dark mode toggle button */
   .dark-mode-toggle {
-    @apply flex items-center justify-center w-10 h-10 rounded-full text-on-surface;
-    @apply hover:bg-surface-high focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary;
-    @apply transition-colors duration-short ease-standard cursor-pointer;
+    @apply flex items-center justify-center w-12 h-12 rounded-full text-on-surface;
+    @apply hover:bg-surface-high hover:text-primary focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary;
+    @apply transition-all duration-short ease-standard cursor-pointer;
     border: none;
     background: transparent;
   }
 
   .dark-mode-toggle svg {
-    @apply w-5 h-5;
+    @apply w-6 h-6;
     transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
   }
 
@@ -161,6 +161,7 @@
     max-width: var(--md-sys-layout-article-width);
     margin-left: 0;
   }
+
   @screen md {
     .layout-article-inner {
       margin-left: var(--md-sys-layout-article-offset);
@@ -437,12 +438,11 @@
   }
 
   .jw-hero-overlay {
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--md-color-scrim) 18%, transparent) 0%,
-      color-mix(in srgb, var(--md-color-scrim) 40%, transparent) 45%,
-      color-mix(in srgb, var(--md-color-scrim) 70%, transparent) 100%
-    );
+    background: linear-gradient(180deg,
+        transparent 0%,
+        color-mix(in srgb, var(--md-color-scrim) 20%, transparent) 30%,
+        color-mix(in srgb, var(--md-color-scrim) 60%, transparent) 70%,
+        color-mix(in srgb, var(--md-color-scrim) 85%, transparent) 100%);
   }
 
   .jw-hero-content {
@@ -578,7 +578,7 @@
   }
 
   @screen sm {
-    .jw-card--bento > a {
+    .jw-card--bento>a {
       flex-direction: column;
     }
 
@@ -590,7 +590,7 @@
   }
 
   @screen lg {
-    .jw-card--bento > a {
+    .jw-card--bento>a {
       flex-direction: row;
     }
 
@@ -642,12 +642,20 @@
   #search-wrapper.search-border-fade {
     transition: border-color var(--md-sys-motion-delay-short) var(--md-sys-motion-easing-standard);
   }
+
   #search-wrapper.search-border-fade #search-placeholder-text {
     transition-duration: var(--md-sys-motion-delay-short);
   }
 
   .hero-image-wrap {
     @apply aspect-[16/9] min-h-hero-min max-h-hero-max w-full;
+  }
+
+  /* Remove aspect ratio constraint inside slider - let slider height drive the size */
+  .jw-hero-slider .hero-image-wrap,
+  .jw-hero-slider .jw-hero-media {
+    aspect-ratio: unset;
+    height: 100%;
   }
 
   @screen sm {
