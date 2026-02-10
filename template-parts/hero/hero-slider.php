@@ -15,14 +15,19 @@ if (empty($post_ids)) {
 }
 
 if ($slider):
+	$slider_id = wp_unique_id('jw-hero-slider-');
+	$slide_total = count($post_ids);
 ?>
 	<section class="hero hero--slider" aria-label="<?php esc_attr_e('Featured', 'jagawarta'); ?>">
 		<div
+			id="<?php echo esc_attr($slider_id); ?>"
 			class="jw-hero-slider transition-shadow duration-medium ease-emphasized"
 			data-hero-slider="true"
 			data-hero-slider-autoplay="false"
+			aria-roledescription="<?php esc_attr_e('carousel', 'jagawarta'); ?>"
+			aria-label="<?php esc_attr_e('Featured stories', 'jagawarta'); ?>"
 		>
-			<div class="jw-hero-slider__viewport">
+			<div class="jw-hero-slider__viewport" aria-live="polite" aria-atomic="true">
 				<ul class="jw-hero-slider__list">
 					<?php
 	$slide_index = 0;
@@ -38,6 +43,8 @@ if ($slider):
 							class="jw-hero-slider__slide"
 							data-hero-slide="<?php echo esc_attr($pid); ?>"
 							data-hero-slide-index="<?php echo esc_attr($slide_index); ?>"
+							aria-roledescription="<?php esc_attr_e('slide', 'jagawarta'); ?>"
+							aria-label="<?php echo esc_attr(sprintf(__('Slide %1$d of %2$d', 'jagawarta'), $slide_index + 1, $slide_total)); ?>"
 							<?php if (!$is_active): ?>
 								aria-hidden="true"
 							<?php
@@ -66,11 +73,12 @@ if ($slider):
 			</div>
 
 			<?php if (count($post_ids) > 1): ?>
-				<div class="jw-hero-slider__controls" aria-hidden="true">
+				<div class="jw-hero-slider__controls" aria-label="<?php esc_attr_e('Slider controls', 'jagawarta'); ?>">
 					<button
 						type="button"
 						class="jw-hero-slider__arrow jw-hero-slider__arrow--prev"
 						data-hero-slider-prev
+						aria-controls="<?php echo esc_attr($slider_id); ?>"
 						aria-label="<?php esc_attr_e('Previous featured story', 'jagawarta'); ?>"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"/></svg>
@@ -79,12 +87,12 @@ if ($slider):
 						type="button"
 						class="jw-hero-slider__arrow jw-hero-slider__arrow--next"
 						data-hero-slider-next
+						aria-controls="<?php echo esc_attr($slider_id); ?>"
 						aria-label="<?php esc_attr_e('Next featured story', 'jagawarta'); ?>"
 					>
 						<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"/></svg>
 					</button>
 				</div>
-                <div class="jw-hero-slider__dots" data-hero-slider-dots></div>
 			<?php
 	endif; ?>
 		</div>

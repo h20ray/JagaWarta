@@ -514,6 +514,12 @@
     flex-direction: column;
   }
 
+  @screen lg {
+    .jw-top-split {
+      align-items: start;
+    }
+  }
+
   .jw-card--hero {
     background: var(--md-color-surface-container-low);
   }
@@ -570,6 +576,8 @@
   .jw-bento-media {
     flex: 0 0 42%;
     min-width: 42%;
+    aspect-ratio: 16 / 10;
+    height: auto;
     background: var(--md-color-surface-container-low);
   }
 
@@ -597,7 +605,7 @@
     .jw-bento-media {
       flex: 0 0 45%;
       min-width: 45%;
-      aspect-ratio: auto;
+      aspect-ratio: 16 / 10;
     }
   }
 

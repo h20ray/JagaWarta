@@ -46,7 +46,7 @@ jagawarta_the_post_display_image($post_id, array(
 endif; ?>
 			</div>
 
-			<h3 class="mt-spacing-2 text-title-medium text-on-surface leading-snug line-clamp-2 group-hover:text-primary transition-colors duration-short">
+			<h3 class="mt-spacing-2 text-title-medium text-on-surface leading-snug group-hover:text-primary transition-colors duration-short">
 				<?php echo esc_html($title); ?>
 			</h3>
 

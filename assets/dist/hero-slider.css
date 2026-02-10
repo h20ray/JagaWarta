@@ -3,13 +3,22 @@
 .jw-hero-slider {
   width: 100%;
   position: relative;
-  /* Mobile: fixed height for stability and predictability */
-  height: 22rem;
+  aspect-ratio: 16 / 9;
+  min-height: clamp(18rem, 52vw, 26rem);
+  max-height: 70vh;
   overflow: hidden;
   border-radius: var(--md-sys-shape-corner-large);
+  background: var(--md-color-surface-container-low);
   /* Force dark mode context for the slider internal content */
   --md-sys-color-on-surface: var(--md-ref-palette-neutral-98);
   --md-sys-color-on-surface-variant: var(--md-ref-palette-neutral-variant-90);
+}
+
+.jw-hero-slider__viewport {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  touch-action: pan-y;
 }
 
 .jw-hero-slider__list {
@@ -17,6 +26,7 @@
   margin: 0;
   padding: 0;
   height: 100%;
+  width: 100%;
 
   /* Flex Row for Slide Effect */
   display: flex;
@@ -24,11 +34,13 @@
 
   /* Transition for Slide */
   transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: transform;
 }
 
 .jw-hero-slider__slide {
   height: 100%;
   width: 100%;
+  min-height: 100%;
 
   /* Flex item specific */
   flex: 0 0 100%;
@@ -46,6 +58,7 @@
 
 .jw-hero-slider .jw-hero-card {
   height: 100%;
+  min-height: 100%;
 }
 
 .jw-hero-slider .jw-hero-excerpt {
@@ -70,11 +83,19 @@
   width: 100%;
 }
 
+.jw-hero-slider .hero-image-wrap {
+  min-height: 100%;
+  max-height: none;
+  height: 100%;
+}
+
 .jw-hero-slider img {
   height: 100%;
   width: 100%;
   object-fit: cover;
+  object-position: center;
   border-radius: inherit;
+  display: block;
 }
 
 .jw-hero-slider__controls {
@@ -86,9 +107,8 @@
 
 .jw-hero-slider__arrow {
   pointer-events: auto;
-  width: 2.75rem;
-  /* Reduced size */
-  height: 2.75rem;
+  width: var(--md-sys-spacing-11);
+  height: var(--md-sys-spacing-11);
   border-radius: 999px;
   background: color-mix(in srgb, var(--md-color-scrim) 30%, transparent);
   color: var(--md-color-on-surface);
@@ -108,9 +128,8 @@
 .jw-hero-slider__arrow svg {
   display: block;
   fill: currentColor;
-  width: 1.5rem;
-  /* Smaller icon */
-  height: 1.5rem;
+  width: var(--md-sys-spacing-6);
+  height: var(--md-sys-spacing-6);
 }
 
 .jw-hero-slider__arrow:hover {
@@ -120,7 +139,7 @@
 }
 
 .jw-hero-slider__arrow:focus-visible {
-  outline: 2px solid var(--md-color-on-primary-container);
+  outline: 2px solid var(--md-color-primary);
   outline-offset: 2px;
 }
 
@@ -129,32 +148,32 @@
 }
 
 .jw-hero-slider__arrow--prev {
-  left: 1.5rem;
+  left: var(--md-sys-spacing-6);
 }
 
 .jw-hero-slider__arrow--next {
-  right: 1.5rem;
+  right: var(--md-sys-spacing-6);
 }
 
 /* Dots Pagination */
 .jw-hero-slider__dots {
   position: absolute;
-  bottom: 2rem;
-  /* Higher up */
+  bottom: var(--md-sys-spacing-8);
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 0.75rem;
-  /* Separated but grouped */
+  align-items: center;
+  gap: var(--md-sys-spacing-3);
   z-index: 4;
-  padding: 0.5rem;
+  padding: var(--md-sys-spacing-2);
   pointer-events: auto;
+  list-style: none;
+  margin: 0;
 }
 
 .jw-hero-slider__dot {
-  width: 0.5rem;
-  /* Reduced size */
-  height: 0.5rem;
+  width: var(--md-sys-spacing-2);
+  height: var(--md-sys-spacing-2);
   border-radius: 999px;
   background-color: color-mix(in srgb, var(--md-color-on-surface) 40%, transparent);
   border: none;
@@ -171,6 +190,11 @@
   transform: scale(1.1);
 }
 
+.jw-hero-slider__dot:focus-visible {
+  outline: 2px solid var(--md-color-primary);
+  outline-offset: 2px;
+}
+
 .jw-hero-slider__dot--active {
   background-color: var(--md-color-on-surface);
   transform: scale(1.3);
@@ -179,16 +203,16 @@
 
 @media (max-width: 640px) {
   .jw-hero-slider__arrow {
-    width: 2.25rem;
-    height: 2.25rem;
+    width: var(--md-sys-spacing-9);
+    height: var(--md-sys-spacing-9);
   }
 
   .jw-hero-slider__arrow--prev {
-    left: 0.5rem;
+    left: var(--md-sys-spacing-2);
   }
 
   .jw-hero-slider__arrow--next {
-    right: 0.5rem;
+    right: var(--md-sys-spacing-2);
   }
 }
 
@@ -201,8 +225,7 @@
 
 @media (min-width: 640px) {
   .jw-hero-slider {
-    /* Tablet: responsive height with constraints */
-    height: clamp(24rem, 40vh, 28rem);
+    min-height: clamp(22rem, 45vw, 30rem);
   }
 
   .jw-hero-content--flexible {
@@ -215,13 +238,14 @@
 
   /* Arrow sizing */
   .jw-hero-slider__arrow {
-    width: 3rem;
-    height: 3rem;
+    width: var(--md-sys-spacing-12);
+    height: var(--md-sys-spacing-12);
   }
 
   .jw-hero-slider {
-    /* Desktop: viewport-based with generous constraints */
-    height: clamp(28rem, 50vh, 36rem);
+    aspect-ratio: 21 / 9;
+    min-height: clamp(26rem, 40vw, 36rem);
+    max-height: 75vh;
   }
 
   .jw-hero-content--flexible {
