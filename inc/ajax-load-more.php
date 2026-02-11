@@ -32,9 +32,19 @@ function jagawarta_load_more_posts()
 
 	if ($query->have_posts()) {
 		$index = $offset + 1;
+		// Detect if we are in an archive context based on common query vars
+		$is_archive = !empty($archive['category_name']) || !empty($archive['cat']) || !empty($archive['tag']) || !empty($archive['author']) || !empty($archive['year']);
+
 		while ($query->have_posts()) {
 			$query->the_post();
-			get_template_part('template-parts/cards/card-list-item', null, array('index' => $index));
+			if ($is_archive) {
+				echo '<li class="flex h-full">';
+				get_template_part('template-parts/cards/card-categories');
+				echo '</li>';
+			}
+			else {
+				get_template_part('template-parts/cards/card-list-item', null, array('index' => $index));
+			}
 			$index++;
 		}
 		wp_reset_postdata();
