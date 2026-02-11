@@ -20,7 +20,7 @@ $category = get_the_category($post_id);
 $cat = $category ? $category[0] : null;
 ?>
 
-<article class="jw-card jw-card--bento jw-card--bento-split">
+<article class="jw-card--bento">
   <a href="<?php echo esc_url($permalink); ?>"
      class="jw-bento-link group focus:outline-none focus-visible:ring-2 focus-visible:ring-primary">
 

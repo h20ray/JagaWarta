@@ -34,8 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
 			type: slideCount > 1 ? 'loop' : 'slide',
 			perPage: 1,
 			perMove: 1,
-			gap: '1rem',
-			padding: { right: '0' },
+			gap: 0,
+			padding: 0,
 			arrows: false,
 			pagination: slideCount > 1, // Let Splide generate dots when needed
 			autoplay,
@@ -58,12 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
 				rewindSpeed: 0,
 				autoplay: false,
 			},
-			breakpoints: {
-				768: {
-					gap: '1rem',
-					padding: { right: '2rem' }
-				}
-			}
 		});
 
 		slider.mount();

@@ -529,7 +529,7 @@
   }
 
   .jw-card--bento {
-    @apply relative overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3;
+    @apply block overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-shadow duration-medium ease-emphasized hover:shadow-elevation-3;
   }
 
   .jw-media-wrap {
@@ -573,51 +573,79 @@
     letter-spacing: 0.02em;
   }
 
+
+
+  /* Bento Card - MD3x compliant responsive layout */
   .jw-bento-link {
-    display: grid;
-    grid-template-columns: 100px 1fr;
-    align-items: center;
+    display: flex;
+    min-height: 4.5rem;
+  }
+
+  @screen sm {
+    .jw-bento-link {
+      min-height: 5rem;
+    }
   }
 
   @screen lg {
     .jw-bento-link {
-      grid-template-columns: 140px 1fr;
+      min-height: 6rem;
     }
   }
 
   .jw-bento-media {
-    width: 100px;
-    height: 100px;
-    background: var(--md-color-surface-container-low);
-    overflow: hidden;
+    width: 5rem;
     flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--md-color-surface-container-low);
     border-top-left-radius: var(--md-sys-shape-corner-medium);
     border-bottom-left-radius: var(--md-sys-shape-corner-medium);
   }
 
+  @screen sm {
+    .jw-bento-media {
+      width: 6rem;
+    }
+  }
+
   @screen lg {
     .jw-bento-media {
-      width: 140px;
-      height: 140px;
+      width: 7.5rem;
     }
   }
 
   .jw-bento-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    display: block;
   }
 
   .jw-bento-content {
-    @apply flex flex-col justify-center px-spacing-5 py-spacing-4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: var(--md-sys-spacing-4);
+    padding-right: var(--md-sys-spacing-4);
+    padding-top: var(--md-sys-spacing-2);
+    padding-bottom: var(--md-sys-spacing-2);
+    min-width: 0;
+  }
+
+  @screen sm {
+    .jw-bento-content {
+      padding-left: var(--md-sys-spacing-5);
+      padding-right: var(--md-sys-spacing-5);
+    }
   }
 
   .jw-bento-title {
     display: -webkit-box;
-    -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
     overflow: hidden;
   }
 
