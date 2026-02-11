@@ -19,7 +19,7 @@ if ( ! $tags ) {
 // Limit to max 4 tags as per Google Blog style request
 $tags = array_slice( $tags, 0, 4 );
 ?>
-<footer class="mt-spacing-12 pt-spacing-8">
+<footer class="mt-spacing-12 pt-spacing-8" data-reading-end>
 	<div class="flex flex-col sm:flex-row sm:items-baseline gap-spacing-4">
 		<span class="text-body-large font-medium uppercase tracking-wide text-on-surface-variant flex-shrink-0">
 			<?php esc_html_e( 'Posted In:', 'jagawarta' ); ?>

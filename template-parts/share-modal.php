@@ -24,6 +24,9 @@ $services = $share['services'];
 			<h2 id="jw-share-modal-title" class="jw-share-modal-title">
 				<?php esc_html_e( 'Share article', 'jagawarta' ); ?>
 			</h2>
+			<p class="jw-share-modal-supporting">
+				<?php esc_html_e( 'Choose where you want to share this story.', 'jagawarta' ); ?>
+			</p>
 			<button
 				type="button"
 				class="jw-share-modal-close"
@@ -51,27 +54,52 @@ $services = $share['services'];
 					$label   = $service['label'];
 					$link    = $service['url'];
 					$is_copy = ( 'copy' === $key );
+					$item_class = 'jw-share-modal-item jw-share-modal-item--' . sanitize_html_class( $key );
+					$description = '';
+					switch ( $key ) {
+						case 'x':
+							$description = __( 'Post to X timeline', 'jagawarta' );
+							break;
+						case 'facebook':
+							$description = __( 'Share on Facebook feed', 'jagawarta' );
+							break;
+						case 'whatsapp':
+							$description = __( 'Send via WhatsApp chat', 'jagawarta' );
+							break;
+						case 'telegram':
+							$description = __( 'Send to Telegram', 'jagawarta' );
+							break;
+						case 'email':
+							$description = __( 'Open email composer', 'jagawarta' );
+							break;
+						case 'copy':
+							$description = __( 'Copy article URL', 'jagawarta' );
+							break;
+					}
 					?>
 					<?php if ( $is_copy ) : ?>
 						<button
 							type="button"
-							class="jw-share-modal-item"
+							class="<?php echo esc_attr( $item_class ); ?>"
 							data-share-copy
 							data-share-copy-url="<?php echo esc_url( $link ); ?>"
 							aria-label="<?php echo esc_attr( $label ); ?>"
-						>
-							<span class="jw-share-modal-item-icon" aria-hidden="true">
+							>
+								<span class="jw-share-modal-item-icon" aria-hidden="true">
 								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 									<rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
 									<path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
 								</svg>
 							</span>
-							<span class="jw-share-modal-item-label"><?php esc_html_e( 'Copy link', 'jagawarta' ); ?></span>
+							<span class="jw-share-modal-item-meta">
+								<span class="jw-share-modal-item-label"><?php esc_html_e( 'Copy link', 'jagawarta' ); ?></span>
+								<span class="jw-share-modal-item-supporting"><?php echo esc_html( $description ); ?></span>
+							</span>
 						</button>
 					<?php else : ?>
 						<a
 							href="<?php echo esc_url( $link ); ?>"
-							class="jw-share-modal-item"
+							class="<?php echo esc_attr( $item_class ); ?>"
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="<?php echo esc_attr( $label ); ?>"
@@ -117,7 +145,10 @@ $services = $share['services'];
 								}
 								?>
 							</span>
-							<span class="jw-share-modal-item-label"><?php echo esc_html( $label ); ?></span>
+							<span class="jw-share-modal-item-meta">
+								<span class="jw-share-modal-item-label"><?php echo esc_html( $label ); ?></span>
+								<span class="jw-share-modal-item-supporting"><?php echo esc_html( $description ); ?></span>
+							</span>
 						</a>
 					<?php endif; ?>
 				<?php endforeach; ?>
