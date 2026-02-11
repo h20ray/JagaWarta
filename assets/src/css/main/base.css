@@ -1,0 +1,25 @@
+@layer base {
+  html {
+    @apply font-sans antialiased;
+  }
+
+  body {
+    @apply text-on-surface bg-surface;
+  }
+
+  h1 {
+    @apply text-headline-large font-sans tracking-tight mb-3;
+  }
+
+  h2 {
+    @apply text-headline-medium font-sans tracking-tight mb-3;
+  }
+
+  h3 {
+    @apply text-title-large font-sans tracking-tight mb-2;
+  }
+
+  a:focus-visible {
+    @apply outline-2 outline outline-primary outline-offset-2;
+  }
+}

@@ -1,0 +1,97 @@
+  /* MD3 surfaces: page/section=surface, card=surface-low, hero/hover=surface-high */
+  .prose-article {
+    @apply max-w-none font-sans text-body-large text-on-surface-variant;
+    font-size: var(--jw-article-font-size, var(--md-sys-typescale-body-large-size));
+    line-height: var(--jw-article-line-height, var(--md-sys-typescale-body-large-line-height));
+  }
+
+  .prose-article a {
+    @apply text-primary underline decoration-outline-variant underline-offset-2;
+  }
+
+  .prose-article a:hover {
+    @apply decoration-primary;
+  }
+
+  .prose-article a:visited {
+    @apply text-on-surface-variant;
+  }
+
+  .prose-article figure,
+  .prose-article .wp-block-image {
+    @apply my-spacing-6 overflow-hidden rounded-xl;
+  }
+
+  .prose-article figure img,
+  .prose-article .wp-block-image img {
+    @apply w-full h-auto object-cover;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center rounded-full px-6 py-2.5 text-label-large font-medium transition-all duration-short ease-standard;
+    @apply focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary focus-visible:outline-offset-2;
+    @apply disabled:pointer-events-none;
+    height: 40px;
+    min-width: 64px;
+    opacity: 1;
+  }
+
+  .btn:disabled {
+    opacity: var(--md-sys-disabled-opacity);
+  }
+
+
+  .btn-tonal {
+    @apply btn bg-secondary-container text-on-secondary-container;
+    @apply hover:shadow-elevation-1;
+  }
+
+  .btn-filled {
+    @apply bg-primary text-on-primary border-0;
+  }
+
+  .btn-filled:hover {
+    opacity: var(--md-sys-button-hover-opacity);
+  }
+
+  .btn-outlined {
+    @apply bg-transparent border-outline text-primary;
+  }
+
+  .input {
+    @apply rounded-sm border border-outline-variant px-2 py-1 text-body-medium w-full bg-surface-low text-on-surface;
+    @apply focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary focus-visible:outline-offset-0;
+  }
+
+  .jagawarta-img-wrap {
+    @apply overflow-hidden rounded-md;
+  }
+
+  .jagawarta-img-wrap--card {
+    @apply aspect-video w-full;
+  }
+
+  .jagawarta-img-wrap--hero {
+    @apply aspect-video w-full;
+  }
+
+  .jagawarta-img-wrap--single {
+    @apply aspect-video w-full;
+  }
+
+  .jagawarta-img-wrap img {
+    @apply w-full h-full object-cover;
+  }
+
+  .screen-reader-text {
+    @apply absolute -left-[9999px] top-auto h-px w-px overflow-hidden;
+  }
+
+  .skip-link {
+    @apply absolute;
+  }
+
+  .skip-link:focus {
+    @apply left-4 top-4 z-overlay h-auto w-auto overflow-auto p-2 no-underline bg-surface-high text-on-surface;
+  }
+

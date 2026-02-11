@@ -5,13 +5,13 @@
   "scripts": {
     "build": "npm run build:tokens && npm run build:css && npm run build:js && npm run build:slider-css && npm run build:ticker-css && npm run build:hero-slider-css",
     "build:tokens": "node build-tokens.mjs",
-    "build:css": "tailwindcss -i ./assets/src/main.css -o ./assets/dist/main.css --minify",
+    "build:css": "node build-css.mjs && tailwindcss -i ./assets/src/main.css -o ./assets/dist/main.css --minify",
     "build:js": "node build-js.mjs",
     "build:slider-css": "node -e \"require('fs').copyFileSync('node_modules/@splidejs/splide/dist/css/splide-core.min.css', 'assets/dist/slider.css')\"",
     "build:ticker-css": "node -e \"require('fs').copyFileSync('assets/src/ticker.css', 'assets/dist/ticker.css')\"",
     "build:hero-slider-css": "node -e \"require('fs').copyFileSync('assets/src/css/hero-slider.css', 'assets/dist/hero-slider.css')\"",
     "dev": "npm run dev:css & npm run dev:js",
-    "dev:css": "tailwindcss -i ./assets/src/main.css -o ./assets/dist/main.css --watch",
+    "dev:css": "node build-css.mjs --watch",
     "dev:js": "node build-js.mjs --watch",
     "lint:php": "node lint-php.mjs",
     "lint:design": "node lint-design.mjs"

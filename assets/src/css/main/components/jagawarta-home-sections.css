@@ -1,0 +1,206 @@
+  .jw-top-split {
+    align-items: start;
+  }
+
+  .jw-top-split-main,
+  .jw-top-split-side {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @screen lg {
+    .jw-top-split {
+      align-items: start;
+    }
+  }
+
+  .jw-card--hero {
+    background: var(--md-color-surface-container-low);
+  }
+
+  .jw-card--overlay {
+    background: var(--md-color-surface-container-low);
+  }
+
+  .jw-card--bento {
+    @apply block overflow-hidden rounded-md bg-surface-low shadow-elevation-1 transition-shadow duration-medium ease-emphasized hover:shadow-elevation-3;
+  }
+
+  .jw-media-wrap {
+    position: relative;
+  }
+
+  .jw-chip-overlay {
+    position: absolute;
+    top: var(--md-sys-spacing-2);
+    left: var(--md-sys-spacing-2);
+    z-index: 2;
+  }
+
+  .jw-chip-overlay .jw-chip {
+    box-shadow: var(--md-sys-elevation-1);
+  }
+
+  .jw-chip {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 999px;
+  }
+
+  .jw-chip--sm {
+    height: 32px;
+    padding: 0 12px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--md {
+    height: 36px;
+    padding: 0 14px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--lg {
+    height: 40px;
+    padding: 0 16px;
+    letter-spacing: 0.02em;
+  }
+
+
+
+  /* Bento Card - MD3x compliant responsive layout */
+  .jw-bento-link {
+    display: flex;
+    min-height: 4.5rem;
+  }
+
+  @screen sm {
+    .jw-bento-link {
+      min-height: 5rem;
+    }
+  }
+
+  @screen lg {
+    .jw-bento-link {
+      min-height: 6rem;
+    }
+  }
+
+  .jw-bento-media {
+    width: 5rem;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--md-color-surface-container-low);
+    border-top-left-radius: var(--md-sys-shape-corner-medium);
+    border-bottom-left-radius: var(--md-sys-shape-corner-medium);
+  }
+
+  @screen sm {
+    .jw-bento-media {
+      width: 6rem;
+    }
+  }
+
+  @screen lg {
+    .jw-bento-media {
+      width: 7.5rem;
+    }
+  }
+
+  .jw-bento-media img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .jw-bento-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: var(--md-sys-spacing-4);
+    padding-right: var(--md-sys-spacing-4);
+    padding-top: var(--md-sys-spacing-2);
+    padding-bottom: var(--md-sys-spacing-2);
+    min-width: 0;
+  }
+
+  @screen sm {
+    .jw-bento-content {
+      padding-left: var(--md-sys-spacing-5);
+      padding-right: var(--md-sys-spacing-5);
+    }
+  }
+
+  .jw-bento-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+  }
+
+  .jw-post-list {
+    @apply flex flex-col;
+  }
+
+  .jw-post-list-item {
+    @apply border-b border-outline-variant py-spacing-4;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: var(--md-sys-spacing-4);
+  }
+
+  .jw-post-rank {
+    @apply text-label-large text-on-surface-variant;
+    min-width: var(--md-sys-spacing-6);
+    text-align: right;
+    padding-top: var(--md-sys-spacing-1);
+  }
+
+  .jw-post-list-title {
+    @apply text-title-medium text-on-surface font-medium leading-snug transition-colors duration-short;
+  }
+
+  .jw-post-list-title:hover {
+    @apply text-primary underline decoration-2 underline-offset-2;
+  }
+
+  .jw-post-list-meta {
+    @apply mt-spacing-2 text-label-medium text-on-surface-variant flex flex-wrap gap-x-spacing-2 gap-y-spacing-1;
+  }
+
+  .jw-post-list-meta-item {
+    @apply inline-flex items-center;
+  }
+
+  .jw-post-list-sep {
+    @apply text-on-surface-variant;
+  }
+
+  #search-wrapper.search-border-fade {
+    transition: border-color var(--md-sys-motion-delay-short) var(--md-sys-motion-easing-standard);
+  }
+
+  #search-wrapper.search-border-fade #search-placeholder-text {
+    transition-duration: var(--md-sys-motion-delay-short);
+  }
+
+  .btn:active {
+    @apply scale-95;
+  }
+
+  .btn.loading {
+    @apply opacity-80 cursor-wait;
+  }
+
+  .jw-end-message {
+    @apply hidden opacity-0 transition-opacity duration-medium;
+  }
+
+  .jw-end-message.is-visible {
+    @apply block opacity-100;
+  }

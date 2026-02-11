@@ -1,0 +1,112 @@
+  .prose-article[data-font-size-level='small'] {
+    --jw-article-font-size: var(--md-sys-typescale-body-medium-size);
+    --jw-article-line-height: var(--md-sys-typescale-body-medium-line-height);
+  }
+
+  .prose-article[data-font-size-level='default'] {
+    --jw-article-font-size: var(--md-sys-typescale-body-large-size);
+    --jw-article-line-height: var(--md-sys-typescale-body-large-line-height);
+  }
+
+  .prose-article[data-font-size-level='large'] {
+    --jw-article-font-size: calc(var(--md-sys-typescale-body-large-size) * 1.15);
+    --jw-article-line-height: calc(var(--md-sys-typescale-body-large-line-height) * 1.05);
+  }
+
+  .jw-reading-shell {
+    position: relative;
+  }
+
+  @screen md {
+    .jw-reading-shell {
+      display: grid;
+      grid-template-columns: 0 minmax(0, 1fr);
+      column-gap: 0;
+      align-items: start;
+    }
+  }
+
+  .jw-font-size-controls {
+    position: sticky;
+    top: var(--jw-reading-toolbar-top, 96px);
+    z-index: 40;
+    grid-column: 1;
+    grid-row: 1;
+    align-self: start;
+    width: 0;
+    height: var(--jw-reading-toolbar-height, 248px);
+    overflow: visible;
+  }
+
+  .jw-font-size-controls .jw-font-size-rail {
+    position: absolute;
+    left: -92px;
+    top: 0;
+  }
+
+  .jw-reading-shell .prose-article {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .jw-font-size-rail {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--md-sys-spacing-2);
+    min-width: 56px;
+    padding: var(--md-sys-spacing-2);
+    border-radius: var(--md-sys-shape-corner-full);
+    background: color-mix(in srgb, var(--md-color-surface-container-high) 92%, transparent);
+    box-shadow: var(--md-sys-elevation-2);
+    backdrop-filter: blur(8px);
+  }
+
+  .jw-font-size-divider {
+    display: none;
+  }
+
+  .jw-font-size-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--md-sys-spacing-1);
+  }
+
+  .jw-font-size-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: var(--md-sys-shape-corner-full);
+    background: transparent;
+    color: var(--md-color-on-surface-variant);
+    cursor: pointer;
+    font-size: var(--md-sys-typescale-label-large-size);
+    line-height: var(--md-sys-typescale-label-large-line-height);
+    font-weight: 600;
+    transition:
+      background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  }
+
+  .jw-font-size-btn:hover {
+    background: var(--md-color-surface-container);
+    color: var(--md-color-on-surface);
+  }
+
+  .jw-font-size-btn:active {
+    transform: scale(0.96);
+  }
+
+  .jw-font-size-btn:focus-visible {
+    outline: 2px solid var(--md-color-primary);
+    outline-offset: 2px;
+  }
+
+  .jw-font-size-btn[aria-pressed='true'] {
+    background: var(--md-color-primary-container);
+    color: var(--md-color-on-primary-container);
+  }

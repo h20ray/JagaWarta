@@ -1,0 +1,40 @@
+@layer utilities {
+  .focus-ring {
+    outline: var(--md-sys-focus-ring-width) solid var(--md-color-outline);
+    outline-offset: var(--md-sys-focus-ring-width);
+  }
+
+  .focus-ring:focus-visible {
+    outline-color: var(--md-color-primary);
+  }
+
+  /* Hide native search cancel button aggressively */
+  input[type="search"]::-webkit-search-decoration,
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-results-button,
+  input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+  }
+
+  /* Dark mode toggle button */
+  .dark-mode-toggle {
+    @apply flex items-center justify-center w-12 h-12 rounded-full text-on-surface;
+    @apply hover:bg-surface-high hover:text-primary focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary;
+    @apply transition-all duration-short ease-standard cursor-pointer;
+    border: none;
+    background: transparent;
+  }
+
+  .dark-mode-toggle svg {
+    @apply w-6 h-6;
+    transition: transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  }
+
+  .dark-mode-toggle:hover svg {
+    transform: scale(1.1);
+  }
+
+  .dark-mode-toggle:active svg {
+    transform: scale(0.95);
+  }
+}

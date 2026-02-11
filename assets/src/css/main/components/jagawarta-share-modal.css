@@ -1,0 +1,226 @@
+  .jw-share-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: var(--md-sys-spacing-3);
+  }
+
+  @screen sm {
+    .jw-share-modal {
+      align-items: center;
+      padding: var(--md-sys-spacing-6);
+    }
+  }
+
+  .jw-share-modal-scrim {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in srgb, var(--md-color-scrim) 40%, transparent);
+    opacity: 0;
+    transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+  }
+
+  .jw-share-modal.is-open .jw-share-modal-scrim {
+    opacity: 1;
+  }
+
+  .jw-share-modal-dialog {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 560px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: color-mix(in srgb, var(--md-color-surface-container-high) 94%, var(--md-color-primary-container) 6%);
+    border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-extra-large) 0 0;
+    box-shadow: var(--md-sys-elevation-4);
+    transform: translateY(16px);
+    opacity: 0;
+    transition:
+      transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-emphasized),
+      opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+  }
+
+  @screen sm {
+    .jw-share-modal-dialog {
+      border-radius: var(--md-sys-shape-corner-extra-large);
+      transform: scale(0.98) translateY(8px);
+    }
+  }
+
+  .jw-share-modal.is-open .jw-share-modal-dialog {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+
+  .jw-share-modal-header {
+    position: relative;
+    display: grid;
+    gap: var(--md-sys-spacing-1);
+    padding: var(--md-sys-spacing-6) var(--md-sys-spacing-6) var(--md-sys-spacing-3);
+  }
+
+  .jw-share-modal-title {
+    margin: 0;
+    font-size: var(--md-sys-typescale-title-large-size);
+    line-height: var(--md-sys-typescale-title-large-line-height);
+    font-weight: var(--md-sys-typescale-title-large-weight);
+    color: var(--md-color-on-surface);
+  }
+
+  .jw-share-modal-supporting {
+    margin: 0;
+    color: var(--md-color-on-surface-variant);
+    font-size: var(--md-sys-typescale-body-medium-size);
+    line-height: var(--md-sys-typescale-body-medium-line-height);
+  }
+
+  .jw-share-modal-close {
+    position: absolute;
+    top: var(--md-sys-spacing-4);
+    right: var(--md-sys-spacing-4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: var(--md-color-surface-container-highest);
+    color: var(--md-color-on-surface);
+    border-radius: var(--md-sys-shape-corner-full);
+    cursor: pointer;
+    transition: all var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+  }
+
+  .jw-share-modal-close:hover {
+    background: var(--md-color-surface-container);
+    transform: scale(1.03);
+  }
+
+  .jw-share-modal-close:focus-visible {
+    outline: 2px solid var(--md-color-primary);
+    outline-offset: 2px;
+  }
+
+  .jw-share-modal-content {
+    padding: var(--md-sys-spacing-2) var(--md-sys-spacing-6) var(--md-sys-spacing-6);
+  }
+
+  .jw-share-modal-services {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--md-sys-spacing-3);
+  }
+
+  @screen sm {
+    .jw-share-modal-services {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .jw-share-modal-item {
+    --jw-share-brand: var(--md-color-primary);
+    --jw-share-card-bg: color-mix(in srgb, var(--md-color-surface-container-low) 76%, var(--jw-share-brand) 24%);
+    --jw-share-card-bg-hover: color-mix(in srgb, var(--md-color-surface-container) 70%, var(--jw-share-brand) 30%);
+    --jw-share-card-fg: color-mix(in srgb, var(--md-color-on-surface) 86%, var(--jw-share-brand) 14%);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--md-sys-spacing-3);
+    min-height: 76px;
+    padding: var(--md-sys-spacing-4);
+    border-radius: var(--md-sys-shape-corner-large);
+    background: var(--jw-share-card-bg);
+    color: var(--jw-share-card-fg);
+    text-decoration: none;
+    transition:
+      transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      box-shadow var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
+      background-color var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    border: none;
+    cursor: pointer;
+    box-shadow: var(--md-sys-elevation-1);
+  }
+
+  .jw-share-modal-item:hover {
+    background: var(--jw-share-card-bg-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--md-sys-elevation-2);
+  }
+
+  .jw-share-modal-item:focus-visible {
+    outline: 2px solid var(--md-color-primary);
+    outline-offset: 2px;
+  }
+
+  .jw-share-modal-item-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--md-sys-shape-corner-full);
+    background: color-mix(in srgb, var(--jw-share-brand) 22%, var(--md-color-surface) 78%);
+    color: var(--jw-share-brand);
+    flex-shrink: 0;
+  }
+
+  .jw-share-modal-item-meta {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .jw-share-modal-item-label {
+    text-align: left;
+    margin: 0;
+    font-size: var(--md-sys-typescale-title-small-size);
+    line-height: var(--md-sys-typescale-title-small-line-height);
+    font-weight: var(--md-sys-typescale-title-small-weight);
+    color: var(--jw-share-card-fg);
+  }
+
+  .jw-share-modal-item-supporting {
+    margin: 0;
+    font-size: var(--md-sys-typescale-body-small-size);
+    line-height: var(--md-sys-typescale-body-small-line-height);
+    color: color-mix(in srgb, var(--jw-share-card-fg) 78%, transparent);
+  }
+
+  .jw-share-modal-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .jw-share-modal-item--x {
+    --jw-share-brand: #111111;
+  }
+
+  html[data-theme='dark'] .jw-share-modal-item--x {
+    --jw-share-brand: #ffffff;
+  }
+
+  .jw-share-modal-item--facebook {
+    --jw-share-brand: #1877f2;
+  }
+
+  .jw-share-modal-item--whatsapp {
+    --jw-share-brand: #25d366;
+  }
+
+  .jw-share-modal-item--telegram {
+    --jw-share-brand: #229ed9;
+  }
+
+  .jw-share-modal-item--email {
+    --jw-share-brand: #ef6c00;
+  }
+
+  .jw-share-modal-item--copy {
+    --jw-share-brand: var(--md-color-tertiary);
+  }
