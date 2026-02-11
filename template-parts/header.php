@@ -11,22 +11,25 @@ if (!defined('ABSPATH')) {
 ?>
 <header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface shadow-elevation-2 transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav>
 	<div class="w-full h-full px-4 md:px-12 flex items-center justify-between pointer-events-auto relative">
-		<div id="header-main-content" class="w-full h-full flex items-center justify-between">
-			<div class="flex items-center gap-8 md:gap-12 flex-1 justify-start">
-				<button type="button" data-jagawarta-nav-toggle class="md:hidden inline-flex h-10 w-10 items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary header-transition" aria-controls="mobile-nav-panel" aria-expanded="false" aria-label="<?php esc_attr_e('Menu', 'jagawarta'); ?>">
+		<div id="header-main-content" class="w-full h-full flex items-center justify-between relative">
+			<!-- Left: Menu & Nav -->
+			<div class="flex items-center justify-start flex-1 md:gap-8 min-w-0">
+				<button id="mobile-menu-btn" type="button" data-jagawarta-nav-toggle class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary header-transition transition-opacity duration-short" aria-controls="mobile-nav-panel" aria-expanded="false" aria-label="<?php esc_attr_e('Menu', 'jagawarta'); ?>">
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
 				</button>
-				<div id="header-logo" class="flex-shrink-0 relative z-50">
+				
+				<div id="header-logo" class="flex-shrink-0 z-50 transition-all duration-short absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
 					<?php if (has_custom_logo()): ?>
 						<?php the_custom_logo(); ?>
 					<?php
 else: ?>
-						<a href="<?php echo esc_url(home_url('/')); ?>" class="text-title-large font-medium text-on-surface hover:text-primary focus:outline-none focus:underline" rel="home">
+						<a href="<?php echo esc_url(home_url('/')); ?>" class="text-title-large font-medium text-on-surface hover:text-primary focus:outline-none focus:underline whitespace-nowrap" rel="home">
 							<?php bloginfo('name'); ?>
 						</a>
 					<?php
 endif; ?>
 				</div>
+
 				<nav id="header-nav" class="hidden md:flex transition-all duration-expand ease-[cubic-bezier(0.2,0.0,0,1.0)] transform translate-x-0" aria-label="<?php esc_attr_e('Primary', 'jagawarta'); ?>">
 					<ul class="jw-nav-menu flex items-center gap-1 list-none m-0 p-0" role="menubar">
 						<?php
@@ -55,25 +58,30 @@ else {
 					</ul>
 				</nav>
 			</div>
-			<div id="header-search-container" class="flex items-center justify-end ml-4 transition-all duration-long ease-[cubic-bezier(0.2,0.0,0,1.0)]">
-				<div id="header-search-inner" class="relative flex items-center w-auto h-full transition-all duration-long">
-					<form role="search" method="get" class="flex items-center w-full h-full" action="<?php echo esc_url(home_url('/')); ?>">
-						<label for="header-search" class="sr-only"><?php esc_html_e('Search', 'jagawarta'); ?></label>
-						<div id="search-wrapper" class="relative flex items-center h-10 rounded-full border border-outline-variant bg-surface-container-low px-4 py-1.5 cursor-text hover:bg-surface-container hover:border-outline w-auto transition-[background-color,box-shadow,padding,width,height] duration-short ease-[cubic-bezier(0.2,0.0,0,1.0)] group">
-							<svg id="search-icon" class="h-6 w-6 text-on-surface-variant flex-shrink-0 group-hover:text-primary transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>							<span id="search-placeholder-text" class="ml-3 text-body-medium text-on-surface-variant select-none whitespace-nowrap transition-opacity duration-medium group-hover:text-on-surface">Search</span>
-							<input type="search" id="header-search" name="s" class="absolute inset-0 w-full h-full bg-transparent pl-14 pr-12 text-body-medium text-on-surface placeholder-transparent outline-none opacity-0 pointer-events-none transition-opacity duration-medium delay-short" placeholder="<?php esc_attr_e('Search', 'jagawarta'); ?>" autocomplete="off" />
-							<button type="button" id="search-close-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-variant outline-none focus:outline-none focus:bg-surface-variant transition-all opacity-0" onmousedown="event.preventDefault();">
-								<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-							</button>
 
-							
-							<div id="search-results" class="hidden absolute top-full left-0 w-full bg-surface shadow-elevation-3 rounded-xl mt-2 overflow-hidden z-50 border-none outline-none max-h-results-max overflow-y-auto"></div>
-						</div>
-					</form>
+			<!-- Right: Search & Toggle -->
+			<div class="flex items-center gap-2 justify-end">
+				<div id="header-search-container" class="transition-all duration-long ease-[cubic-bezier(0.2,0.0,0,1.0)]">
+					<div id="header-search-inner" class="relative flex items-center w-auto h-full transition-all duration-long">
+						<form role="search" method="get" class="flex items-center w-full h-full" action="<?php echo esc_url(home_url('/')); ?>">
+							<label for="header-search" class="sr-only"><?php esc_html_e('Search', 'jagawarta'); ?></label>
+							<div id="search-wrapper" class="relative flex items-center h-9 rounded-full transition-[background-color,box-shadow,padding,width,height] duration-short ease-[cubic-bezier(0.2,0.0,0,1.0)] group cursor-pointer w-9 justify-center px-0 bg-transparent border-0 hover:bg-surface-high text-on-surface md:w-auto md:justify-start md:px-4 md:bg-surface-container-low md:border md:border-outline-variant md:text-on-surface-variant md:hover:bg-surface-container md:hover:border-outline">
+								<svg id="search-icon" class="h-6 w-6 text-current flex-shrink-0 group-hover:text-primary transition-colors" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>
+								<span id="search-placeholder-text" class="hidden md:block ml-3 text-body-medium text-current select-none whitespace-nowrap transition-opacity duration-medium group-hover:text-on-surface">Search</span>
+								<input type="search" id="header-search" name="s" class="absolute inset-0 w-full h-full bg-transparent pl-14 pr-12 text-body-medium text-on-surface placeholder-transparent outline-none opacity-0 pointer-events-none transition-opacity duration-medium delay-short" placeholder="<?php esc_attr_e('Search', 'jagawarta'); ?>" autocomplete="off" />
+								<button type="button" id="search-close-btn" class="hidden absolute right-3 top-1/2 -translate-y-1/2 p-2 text-on-surface-variant hover:text-on-surface rounded-full hover:bg-surface-variant outline-none focus:outline-none focus:bg-surface-variant transition-all opacity-0" onmousedown="event.preventDefault();">
+									<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
+								</button>
+
+								
+								<div id="search-results" class="hidden absolute top-full left-0 w-full bg-surface shadow-elevation-3 rounded-xl mt-2 overflow-hidden z-50 border-none outline-none max-h-results-max overflow-y-auto"></div>
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
-			<div class="flex items-center gap-2 ml-3">
-				<?php get_template_part('template-parts/components/dark-mode-toggle'); ?>
+				<div class="flex items-center">
+					<?php get_template_part('template-parts/components/dark-mode-toggle'); ?>
+				</div>
 			</div>
 		</div>
 
@@ -111,6 +119,8 @@ else {
 	<script>
 		(function() {
 			const nav = document.getElementById('header-nav');
+			const logo = document.getElementById('header-logo');
+			const menuBtn = document.getElementById('mobile-menu-btn');
 			const searchContainer = document.getElementById('header-search-container');
 			const searchWrapper = document.getElementById('search-wrapper');
 			const searchInput = document.getElementById('header-search');
@@ -130,22 +140,33 @@ else {
 				searchWrapper.style.minWidth = pillWidth + 'px';
 
 				nav.classList.add('opacity-0', '-translate-x-8', 'pointer-events-none');
+				if(logo) logo.classList.add('opacity-0', 'pointer-events-none');
+				if(menuBtn) menuBtn.classList.add('opacity-0', 'pointer-events-none');
 
-				// Phase 1: fade border and placeholder together (pill stays on the right; nothing "drags" to center)
+				// Phase 1: fade border and placeholder
 				searchWrapper.classList.add('search-border-fade', 'border-transparent', 'shadow-elevation-1');
-				searchWrapper.classList.remove('border-outline-variant');
+				// Remove desktop border class if present
+				searchWrapper.classList.remove('md:border-outline-variant'); 
+				
 				searchPlaceholder.classList.add('opacity-0');
 
-				// Phase 2: move to center and expand; then show input
+				// Phase 2: expand
 				setTimeout(function() {
-					searchContainer.classList.remove('justify-end', 'ml-4');
+					// Removed justify-end and ml-4 manipulation for new layout
 					searchContainer.classList.add('absolute', 'left-1/2', '-translate-x-1/2', 'z-40', 'w-auto', 'h-full', 'flex', 'items-center', 'justify-center', 'pointer-events-none');
 
 					searchWrapper.style.width = '';
 					searchWrapper.style.minWidth = '';
 					searchWrapper.classList.remove('search-border-fade', 'border', 'border-transparent', 'shadow-elevation-1');
-					searchWrapper.classList.remove('w-auto', 'bg-surface-container-low', 'px-4', 'cursor-text');
-					searchWrapper.classList.add('w-[90vw]', 'md:w-search-width', 'h-12', 'bg-surface', 'shadow-elevation-2', 'border-0', 'pl-6', 'pr-0', 'cursor-text', 'pointer-events-auto');
+					
+					// Remove all responsive styling classes to reset to expanded state
+					searchWrapper.classList.remove(
+						'w-9', 'justify-center', 'px-0', 'bg-transparent', 'border-0', 'hover:bg-surface-high', 'text-on-surface',
+						'md:w-auto', 'md:justify-start', 'md:px-4', 'md:bg-surface-container-low', 'md:border', 'md:border-outline-variant', 'md:text-on-surface-variant', 'md:hover:bg-surface-container', 'md:hover:border-outline'
+					);
+
+					// Add expanded classes
+					searchWrapper.classList.add('w-[90vw]', 'md:w-search-width', 'h-12', 'bg-surface', 'shadow-elevation-2', 'border-0', 'pl-6', 'pr-0', 'cursor-text', 'pointer-events-auto', 'text-on-surface');
 
 					searchInput.classList.remove('opacity-0', 'pointer-events-none');
 					searchInput.classList.add('opacity-100', 'pointer-events-auto');
@@ -157,20 +178,33 @@ else {
 
 			function disableSearch() {
 				nav.classList.remove('opacity-0', '-translate-x-8', 'pointer-events-none');
-				searchContainer.classList.add('justify-end', 'ml-4');
+				if(logo) logo.classList.remove('opacity-0', 'pointer-events-none');
+				if(menuBtn) menuBtn.classList.remove('opacity-0', 'pointer-events-none');
+
+				// Removed justify-end and ml-4 re-addition
 				searchContainer.classList.remove('absolute', 'left-1/2', '-translate-x-1/2', 'z-40', 'w-auto', 'h-full', 'flex', 'items-center', 'justify-center', 'pointer-events-none');
 
-				// Phase 1: collapse to normal size with border still invisible (border-transparent)
+				// Phase 1: collapse
 				searchWrapper.style.width = '';
 				searchWrapper.style.minWidth = '';
-				searchWrapper.classList.remove('w-[90vw]', 'md:w-search-width', 'h-12', 'bg-surface', 'shadow-elevation-2', 'border-0', 'pl-6', 'pr-0', 'cursor-text', 'pointer-events-auto');
-				searchWrapper.classList.add('w-auto', 'bg-surface-container-low', 'border', 'border-transparent', 'px-4', 'cursor-text');
+				searchWrapper.classList.remove('w-[90vw]', 'md:w-search-width', 'h-12', 'bg-surface', 'shadow-elevation-2', 'border-0', 'pl-6', 'pr-0', 'cursor-text', 'pointer-events-auto', 'text-on-surface');
+				
+				// Restore responsive classes
+				searchWrapper.classList.add(
+					'w-9', 'justify-center', 'px-0', 'bg-transparent', 'border-0', 'hover:bg-surface-high', 'text-on-surface', 'cursor-pointer',
+					'md:w-auto', 'md:justify-start', 'md:px-4', 'md:bg-surface-container-low', 'md:border', 'md:text-on-surface-variant', 'md:hover:bg-surface-container', 'md:hover:border-outline'
+				);
+				
+				// Initially transparent border for fade in
+				searchWrapper.classList.add('border-transparent');
 
-				// Phase 2: when shrink done, fade in border
+				// Phase 2: fade border in
 				setTimeout(function() {
 					searchWrapper.classList.add('search-border-fade');
 					searchWrapper.classList.remove('border-transparent');
-					searchWrapper.classList.add('border-outline-variant');
+					// Only add visible border color on desktop
+					searchWrapper.classList.add('md:border-outline-variant');
+					
 					setTimeout(function() {
 						searchWrapper.classList.remove('search-border-fade');
 					}, BORDER_FADE_MS);

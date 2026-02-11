@@ -5,14 +5,14 @@
  * @package JagaWarta
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 ?>
 <button
 	id="dark-mode-toggle"
-	class="dark-mode-toggle"
-	aria-label="<?php esc_attr_e( 'Switch to dark mode', 'jagawarta' ); ?>"
+	class="dark-mode-toggle h-9 w-9 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+	aria-label="<?php esc_attr_e('Switch to dark mode', 'jagawarta'); ?>"
 	type="button"
 >
 	<svg class="icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -22,5 +22,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<svg class="icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: none;">
 		<path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" fill="currentColor"/>
 	</svg>
-	<span class="screen-reader-text"><?php esc_html_e( 'Toggle dark mode', 'jagawarta' ); ?></span>
+	<span class="screen-reader-text"><?php esc_html_e('Toggle dark mode', 'jagawarta'); ?></span>
 </button>
