@@ -15,6 +15,7 @@ $related_ids = jagawarta_get_related_posts( get_the_ID(), 3 );
 
 <main id="main" class="site-main">
 	<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+		<?php jagawarta_part( 'template-parts/share-modal' ); ?>
 		<?php jagawarta_part( 'template-parts/single-header' ); ?>
 		<?php jagawarta_part( 'template-parts/single-content' ); ?>
 		

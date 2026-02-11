@@ -19,7 +19,9 @@
   fallbackImages();
 
   const nav = document.querySelector('[data-jagawarta-nav]');
-  if (!nav) return;
+  if (!nav) {
+    return;
+  }
   const toggle = nav.querySelector('[data-jagawarta-nav-toggle]');
   const panel = nav.querySelector('[data-jagawarta-nav-panel]');
   const scrim = nav.querySelector('[data-jagawarta-nav-scrim]');

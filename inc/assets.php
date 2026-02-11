@@ -81,6 +81,19 @@ function jagawarta_enqueue_assets(): void
 		);
 	}
 
+	if (is_singular('post')) {
+		$toolbar_js = $dir . '/article-toolbar.js';
+		if (file_exists($toolbar_js)) {
+			wp_enqueue_script(
+				'jagawarta-article-toolbar',
+				$uri . '/article-toolbar.js',
+				array(),
+				jagawarta_asset_version($toolbar_js),
+				array('strategy' => 'defer')
+			);
+		}
+	}
+
 	if (jagawarta_needs_slider()) {
 		jagawarta_enqueue_hero_slider($dir, $uri);
 	}

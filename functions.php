@@ -17,6 +17,7 @@ define('JAGAWARTA_DIR', get_template_directory());
 define('JAGAWARTA_URI', get_template_directory_uri());
 
 require_once JAGAWARTA_DIR . '/inc/helpers.php';
+require_once JAGAWARTA_DIR . '/inc/helpers-share.php';
 require_once JAGAWARTA_DIR . '/inc/category-color.php';
 require_once JAGAWARTA_DIR . '/inc/query/posts.php';
 require_once JAGAWARTA_DIR . '/inc/assets.php';
