@@ -4,7 +4,7 @@
  *
  * Expects:
  * - $args['slider_ids'] int[]
- * - $args['side_ids']   int[] (2)
+ * - $args['side_ids']   int[]
  *
  * @package JagaWarta
  */
@@ -122,13 +122,9 @@ $primary_id = (int) $slider_ids[0];
 			</div>
 
 			<div class="jw-top-split-side flex flex-col gap-4 lg:col-span-4">
-				<?php if ( ! empty( $side_ids[0] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/card-bento', null, array( 'post_id' => $side_ids[0] ) ); ?>
-				<?php endif; ?>
-
-				<?php if ( ! empty( $side_ids[1] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/card-bento', null, array( 'post_id' => $side_ids[1] ) ); ?>
-				<?php endif; ?>
+				<?php foreach ( $side_ids as $side_id ) : ?>
+					<?php get_template_part( 'template-parts/cards/card-bento', null, array( 'post_id' => $side_id ) ); ?>
+				<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

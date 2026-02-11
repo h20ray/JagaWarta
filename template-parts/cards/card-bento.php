@@ -41,12 +41,12 @@ jagawarta_the_post_display_image($post_id, array(
 				</time>
 				<?php if ($cat): ?>
 					<span aria-hidden="true">·</span>
-					<span class="font-medium text-primary"><?php echo esc_html($cat->name); ?></span>
+					<span class="text-on-surface-variant"><?php echo esc_html($cat->name); ?></span>
 				<?php
 endif; ?>
 			</div>
 
-			<h3 class="mt-spacing-2 text-title-medium text-on-surface leading-snug group-hover:text-primary transition-colors duration-short">
+			<h3 class="jw-bento-title mt-spacing-2 text-title-medium text-on-surface leading-snug group-hover:text-primary transition-colors duration-short">
 				<?php echo esc_html($title); ?>
 			</h3>
 

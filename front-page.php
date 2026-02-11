@@ -17,7 +17,7 @@ $slider_ids = jagawarta_get_featured_slider_ids( $hero_count );
 if ( empty( $slider_ids ) ) {
 	$slider_ids = jagawarta_get_latest_ids_excluding( $hero_count, array() );
 }
-$side_ids     = jagawarta_get_latest_ids_excluding( 2, $slider_ids );
+$side_ids     = jagawarta_get_latest_ids_excluding( 3, $slider_ids );
 $exclude_ids  = array_unique( array_merge( $slider_ids, $side_ids ) );
 $latest_ids   = jagawarta_get_latest_ids_excluding( 9, $exclude_ids );
 ?>

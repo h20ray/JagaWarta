@@ -24,7 +24,18 @@ if (empty($ids)) {
 				<?php echo esc_html($title); ?>
 			</h2>
 
-			<a href="<?php echo esc_url(site_url('/blog/')); ?>"
+			<?php
+			$posts_page_id = (int) get_option( 'page_for_posts' );
+			if ( $posts_page_id ) {
+				$view_all_url = get_permalink( $posts_page_id );
+			} elseif ( 'posts' === get_option( 'show_on_front' ) ) {
+				$view_all_url = home_url( '/' );
+			} else {
+				$view_all_url = get_post_type_archive_link( 'post' );
+			}
+			$view_all_url = $view_all_url ?: home_url( '/' );
+			?>
+			<a href="<?php echo esc_url( $view_all_url ); ?>"
 				class="text-body-medium text-primary underline-offset-2 hover:underline focus:underline">
 				<?php esc_html_e('View all', 'jagawarta'); ?>
 			</a>
