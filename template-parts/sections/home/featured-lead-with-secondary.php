@@ -1,6 +1,8 @@
 <?php
 /**
- * Top Split: Left hero featured + right stacked cards.
+ * Home featured section:
+ * - left: lead featured hero (slider or static hero card)
+ * - right: stacked secondary featured cards.
  *
  * Expects:
  * - $args['slider_ids'] int[]
@@ -46,7 +48,6 @@ elseif ($primary_id): ?>
 	$excerpt = wp_strip_all_tags(get_the_excerpt($primary_id));
 	$date_iso = get_the_date(DATE_W3C, $primary_id);
 	$date_human = get_the_date('', $primary_id);
-
 	$category = get_the_category($primary_id);
 	$cat = $category ? $category[0] : null;
 
@@ -130,7 +131,7 @@ endif; ?>
 
 			<div class="jw-top-split-side flex flex-col justify-between gap-4 h-full lg:col-span-4">
 				<?php foreach ($side_ids as $side_id): ?>
-					<?php get_template_part('template-parts/cards/card-bento', null, array('post_id' => $side_id)); ?>
+					<?php get_template_part('template-parts/cards/home/secondary-feature', null, array('post_id' => $side_id)); ?>
 				<?php
 endforeach; ?>
 			</div>

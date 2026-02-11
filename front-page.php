@@ -24,14 +24,14 @@ $latest_ids = jagawarta_get_latest_ids_excluding(9, $exclude_ids);
 
 <main id="main" class="site-main">
 	<?php if (!empty($slider_ids)): ?>
-		<?php get_template_part('template-parts/home/top-split', null, array(
+		<?php get_template_part('template-parts/sections/home/featured-lead-with-secondary', null, array(
 		'slider_ids' => $slider_ids,
 		'side_ids' => $side_ids,
 	)); ?>
 	<?php
 endif; ?>
 
-	<?php get_template_part('template-parts/home/first-grid', null, array(
+	<?php get_template_part('template-parts/sections/home/latest-stories-grid', null, array(
 	'title' => __('Latest stories', 'jagawarta'),
 	'ids' => $latest_ids,
 )); ?>

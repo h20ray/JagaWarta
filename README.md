@@ -20,7 +20,10 @@ npm run build
 - **design/tokens.json** — Single source of truth untuk warna (light/dark). Build emit sys + role layer ke `tokens.css`.
 - **tokens/** — Typography, shape, motion, spacing, state, elevation. Digabung dengan design tokens oleh `build-tokens.mjs`.
 - **inc/** — Logic saja: `helpers.php`, `assets.php`, `query/posts.php`, `blocks/` (hero, section-grid, related-posts)
-- **template-parts/** — UI yang dipakai ulang (header, footer, hero, section-grid, post-card, single-*, related-posts, pagination)
+- **template-parts/** — UI reusable berbasis konteks:
+  - `sections/` untuk section-level layout (home/archive/shared)
+  - `cards/` untuk komponen card per konteks (`home`, `archive`, `hero`, `lists`, `related`, `shared`)
+  - lihat `docs/TEMPLATE-PARTS-NAMING.md` untuk peta migrasi nama lama -> baru
 - **assets/src/** — Entry Tailwind (`main.css`), sumber JS (`main.js`, `slider.js`)
 - **assets/dist/** — Hasil build CSS/JS; `tokens.css` + `main.css`; di-commit supaya theme jalan tanpa harus run build. Asset slider dan ticker hanya diload saat hero atau breaking-ticker dipakai.
 - **assets/images/** — Gambar template (bukan hasil build). Taruh `jwid_default.png` di sini untuk fallback image saat post tidak punya featured image dan tidak ada gambar di konten.

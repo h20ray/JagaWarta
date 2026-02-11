@@ -1,6 +1,7 @@
 <?php
 /**
- * Card for category/archive/search/author lists. Expects $args['post_id'] or global $post.
+ * Archive/search/author post grid card.
+ * Expects $args['post_id'] or global $post.
  *
  * @package JagaWarta
  */
@@ -10,8 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post_id   = isset( $args['post_id'] ) ? (int) $args['post_id'] : get_the_ID();
-$category  = get_the_category( $post_id );
-$cat       = $category ? $category[0] : null;
 $date_iso  = get_the_date( DATE_W3C, $post_id );
 $date_hr   = function_exists( 'jagawarta_format_date' ) ? jagawarta_format_date( $post_id ) : get_the_date( '', $post_id );
 $author_id = (int) get_post_field( 'post_author', $post_id );
@@ -21,11 +20,6 @@ $author    = $author_id ? get_the_author_meta( 'display_name', $author_id ) : ''
 	<a href="<?php the_permalink(); ?>" class="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-md" aria-label="<?php the_title_attribute(); ?>">
 		<div class="overflow-hidden rounded-t-md aspect-video bg-surface-low shrink-0 jw-media-wrap">
 			<?php jagawarta_the_post_display_image( $post_id, array( 'lcp' => false, 'class' => 'h-full w-full object-cover transition-transform duration-short ease-in group-hover:scale-105' ) ); ?>
-			<?php if ( $cat ) : ?>
-				<div class="jw-chip-overlay">
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
-				</div>
-			<?php endif; ?>
 		</div>
 
 		<div class="relative flex flex-col flex-grow px-spacing-10 pt-spacing-10 pb-spacing-10">

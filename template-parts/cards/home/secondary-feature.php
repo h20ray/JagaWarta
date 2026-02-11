@@ -1,6 +1,7 @@
 <?php
 /**
- * Bento medium card (home top split). Expects $args['post_id'].
+ * Home secondary feature card used in the right column of the featured section.
+ * Expects $args['post_id'].
  *
  * @package JagaWarta
  */

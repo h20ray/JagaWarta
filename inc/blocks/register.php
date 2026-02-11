@@ -65,7 +65,7 @@ function render_section_grid( array $attributes, string $content, WP_Block $bloc
 		return '';
 	}
 	ob_start();
-	get_template_part( 'template-parts/section-grid', null, array( 'category' => $cat, 'post_ids' => $post_ids ) );
+	get_template_part( 'template-parts/sections/shared/category-post-grid', null, array( 'category' => $cat, 'post_ids' => $post_ids ) );
 	return ob_get_clean();
 }
 

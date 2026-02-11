@@ -1,6 +1,6 @@
 <?php
 /**
- * Hero Featured (single post, no slider)
+ * Home single featured story section (no slider).
  * Expects: $args['post_id'] (int)
  *
  * @package JagaWarta

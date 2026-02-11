@@ -54,7 +54,7 @@ endif; ?>
 		$more_ids[] = get_the_ID();
 	}
 	if (!empty($more_ids)) {
-		get_template_part('template-parts/category-3up', null, array('post_ids' => $more_ids));
+		get_template_part('template-parts/sections/archive/featured-three-column', null, array('post_ids' => $more_ids));
 	}
 ?>
 
@@ -70,7 +70,7 @@ endif; ?>
 	while (have_posts()) {
 		the_post();
 ?>
-				<li class="flex h-full"><?php get_template_part('template-parts/cards/card-categories'); ?></li>
+				<li class="flex h-full"><?php get_template_part('template-parts/cards/archive/post-grid-item'); ?></li>
 				<?php
 	}
 ?>

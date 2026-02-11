@@ -10,8 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post_id  = get_the_ID();
-$category = get_the_category( $post_id );
-$cat      = $category ? $category[0] : null;
 ?>
 <section class="group w-full">
 	<a href="<?php the_permalink(); ?>" class="flex flex-col md:grid md:grid-cols-12 md:gap-spacing-6 items-stretch group">
@@ -24,11 +22,6 @@ $cat      = $category ? $category[0] : null;
 				) );
 				?>
 			</div>
-			<?php if ( $cat ) : ?>
-				<div class="jw-chip-overlay">
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
-				</div>
-			<?php endif; ?>
 		</div>
 
 		<div class="md:col-span-4 flex flex-col relative mt-spacing-6 md:mt-0 order-2 md:order-2 min-h-0">

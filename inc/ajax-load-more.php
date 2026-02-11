@@ -39,11 +39,11 @@ function jagawarta_load_more_posts()
 			$query->the_post();
 			if ($is_archive) {
 				echo '<li class="flex h-full">';
-				get_template_part('template-parts/cards/card-categories');
+				get_template_part('template-parts/cards/archive/post-grid-item');
 				echo '</li>';
 			}
 			else {
-				get_template_part('template-parts/cards/card-list-item', null, array('index' => $index));
+				get_template_part('template-parts/cards/lists/ranked-post-item', null, array('index' => $index));
 			}
 			$index++;
 		}

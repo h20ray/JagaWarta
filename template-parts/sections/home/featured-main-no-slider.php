@@ -1,6 +1,6 @@
 <?php
 /**
- * Home hero featured (no slider).
+ * Home featured main area rendered as non-slider hero stack.
  * Expects: $args['ids'] = array<int> post IDs.
  *
  * Delegates to `template-parts/hero/hero-slider` in non-slider mode

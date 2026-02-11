@@ -1,6 +1,6 @@
 <?php
 /**
- * First Grid / Latest Stories
+ * Home latest stories grid section.
  * Expects:
  * - $args['title'] string
  * - $args['ids'] array<int>
@@ -17,10 +17,10 @@ if (empty($ids)) {
 	return;
 }
 ?>
-<section class="bg-surface" aria-labelledby="first-grid-heading">
+<section class="bg-surface" aria-labelledby="latest-stories-heading">
 	<div class="mx-auto max-w-screen-xl px-4 pb-8">
 		<div class="flex items-end justify-between">
-			<h2 id="first-grid-heading" class="text-title-large text-on-surface">
+			<h2 id="latest-stories-heading" class="text-title-large text-on-surface">
 				<?php echo esc_html($title); ?>
 			</h2>
 
@@ -33,7 +33,7 @@ if (empty($ids)) {
 
 		<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			<?php foreach ($ids as $post_id): ?>
-				<?php get_template_part('template-parts/cards/card-default', null, array('post_id' => $post_id)); ?>
+				<?php get_template_part('template-parts/cards/shared/post-default', null, array('post_id' => $post_id)); ?>
 			<?php
 endforeach; ?>
 		</div>

@@ -1,6 +1,8 @@
 <?php
 /**
- * Top Featured Section (no slider).
+ * Home featured section:
+ * - main area uses non-slider featured stack
+ * - side area shows overlay feature cards.
  *
  * Expects: $args['slider_ids'] = array<int>, $args['side_ids'] = array<int> (2 posts)
  *
@@ -17,16 +19,16 @@ $side_ids   = isset( $args['side_ids'] ) ? array_map( 'intval', (array) $args['s
 	<div class="mx-auto max-w-screen-xl px-4 py-6">
 		<div class="grid gap-4 lg:grid-cols-[2fr,1fr]">
 			<div>
-				<?php get_template_part( 'template-parts/home/hero-slider', null, array( 'ids' => $slider_ids ) ); ?>
+				<?php get_template_part( 'template-parts/sections/home/featured-main-no-slider', null, array( 'ids' => $slider_ids ) ); ?>
 			</div>
 
 			<div class="grid gap-4 lg:grid-rows-2">
 				<?php if ( ! empty( $side_ids[0] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/card-compact-overlay', null, array( 'post_id' => $side_ids[0] ) ); ?>
+					<?php get_template_part( 'template-parts/cards/home/side-overlay-feature', null, array( 'post_id' => $side_ids[0] ) ); ?>
 				<?php endif; ?>
 
 				<?php if ( ! empty( $side_ids[1] ) ) : ?>
-					<?php get_template_part( 'template-parts/cards/card-compact-overlay', null, array( 'post_id' => $side_ids[1] ) ); ?>
+					<?php get_template_part( 'template-parts/cards/home/side-overlay-feature', null, array( 'post_id' => $side_ids[1] ) ); ?>
 				<?php endif; ?>
 			</div>
 		</div>

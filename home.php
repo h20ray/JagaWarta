@@ -29,7 +29,7 @@ endif; ?>
 	$index = 1;
 	while (have_posts()) {
 		the_post();
-		get_template_part('template-parts/cards/card-list-item', null, array('index' => $index));
+		get_template_part('template-parts/cards/lists/ranked-post-item', null, array('index' => $index));
 		$index++;
 	}
 ?>

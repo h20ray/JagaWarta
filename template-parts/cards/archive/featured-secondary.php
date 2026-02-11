@@ -1,6 +1,7 @@
 <?php
 /**
- * Card used below category hero on archive (3-up section). Expects global $post.
+ * Archive featured-secondary card used in the 3-column featured section.
+ * Expects global $post.
  *
  * @package JagaWarta
  */
@@ -10,8 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $post_id   = get_the_ID();
-$category  = get_the_category( $post_id );
-$cat       = $category ? $category[0] : null;
 
 ?>
 <article <?php post_class( 'group relative flex flex-col h-full min-w-0 overflow-hidden rounded-md bg-surface-low border border-outline-variant shadow-elevation-1 transition-all duration-medium ease-emphasized hover:bg-surface-high hover:shadow-elevation-3' ); ?>>
@@ -33,11 +32,6 @@ $cat       = $category ? $category[0] : null;
 				)
 			);
 			?>
-			<?php if ( $cat ) : ?>
-				<div class="jw-chip-overlay">
-					<?php jagawarta_the_category_chip( $cat, array( 'size' => 'small', 'show_link' => false ) ); ?>
-				</div>
-			<?php endif; ?>
 		</div>
 
 	</a>

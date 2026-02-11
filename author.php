@@ -22,7 +22,7 @@ get_header();
 			while ( have_posts() ) {
 				the_post();
 				?>
-				<li><?php get_template_part( 'template-parts/cards/card-categories' ); ?></li>
+				<li><?php get_template_part( 'template-parts/cards/archive/post-grid-item' ); ?></li>
 				<?php
 			}
 			?>
