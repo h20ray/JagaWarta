@@ -19,15 +19,22 @@ if (!defined('ABSPATH')) {
 				</button>
 				
 				<div id="header-logo" class="flex-shrink-0 z-50 transition-all duration-short absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
-					<?php if (has_custom_logo()): ?>
-						<?php the_custom_logo(); ?>
-					<?php
-else: ?>
-						<a href="<?php echo esc_url(home_url('/')); ?>" class="text-title-large font-medium text-on-surface hover:text-primary focus:outline-none focus:underline whitespace-nowrap" rel="home">
+					<a href="<?php echo esc_url(home_url('/')); ?>" class="group flex items-center gap-3 focus:outline-none" rel="home">
+						<?php
+$logo_url = get_template_directory_uri() . '/assets/images/logo_jwid_color.svg';
+if (has_custom_logo()) {
+	$custom_logo_id = get_theme_mod('custom_logo');
+	$image = wp_get_attachment_image_src($custom_logo_id, 'full');
+	if ($image) {
+		$logo_url = $image[0];
+	}
+}
+?>
+						<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" class="object-contain" style="height: 32px; width: auto; max-width: 200px;">
+						<span class="text-title-large font-medium text-on-surface tracking-tight group-hover:text-primary transition-colors">
 							<?php bloginfo('name'); ?>
-						</a>
-					<?php
-endif; ?>
+						</span>
+					</a>
 				</div>
 
 				<nav id="header-nav" class="hidden md:flex transition-all duration-expand ease-[cubic-bezier(0.2,0.0,0,1.0)] transform translate-x-0" aria-label="<?php esc_attr_e('Primary', 'jagawarta'); ?>">
