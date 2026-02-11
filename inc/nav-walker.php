@@ -28,7 +28,7 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu {
 		$classes[] = 'menu-item-' . $item->ID;
 
 		$has_children = in_array('menu-item-has-children', $classes);
-		$is_current = in_array('current-menu-item', $classes) || in_array('current-menu-ancestor', $classes);
+		$is_current = in_array('current-menu-item', $classes);
 
 		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
 		$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -43,8 +43,8 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu {
 		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-		$active_class = $is_current ? ' font-medium text-primary bg-surface-high border-b-2 border-primary' : '';
-		$link_classes = 'jw-nav-link px-4 py-2 text-title-small font-normal text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . $active_class;
+		$active_class = $is_current ? ' font-medium text-primary bg-surface-high' : '';
+		$link_classes = 'jw-nav-link px-3 py-2 text-label-large font-normal text-on-surface hover:text-primary hover:bg-surface-high rounded-full transition-all duration-short ease-standard inline-block' . $active_class;
 
 		$item_output = isset($args->before) ? $args->before : '';
 		$item_output .= '<a class="' . esc_attr($link_classes) . '"' . $attributes . '>';
@@ -85,7 +85,7 @@ class JagaWarta_Mobile_Nav_Walker extends Walker_Nav_Menu {
 		$classes[] = 'menu-item-' . $item->ID;
 
 		$has_children = in_array('menu-item-has-children', $classes);
-		$is_current = in_array('current-menu-item', $classes) || in_array('current-menu-ancestor', $classes);
+		$is_current = in_array('current-menu-item', $classes);
 
 		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
 		$class_names = $class_names ? ' class="' . esc_attr($class_names) . '"' : '';
@@ -101,7 +101,7 @@ class JagaWarta_Mobile_Nav_Walker extends Walker_Nav_Menu {
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
 		$active_class = $is_current ? ' font-medium text-primary bg-surface-high' : '';
-		$link_classes = 'jw-nav-link font-normal' . $active_class;
+		$link_classes = 'jw-nav-link font-normal rounded-full' . $active_class;
 
 		$item_output = isset($args->before) ? $args->before : '';
 		

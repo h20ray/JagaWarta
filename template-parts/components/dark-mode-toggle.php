@@ -11,7 +11,7 @@ if (!defined('ABSPATH')) {
 ?>
 <button
 	id="dark-mode-toggle"
-	class="dark-mode-toggle h-9 w-9 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary transition-colors"
+	class="dark-mode-toggle h-12 w-12 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-colors"
 	aria-label="<?php esc_attr_e('Switch to dark mode', 'jagawarta'); ?>"
 	type="button"
 >

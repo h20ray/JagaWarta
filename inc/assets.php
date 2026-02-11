@@ -81,6 +81,31 @@ function jagawarta_enqueue_assets(): void
 		);
 	}
 
+	$header_search_js = $dir . '/header-search.js';
+	if (file_exists($header_search_js)) {
+		wp_enqueue_script(
+			'jagawarta-header-search',
+			$uri . '/header-search.js',
+			array(),
+			jagawarta_asset_version($header_search_js),
+			array('strategy' => 'defer')
+		);
+		wp_localize_script('jagawarta-header-search', 'jagawarta_header', array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+		));
+	}
+
+	$header_mega_js = $dir . '/header-mega-menu.js';
+	if (file_exists($header_mega_js)) {
+		wp_enqueue_script(
+			'jagawarta-header-mega-menu',
+			$uri . '/header-mega-menu.js',
+			array(),
+			jagawarta_asset_version($header_mega_js),
+			array('strategy' => 'defer')
+		);
+	}
+
 	if (is_singular('post')) {
 		$toolbar_js = $dir . '/article-toolbar.js';
 		if (file_exists($toolbar_js)) {

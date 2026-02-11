@@ -225,6 +225,21 @@
     overflow: hidden;
   }
 
+  .jw-search-scrim {
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: color-mix(in srgb, var(--md-color-scrim) 40%, transparent);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
+  }
+
+  .jw-search-scrim.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
   .jw-nav-scrim {
     position: fixed;
     inset: 0;
@@ -232,7 +247,7 @@
     background: color-mix(in srgb, var(--md-color-scrim) 40%, transparent);
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+    transition: opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
   }
 
   .jw-nav-scrim.is-open {
@@ -241,14 +256,14 @@
   }
 
   .jw-mobile-nav-panel {
-    @apply absolute top-full left-0 right-0 bg-surface shadow-elevation-3 border-t border-outline-variant;
+    @apply absolute top-full left-0 right-0 bg-surface-high shadow-elevation-3 border-t border-outline-variant;
     z-index: 50;
     opacity: 0;
     transform: translateY(-8px);
     pointer-events: none;
     transition:
-      opacity var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard),
-      transform var(--md-sys-motion-duration-short) var(--md-sys-motion-easing-standard);
+      opacity var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard),
+      transform var(--md-sys-motion-duration-medium) var(--md-sys-motion-easing-standard);
   }
 
   .jw-mobile-nav-panel.is-open {
@@ -266,10 +281,11 @@
   }
 
   .jw-mobile-submenu-toggle {
-    @apply flex items-center justify-between w-full text-left;
-    @apply bg-transparent border-none p-0 cursor-pointer;
+    @apply flex items-center justify-between w-full text-left rounded-full px-3 py-3;
+    @apply bg-transparent border-none cursor-pointer;
     @apply text-title-small text-on-surface transition-colors duration-short ease-standard;
     @apply hover:bg-surface-high hover:text-primary;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 
   .jw-mobile-submenu {
@@ -294,17 +310,18 @@
   }
 
   .jw-nav-link {
-    @apply block rounded-lg px-4 py-3 text-title-small font-normal text-on-surface transition-colors duration-short ease-standard hover:bg-surface-high hover:text-primary;
+    @apply block rounded-full px-3 py-3 text-label-large font-normal text-on-surface transition-colors duration-short ease-standard hover:bg-surface-high hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 
   @screen md {
     .jw-nav-link {
-      @apply px-4 py-2;
+      @apply px-3 py-2;
     }
   }
 
-  .jw-nav-menu .current-menu-item .jw-nav-link {
-    @apply font-medium text-primary bg-surface-high border-b-2 border-primary;
+  .jw-nav-menu .current-menu-item .jw-nav-link,
+  .jw-nav-menu .current-menu-item .jw-mobile-submenu-toggle {
+    @apply font-medium text-primary bg-surface-high;
   }
 
   .jw-nav-chevron {
@@ -321,7 +338,7 @@
   }
 
   .jw-mega-menu {
-    @apply absolute top-full left-0 bg-surface-low shadow-elevation-3 rounded-md opacity-0 pointer-events-none;
+    @apply absolute top-full left-0 bg-surface-high shadow-elevation-3 rounded-lg opacity-0 pointer-events-none;
     min-width: 240px;
     max-width: 600px;
     padding-top: var(--md-sys-spacing-2);
@@ -348,12 +365,12 @@
 
   .jw-mega-menu .jw-nav-link {
     @apply block px-4 py-2 text-body-medium font-normal text-on-surface rounded-md;
-    @apply hover:bg-surface-mid hover:text-primary;
+    @apply hover:bg-surface-high hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
     white-space: nowrap;
   }
 
   .jw-mega-menu .current-menu-item .jw-nav-link {
-    @apply font-medium text-primary bg-surface-mid;
+    @apply font-medium text-primary bg-surface-high;
   }
 
   .jw-card {
