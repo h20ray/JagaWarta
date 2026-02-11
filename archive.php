@@ -16,7 +16,7 @@ set_query_var('breadcrumb_context', 'archive');
 ?>
 
 <main id="main" class="jw-archive site-main layout-content max-w-page-max flex flex-col text-on-surface">
-	<?php get_template_part('template-parts/breadcrumb'); ?>
+	<?php jagawarta_part('template-parts/breadcrumb'); ?>
 	<header class="jw-archive-header flex flex-col max-w-content-max pt-0">
 		<div class="mb-spacing-2">
 			<?php the_archive_title('<h1 class="jw-archive-title tracking-tight text-on-surface">', '</h1>'); ?>
@@ -42,7 +42,7 @@ endif; ?>
 		the_post(); // Hero
 ?>
 			<div class="mb-spacing-10">
-				<?php get_template_part('template-parts/hero/hero-category'); ?>
+				<?php jagawarta_part('template-parts/hero/hero-category'); ?>
 			</div>
 			<?php
 	}
@@ -54,7 +54,7 @@ endif; ?>
 		$more_ids[] = get_the_ID();
 	}
 	if (!empty($more_ids)) {
-		get_template_part('template-parts/sections/archive/featured-three-column', null, array('post_ids' => $more_ids));
+		jagawarta_part('template-parts/sections/archive/featured-three-column', null, array('post_ids' => $more_ids));
 	}
 ?>
 
@@ -70,18 +70,18 @@ endif; ?>
 	while (have_posts()) {
 		the_post();
 ?>
-				<li class="flex h-full"><?php get_template_part('template-parts/cards/archive/post-grid-item'); ?></li>
+				<li class="flex h-full"><?php jagawarta_part('template-parts/cards/archive/post-grid-item'); ?></li>
 				<?php
 	}
 ?>
 		</ul>
 
-		<?php get_template_part('template-parts/pagination'); ?>
+		<?php jagawarta_part('template-parts/pagination'); ?>
 
 
 	<?php
 else: ?>
-		<?php get_template_part('template-parts/content', 'none'); ?>
+		<?php jagawarta_part('template-parts/content', 'none'); ?>
 	<?php
 endif; ?>
 </main>

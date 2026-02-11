@@ -22,14 +22,14 @@ get_header();
 			while ( have_posts() ) {
 				the_post();
 				?>
-				<li><?php get_template_part( 'template-parts/cards/archive/post-grid-item' ); ?></li>
+				<li><?php jagawarta_part( 'template-parts/cards/archive/post-grid-item' ); ?></li>
 				<?php
 			}
 			?>
 		</ul>
-		<?php get_template_part( 'template-parts/pagination' ); ?>
+		<?php jagawarta_part( 'template-parts/pagination' ); ?>
 	<?php else : ?>
-		<?php get_template_part( 'template-parts/content', 'none' ); ?>
+		<?php jagawarta_part( 'template-parts/content', 'none' ); ?>
 	<?php endif; ?>
 </main>
 

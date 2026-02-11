@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<?php get_template_part( 'template-parts/newsletter-slot', null, array( 'slot' => 'footer' ) ); ?>
+<?php jagawarta_part( 'template-parts/newsletter-slot', null, array( 'slot' => 'footer' ) ); ?>
 <footer class="border-t border-outline-variant bg-surface-container-highest mt-spacing-12" role="contentinfo">
 	<div class="layout-content py-spacing-16">
 		<!-- Footer Grid -->

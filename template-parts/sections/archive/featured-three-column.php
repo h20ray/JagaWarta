@@ -27,7 +27,7 @@ $featured_query = new WP_Query( array(
 <section aria-label="<?php esc_attr_e( 'Featured stories', 'jagawarta' ); ?>" class="layout-content w-full pt-spacing-16 pb-spacing-8">
 	<div class="grid grid-cols-1 md:grid-cols-3 gap-spacing-6">
 		<?php while ( $featured_query->have_posts() ) : $featured_query->the_post(); ?>
-			<?php get_template_part( 'template-parts/cards/archive/featured-secondary' ); ?>
+			<?php jagawarta_part( 'template-parts/cards/archive/featured-secondary' ); ?>
 		<?php endwhile; wp_reset_postdata(); ?>
 	</div>
 </section>

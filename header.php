@@ -19,4 +19,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <a class="skip-link screen-reader-text" href="#main"><?php esc_html_e( 'Skip to content', 'jagawarta' ); ?></a>
-<?php get_template_part( 'template-parts/header' ); ?>
+<?php jagawarta_part( 'template-parts/header' ); ?>

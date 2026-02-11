@@ -20,7 +20,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 ?>
 <header class="pt-spacing-12 pb-spacing-10 px-spacing-4">
 	<div class="mx-auto max-w-page-max">
-		<?php get_template_part( 'template-parts/breadcrumb' ); ?>
+		<?php jagawarta_part( 'template-parts/breadcrumb' ); ?>
 
 		<h1 class="layout-article-inner jw-article-title font-normal text-on-surface mb-spacing-4 tracking-tight">
 			<?php echo esc_html( $title ); ?>
@@ -88,7 +88,7 @@ $read_time  = jagawarta_read_time_label( $post_id );
 					</span>
 				<?php endif; ?>
 
-				<?php get_template_part( 'template-parts/share-button' ); ?>
+				<?php jagawarta_part( 'template-parts/share-button' ); ?>
 			</div>
 		</div>
 	</div>

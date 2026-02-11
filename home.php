@@ -17,7 +17,7 @@ $breaking_ids = (is_front_page() && $ticker_on) ? jagawarta_get_breaking_posts($
 
 <main id="main" class="site-main layout-content layout-section flex flex-col gap-10">
 	<?php if (!empty($breaking_ids)): ?>
-		<?php get_template_part('template-parts/breaking-ticker', null, array('post_ids' => $breaking_ids)); ?>
+		<?php jagawarta_part('template-parts/breaking-ticker', null, array('post_ids' => $breaking_ids)); ?>
 	<?php
 endif; ?>
 	<header class="pb-4 border-b border-outline-variant mb-2">
@@ -29,20 +29,20 @@ endif; ?>
 	$index = 1;
 	while (have_posts()) {
 		the_post();
-		get_template_part('template-parts/cards/lists/ranked-post-item', null, array('index' => $index));
+		jagawarta_part('template-parts/cards/lists/ranked-post-item', null, array('index' => $index));
 		$index++;
 	}
 ?>
 		</ol>
 		<?php
 	global $wp_query;
-	get_template_part('template-parts/pagination', null, array(
+	jagawarta_part('template-parts/pagination', null, array(
 		'total_posts' => (int)$wp_query->found_posts,
 	));
 ?>
 	<?php
 else: ?>
-		<?php get_template_part('template-parts/content', 'none'); ?>
+		<?php jagawarta_part('template-parts/content', 'none'); ?>
 	<?php
 endif; ?>
 </main>

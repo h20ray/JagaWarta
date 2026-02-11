@@ -10,7 +10,9 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-define('JAGAWARTA_VERSION', '1.0.0');
+$theme = wp_get_theme();
+$theme_version = (string)$theme->get('Version');
+define('JAGAWARTA_VERSION', $theme_version !== '' ? $theme_version : '1.0.1');
 define('JAGAWARTA_DIR', get_template_directory());
 define('JAGAWARTA_URI', get_template_directory_uri());
 

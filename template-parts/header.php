@@ -80,7 +80,7 @@ else {
 					</div>
 				</div>
 				<div class="flex items-center">
-					<?php get_template_part('template-parts/components/dark-mode-toggle'); ?>
+					<?php jagawarta_part('template-parts/components/dark-mode-toggle'); ?>
 				</div>
 			</div>
 		</div>

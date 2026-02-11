@@ -33,7 +33,7 @@ if (empty($ids)) {
 
 		<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			<?php foreach ($ids as $post_id): ?>
-				<?php get_template_part('template-parts/cards/shared/post-default', null, array('post_id' => $post_id)); ?>
+				<?php jagawarta_part('template-parts/cards/shared/post-default', null, array('post_id' => $post_id)); ?>
 			<?php
 endforeach; ?>
 		</div>

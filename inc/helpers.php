@@ -9,6 +9,17 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+/**
+ * Theme wrapper for template partial loading.
+ *
+ * Keep this as the single include API so we can evolve
+ * loading rules without touching every template callsite.
+ */
+function jagawarta_part(string $slug, ?string $name = null, array $args = array()): void
+{
+	get_template_part($slug, $name, $args);
+}
+
 function jagawarta_excerpt_length(int $length = 25): int
 {
 	return (int)apply_filters('jagawarta_excerpt_length', $length);

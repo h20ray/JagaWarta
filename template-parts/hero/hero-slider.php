@@ -54,7 +54,7 @@ if ($slider):
 		endif; ?>
 						>
 							<?php
-		get_template_part(
+		jagawarta_part(
 			'template-parts/cards/hero/slider-overlay',
 			null,
 			array(
@@ -108,7 +108,7 @@ else:
 	$post = get_post($first_id);
 	if ($post) {
 		setup_postdata($post);
-		get_template_part('template-parts/cards/hero/lead-story');
+		jagawarta_part('template-parts/cards/hero/lead-story');
 		wp_reset_postdata();
 	}
 ?>
@@ -123,7 +123,7 @@ else:
 			}
 			setup_postdata($post);
 ?>
-					<div><?php get_template_part('template-parts/cards/archive/post-grid-item', null, array('post_id' => $pid)); ?></div>
+					<div><?php jagawarta_part('template-parts/cards/archive/post-grid-item', null, array('post_id' => $pid)); ?></div>
 					<?php
 			wp_reset_postdata();
 		}

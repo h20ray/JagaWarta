@@ -19,7 +19,7 @@ if ( empty( $ids ) ) {
 	return;
 }
 
-get_template_part(
+jagawarta_part(
 	'template-parts/hero/hero-slider',
 	null,
 	array(
