@@ -121,7 +121,7 @@ $primary_id = (int) $slider_ids[0];
 				<?php endif; ?>
 			</div>
 
-			<div class="jw-top-split-side flex flex-col gap-4 lg:col-span-4">
+			<div class="jw-top-split-side flex flex-col gap-spacing-5 lg:col-span-4">
 				<?php foreach ( $side_ids as $side_id ) : ?>
 					<?php get_template_part( 'template-parts/cards/card-bento', null, array( 'post_id' => $side_id ) ); ?>
 				<?php endforeach; ?>

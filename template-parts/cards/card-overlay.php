@@ -65,11 +65,11 @@ endif; ?>
 
 			<div class="absolute inset-0 flex items-end">
 				<div class="jw-hero-content w-full min-h-32 p-spacing-4 sm:min-h-40 sm:p-spacing-6 lg:min-h-48 lg:p-spacing-8<?php echo $has_long_content ? ' jw-hero-content--flexible' : ''; ?>">
-					<h2 class="jw-hero-title mt-spacing-2 max-w-3xl text-on-surface">
+					<h2 class="jw-hero-title mt-spacing-2 max-w-3xl text-on-primary-container">
 						<?php echo esc_html($title); ?>
 					</h2>
 
-					<div class="jw-hero-meta mt-spacing-2 flex flex-wrap items-center gap-x-spacing-3 gap-y-spacing-1 text-on-surface-variant">
+					<div class="jw-hero-meta mt-spacing-2 flex flex-wrap items-center gap-x-spacing-3 gap-y-spacing-1 text-on-primary-container">
 						<time datetime="<?php echo esc_attr($date_iso); ?>"><?php echo esc_html($date_human); ?></time>
 						<?php if ($read_time): ?>
 							<span aria-hidden="true">•</span>

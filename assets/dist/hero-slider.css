@@ -10,8 +10,19 @@
   border-radius: var(--md-sys-shape-corner-large);
   background: var(--md-color-surface-container-low);
   /* Force dark mode context for the slider internal content */
-  --md-color-on-surface: var(--md-ref-palette-neutral-98);
-  --md-color-on-surface-variant: var(--md-ref-palette-neutral-variant-90);
+  --md-color-on-surface: 255 255 255 !important;
+  /* white */
+  --md-color-on-surface-variant: 230 230 230 !important;
+  /* light gray */
+  --md-color-primary-container: 255 255 255 !important;
+  --md-color-on-primary-container: 255 255 255 !important;
+  color: white !important;
+}
+
+/* Explicitly force white on the specific text classes used in the slider */
+.jw-hero-slider .text-on-primary-container,
+.jw-hero-slider .text-on-surface {
+  color: white !important;
 }
 
 .jw-hero-slider__viewport {
@@ -121,8 +132,13 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0.9;
+  opacity: 0;
   transition: all 0.3s ease-out;
+}
+
+.jw-hero-slider:hover .jw-hero-slider__arrow,
+.jw-hero-slider:focus-within .jw-hero-slider__arrow {
+  opacity: 0.9;
 }
 
 .jw-hero-slider__arrow svg {
@@ -139,6 +155,7 @@
 }
 
 .jw-hero-slider__arrow:focus-visible {
+  opacity: 1;
   outline: 2px solid var(--md-color-primary);
   outline-offset: 2px;
 }
