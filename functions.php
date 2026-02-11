@@ -25,6 +25,7 @@ require_once JAGAWARTA_DIR . '/inc/customizer.php';
 require_once JAGAWARTA_DIR . '/inc/dark-mode.php';
 require_once JAGAWARTA_DIR . '/inc/ajax-search.php';
 require_once JAGAWARTA_DIR . '/inc/ajax-load-more.php';
+require_once JAGAWARTA_DIR . '/inc/nav-walker.php';
 
 add_action('after_setup_theme', 'jagawarta_setup');
 function jagawarta_setup()

@@ -102,4 +102,27 @@
       }
     });
   }
+
+  const submenuToggles = menu.querySelectorAll('.jw-mobile-submenu-toggle');
+  submenuToggles.forEach((toggle) => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      const submenuId = toggle.getAttribute('aria-controls');
+      const submenu = document.getElementById(submenuId);
+
+      if (submenu) {
+        toggle.setAttribute('aria-expanded', String(!isExpanded));
+        if (!isExpanded) {
+          submenu.removeAttribute('hidden');
+          submenu.style.maxHeight = submenu.scrollHeight + 'px';
+        } else {
+          submenu.style.maxHeight = '0';
+          setTimeout(() => {
+            submenu.setAttribute('hidden', '');
+          }, 300);
+        }
+      }
+    });
+  });
 })();

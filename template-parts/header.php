@@ -31,7 +31,7 @@ if (has_custom_logo()) {
 }
 ?>
 						<img src="<?php echo esc_url($logo_url); ?>" alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>" class="object-contain" style="height: 32px; width: auto; max-width: 200px;">
-						<span class="text-title-large font-medium text-on-surface tracking-tight group-hover:text-primary transition-colors">
+						<span class="text-title-large font-normal text-on-surface-variant tracking-tight group-hover:text-primary transition-colors">
 							<?php bloginfo('name'); ?>
 						</span>
 					</a>
@@ -45,19 +45,20 @@ if (has_nav_menu('primary')) {
 		'theme_location' => 'primary',
 		'container' => false,
 		'items_wrap' => '%3$s',
-		'depth' => 1,
-		'link_before' => '<span class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block">',
-		'link_after' => '</span>',
+		'depth' => 0,
+		'walker' => new JagaWarta_Nav_Walker(),
 	));
 }
 else {
 	$categories = get_categories(array('number' => 5, 'orderby' => 'count', 'order' => 'DESC'));
 	$is_front = is_front_page();
 	if ($categories) {
-		echo '<li><a href="' . esc_url(home_url('/')) . '" class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ($is_front ? ' font-semibold text-primary bg-surface-high' : '') . '">' . esc_html__('Home', 'jagawarta') . '</a></li>';
+		$active_class = $is_front ? ' font-medium text-primary bg-surface-high border-b-2 border-primary' : '';
+		echo '<li><a href="' . esc_url(home_url('/')) . '" class="jw-nav-link px-4 py-2 text-title-small font-normal text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . $active_class . '">' . esc_html__('Home', 'jagawarta') . '</a></li>';
 		foreach ($categories as $cat) {
 			$active = is_category($cat->term_id);
-			echo '<li><a href="' . esc_url(get_category_link($cat->term_id)) . '" class="jw-nav-link px-4 py-2 text-title-small text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . ($active ? ' font-semibold text-primary bg-surface-high' : '') . '">' . esc_html($cat->name) . '</a></li>';
+			$active_class = $active ? ' font-medium text-primary bg-surface-high border-b-2 border-primary' : '';
+			echo '<li><a href="' . esc_url(get_category_link($cat->term_id)) . '" class="jw-nav-link px-4 py-2 text-title-small font-normal text-on-surface hover:text-primary hover:bg-surface-high rounded-lg transition-all duration-short ease-standard inline-block' . $active_class . '">' . esc_html($cat->name) . '</a></li>';
 		}
 	}
 }
@@ -102,19 +103,20 @@ if (has_nav_menu('primary')) {
 		'theme_location' => 'primary',
 		'container' => false,
 		'items_wrap' => '%3$s',
-		'depth' => 1,
-		'link_before' => '<span class="jw-nav-link">',
-		'link_after' => '</span>',
+		'depth' => 0,
+		'walker' => new JagaWarta_Mobile_Nav_Walker(),
 	));
 }
 else {
 	$categories = get_categories(array('number' => 8, 'orderby' => 'count', 'order' => 'DESC'));
 	$is_front = is_front_page();
 	if ($categories) {
-		echo '<li role="none"><a role="menuitem" href="' . esc_url(home_url('/')) . '" class="jw-nav-link' . ($is_front ? ' font-semibold text-primary bg-surface-high' : '') . '">' . esc_html__('Home', 'jagawarta') . '</a></li>';
+		$active_class = $is_front ? ' font-medium text-primary bg-surface-high' : '';
+		echo '<li role="none"><a role="menuitem" href="' . esc_url(home_url('/')) . '" class="jw-nav-link font-normal' . $active_class . '">' . esc_html__('Home', 'jagawarta') . '</a></li>';
 		foreach ($categories as $cat) {
 			$active = is_category($cat->term_id);
-			echo '<li role="none"><a role="menuitem" href="' . esc_url(get_category_link($cat->term_id)) . '" class="jw-nav-link' . ($active ? ' font-semibold text-primary bg-surface-high' : '') . '">' . esc_html($cat->name) . '</a></li>';
+			$active_class = $active ? ' font-medium text-primary bg-surface-high' : '';
+			echo '<li role="none"><a role="menuitem" href="' . esc_url(get_category_link($cat->term_id)) . '" class="jw-nav-link font-normal' . $active_class . '">' . esc_html($cat->name) . '</a></li>';
 		}
 	}
 }
@@ -332,6 +334,80 @@ else {
 			searchInput.addEventListener('input', function(e) {
 				clearTimeout(debounceTimer);
 				debounceTimer = setTimeout(() => performSearch(e.target.value), 300);
+			});
+		})();
+
+		(function() {
+			const navMenu = document.querySelector('#header-nav .jw-nav-menu');
+			if (!navMenu) return;
+
+			const menuItems = navMenu.querySelectorAll('.menu-item-has-children');
+			let openItem = null;
+
+			function closeMegaMenu() {
+				if (openItem) {
+					openItem.classList.remove('is-open');
+					openItem.querySelector('a').setAttribute('aria-expanded', 'false');
+					openItem = null;
+				}
+			}
+
+			function openMegaMenu(item) {
+				closeMegaMenu();
+				item.classList.add('is-open');
+				item.querySelector('a').setAttribute('aria-expanded', 'true');
+				openItem = item;
+			}
+
+			menuItems.forEach(item => {
+				const link = item.querySelector('a');
+				if (!link) return;
+
+				link.setAttribute('aria-expanded', 'false');
+				link.setAttribute('aria-haspopup', 'true');
+
+				link.addEventListener('mouseenter', () => {
+					openMegaMenu(item);
+				});
+
+				item.addEventListener('mouseleave', () => {
+					closeMegaMenu();
+				});
+
+				link.addEventListener('click', () => {
+					closeMegaMenu();
+				});
+
+				link.addEventListener('keydown', (e) => {
+					if (e.key === 'Enter' || e.key === ' ') {
+						e.preventDefault();
+						if (item.classList.contains('is-open')) {
+							closeMegaMenu();
+						} else {
+							openMegaMenu(item);
+						}
+					} else if (e.key === 'Escape') {
+						closeMegaMenu();
+						link.focus();
+					} else if (e.key === 'ArrowDown') {
+						e.preventDefault();
+						openMegaMenu(item);
+						const firstSubItem = item.querySelector('.jw-mega-menu a');
+						if (firstSubItem) firstSubItem.focus();
+					}
+				});
+			});
+
+			document.addEventListener('click', (e) => {
+				if (!navMenu.contains(e.target)) {
+					closeMegaMenu();
+				}
+			});
+
+			document.addEventListener('keydown', (e) => {
+				if (e.key === 'Escape' && openItem) {
+					closeMegaMenu();
+				}
 			});
 		})();
 	</script>
