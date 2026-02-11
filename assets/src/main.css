@@ -99,9 +99,22 @@
   }
 
   .btn {
-    @apply rounded-sm px-3 py-1.5 text-label-large font-medium border border-outline-variant bg-surface-high text-on-surface;
-    @apply hover:bg-surface-mid transition-colors duration-short ease-standard;
+    @apply inline-flex items-center justify-center rounded-full px-6 py-2.5 text-label-large font-medium transition-all duration-short ease-standard;
     @apply focus-visible:outline-2 focus-visible:outline focus-visible:outline-primary focus-visible:outline-offset-2;
+    @apply disabled:pointer-events-none;
+    height: 40px;
+    min-width: 64px;
+    opacity: 1;
+  }
+
+  .btn:disabled {
+    opacity: var(--md-sys-disabled-opacity);
+  }
+
+
+  .btn-tonal {
+    @apply btn bg-secondary-container text-on-secondary-container;
+    @apply hover:shadow-elevation-1;
   }
 
   .btn-filled {
@@ -710,5 +723,21 @@
     .hero-image-wrap {
       max-height: min(var(--md-sys-layout-hero-max-height), var(--md-sys-spacing-28));
     }
+  }
+}
+  .btn:active {
+    @apply scale-95;
+  }
+
+  .btn.loading {
+    @apply opacity-80 cursor-wait;
+  }
+
+  .jw-end-message {
+    @apply hidden opacity-0 transition-opacity duration-medium;
+  }
+
+  .jw-end-message.is-visible {
+    @apply block opacity-100;
   }
 }

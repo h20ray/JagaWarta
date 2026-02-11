@@ -5,36 +5,42 @@
  * @package JagaWarta
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit;
 }
 
-function jagawarta_load_more_posts() {
-	check_ajax_referer( 'jagawarta_nonce', 'nonce' );
+function jagawarta_load_more_posts()
+{
+	check_ajax_referer('jagawarta_nonce', 'nonce');
 
-	$page    = isset( $_POST['page'] ) ? absint( $_POST['page'] ) : 1;
-	$archive = isset( $_POST['archive'] ) ? json_decode( stripslashes( $_POST['archive'] ), true ) : array();
+	$page = isset($_POST['page']) ? absint($_POST['page']) : 2;
+	$archive = isset($_POST['archive']) ? json_decode(stripslashes($_POST['archive']), true) : array();
 
-	$args = array_merge( $archive, array(
-		'paged'          => $page,
-		'post_status'    => 'publish',
-		'posts_per_page' => 6,
-		'no_found_rows'  => true,
-	) );
+	// Logic: First 20 are loaded by main query. AJAX loads 10 each.
+	$ppp = 10;
+	$offset = 20 + (($page - 2) * $ppp);
 
-	$query = new WP_Query( $args );
+	$args = array_merge($archive, array(
+		'post_type' => 'post',
+		'posts_per_page' => $ppp,
+		'offset' => $offset,
+		'post_status' => 'publish',
+		'no_found_rows' => true,
+	));
 
-	if ( $query->have_posts() ) {
-		while ( $query->have_posts() ) {
+	$query = new WP_Query($args);
+
+	if ($query->have_posts()) {
+		$index = $offset + 1;
+		while ($query->have_posts()) {
 			$query->the_post();
-			echo '<li class="flex h-full">';
-			get_template_part( 'template-parts/cards/card-categories' );
-			echo '</li>';
+			get_template_part('template-parts/cards/card-list-item', null, array('index' => $index));
+			$index++;
 		}
 		wp_reset_postdata();
 	}
 
 	die();
 }
-add_action( 'wp_ajax_jagawarta_load_more', 'jagawarta_load_more_posts' );
-add_action( 'wp_ajax_nopriv_jagawarta_load_more', 'jagawarta_load_more_posts' );
+add_action('wp_ajax_jagawarta_load_more', 'jagawarta_load_more_posts');
+add_action('wp_ajax_nopriv_jagawarta_load_more', 'jagawarta_load_more_posts');

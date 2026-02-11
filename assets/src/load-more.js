@@ -14,13 +14,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const archive = button.dataset.archive;
         const nonce = jagawarta_vars.nonce; // Ensure this is localized
 
-        if (button.classList.contains('loading')) return;
-
-        const initialHtml = button.dataset.initialHtml || button.innerHTML;
+        const initialHtml = button.innerHTML;
         button.classList.add('loading');
         button.setAttribute('aria-busy', 'true');
-        button.innerHTML = 'Loading...';
         button.disabled = true;
+        button.style.width = `${button.offsetWidth}px`; // Maintain width
+        button.innerHTML = '<span class="animate-pulse">Loading...</span>';
 
         const data = new FormData();
         data.append('action', 'jagawarta_load_more');
@@ -48,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         button.setAttribute('aria-busy', 'false');
                         button.innerHTML = initialHtml;
                         button.disabled = false;
+                        button.style.width = ''; // Reset width
                     }
                 } else {
                     button.remove();
@@ -58,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 button.setAttribute('aria-busy', 'false');
                 button.innerHTML = initialHtml;
                 button.disabled = false;
+                button.style.width = ''; // Reset width
             });
     });
 });

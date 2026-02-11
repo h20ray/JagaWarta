@@ -88,7 +88,7 @@ function jagawarta_enqueue_assets(): void
 		jagawarta_enqueue_ticker($dir, $uri);
 	}
 
-	if (is_archive()) {
+	if (is_archive() || is_home()) {
 		$load_more_js = $dir . '/load-more.js';
 		if (file_exists($load_more_js)) {
 			wp_enqueue_script(
