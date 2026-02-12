@@ -33,7 +33,7 @@
   .jw-chip-overlay {
     position: absolute;
     top: var(--md-sys-spacing-2);
-    left: var(--md-sys-spacing-2);
+    right: var(--md-sys-spacing-2);
     z-index: 2;
   }
 
@@ -50,21 +50,35 @@
   }
 
   .jw-chip--sm {
+    height: 24px;
+    padding: 0 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--md {
+    height: 28px;
+    padding: 0 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--lg {
     height: 32px;
     padding: 0 12px;
     letter-spacing: 0.02em;
   }
 
-  .jw-chip--md {
-    height: 36px;
-    padding: 0 14px;
-    letter-spacing: 0.02em;
+  /* Single Post Excerpt Refinement */
+  .jw-single-excerpt p {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.6;
+    @apply text-on-surface-variant;
   }
 
-  .jw-chip--lg {
-    height: 40px;
-    padding: 0 16px;
-    letter-spacing: 0.02em;
+  @screen md {
+    .jw-single-excerpt p {
+      font-size: var(--md-sys-typescale-body-large-size);
+    }
   }
 
 

@@ -13,13 +13,13 @@ if (!defined('ABSPATH')) {
 <footer class="border-t border-outline-variant bg-surface-container-highest mt-spacing-12" role="contentinfo">
 	<div class="layout-content py-spacing-16">
 		<!-- Footer Grid -->
-		<div class="grid grid-cols-1 md:grid-cols-4 gap-spacing-8 mb-spacing-12">
+		<div class="grid grid-cols-1 md:grid-cols-4 gap-spacing-12 mb-spacing-12">
 			<!-- About -->
 			<div>
 				<h3 class="text-title-medium text-on-surface mb-spacing-4"><?php bloginfo('name'); ?></h3>
 				
-				<div class="mb-spacing-4 flex justify-center">
-					<a href="<?php echo esc_url(home_url('/')); ?>" class="block w-[75%] focus:outline-none">
+				<div class="mb-spacing-4 flex">
+					<a href="<?php echo esc_url(home_url('/')); ?>" class="block w-[60%] md:w-[70%] focus:outline-none">
 						<?php
 $logo_url = get_template_directory_uri() . '/assets/images/logo_jwid_color.svg';
 if (has_custom_logo()) {
@@ -40,7 +40,7 @@ if (has_custom_logo()) {
 			</div>
 
 			<!-- Categories -->
-			<div>
+			<div class="border-t border-outline-variant pt-spacing-6 md:border-t-0 md:pt-0">
 				<h4 class="text-title-small text-on-surface mb-spacing-4"><?php esc_html_e('Categories', 'jagawarta'); ?></h4>
 				<?php
 wp_nav_menu(array(
@@ -64,7 +64,7 @@ wp_nav_menu(array(
 			</div>
 
 			<!-- Quick Links -->
-			<div>
+			<div class="border-t border-outline-variant pt-spacing-6 md:border-t-0 md:pt-0">
 				<h4 class="text-title-small text-on-surface mb-spacing-4"><?php esc_html_e('Quick Links', 'jagawarta'); ?></h4>
 				<?php
 wp_nav_menu(array(
@@ -85,7 +85,7 @@ wp_nav_menu(array(
 			</div>
 
 			<!-- Social / Connect -->
-			<div>
+			<div class="border-t border-outline-variant pt-spacing-6 md:border-t-0 md:pt-0">
 				<h4 class="text-title-small text-on-surface mb-spacing-4"><?php esc_html_e('Connect', 'jagawarta'); ?></h4>
 				<div class="flex gap-spacing-3">
 					<!-- Add social links here when configured -->

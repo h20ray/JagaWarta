@@ -73,9 +73,31 @@
 
   /* MD3 surfaces: page/section=surface, card=surface-low, hero/hover=surface-high */
   .prose-article {
-    @apply max-w-none font-sans text-body-large text-on-surface-variant;
-    font-size: var(--jw-article-font-size, var(--md-sys-typescale-body-large-size));
-    line-height: var(--jw-article-line-height, var(--md-sys-typescale-body-large-line-height));
+    @apply max-w-none font-sans text-on-surface-variant;
+    font-size: 1rem;
+    /* 16px */
+    line-height: 1.7;
+    @apply md:text-body-large;
+  }
+
+  .prose-article p {
+    margin-bottom: 20px;
+  }
+
+  .prose-article h2,
+  .prose-article h3,
+  .prose-article h4 {
+    @apply text-on-surface font-medium tracking-tight;
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+
+  .prose-article h2 {
+    @apply text-headline-small;
+  }
+
+  .prose-article h3 {
+    @apply text-title-large;
   }
 
   .prose-article a {
@@ -98,6 +120,12 @@
   .prose-article figure img,
   .prose-article .wp-block-image img {
     @apply w-full h-auto object-cover;
+  }
+
+  .jw-site-header {
+    @apply border-b border-outline-variant bg-surface-low transition-shadow duration-short ease-standard;
+    box-shadow: 0 1px 3px 0 color-mix(in srgb, var(--md-color-scrim) 5%, transparent),
+      0 1px 2px -1px color-mix(in srgb, var(--md-color-scrim) 5%, transparent);
   }
 
   .btn {
@@ -889,7 +917,7 @@
   .jw-chip-overlay {
     position: absolute;
     top: var(--md-sys-spacing-2);
-    left: var(--md-sys-spacing-2);
+    right: var(--md-sys-spacing-2);
     z-index: 2;
   }
 
@@ -906,21 +934,35 @@
   }
 
   .jw-chip--sm {
+    height: 24px;
+    padding: 0 8px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--md {
+    height: 28px;
+    padding: 0 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .jw-chip--lg {
     height: 32px;
     padding: 0 12px;
     letter-spacing: 0.02em;
   }
 
-  .jw-chip--md {
-    height: 36px;
-    padding: 0 14px;
-    letter-spacing: 0.02em;
+  /* Single Post Excerpt Refinement */
+  .jw-single-excerpt p {
+    font-size: 0.875rem;
+    /* 14px */
+    line-height: 1.6;
+    @apply text-on-surface-variant;
   }
 
-  .jw-chip--lg {
-    height: 40px;
-    padding: 0 16px;
-    letter-spacing: 0.02em;
+  @screen md {
+    .jw-single-excerpt p {
+      font-size: var(--md-sys-typescale-body-large-size);
+    }
   }
 
 

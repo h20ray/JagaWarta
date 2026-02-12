@@ -17,6 +17,7 @@ $author = $author_id ? get_the_author_meta('display_name', $author_id) : '';
 $excerpt = trim(get_the_excerpt($post_id));
 $has_thumb = has_post_thumbnail($post_id);
 $category = get_the_category($post_id);
+$hide_excerpt = isset($args['hide_excerpt']) ? (bool)$args['hide_excerpt'] : false;
 ?>
 <article class="jw-card group">
 	<a href="<?php echo esc_url(get_permalink($post_id)); ?>" class="flex flex-col h-full focus:outline-none focus:ring-2 focus:ring-primary rounded-md" aria-label="<?php echo esc_attr(get_the_title($post_id)); ?>">
@@ -38,7 +39,7 @@ endif; ?>
 				<?php echo esc_html(get_the_title($post_id)); ?>
 			</h3>
 
-			<?php if ($excerpt): ?>
+			<?php if ($excerpt && !$hide_excerpt): ?>
 				<p class="mt-spacing-3 text-body-medium text-on-surface-variant line-clamp-3">
 					<?php echo esc_html($excerpt); ?>
 				</p>

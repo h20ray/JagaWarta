@@ -95,7 +95,16 @@ else {
 			<nav class="jw-mobile-nav-inner" aria-label="<?php esc_attr_e('Mobile', 'jagawarta'); ?>">
 				<ul data-jagawarta-nav-menu class="jw-nav-menu jw-mobile-nav-list" role="menu">
 					<?php
-if (has_nav_menu('primary')) {
+if (has_nav_menu('hamburger')) {
+	wp_nav_menu(array(
+		'theme_location' => 'hamburger',
+		'container' => false,
+		'items_wrap' => '%3$s',
+		'depth' => 0,
+		'walker' => new JagaWarta_Mobile_Nav_Walker(),
+	));
+}
+elseif (has_nav_menu('primary')) {
 	wp_nav_menu(array(
 		'theme_location' => 'primary',
 		'container' => false,
@@ -115,6 +124,15 @@ else {
 			$active_class = $active ? ' font-medium text-primary bg-surface-high' : '';
 			echo '<li role="none"><a role="menuitem" href="' . esc_url(get_category_link($cat->term_id)) . '" class="jw-nav-link font-normal rounded-full' . $active_class . '">' . esc_html($cat->name) . '</a></li>';
 		}
+	}
+	else {
+		wp_page_menu(array(
+			'container' => false,
+			'menu_class' => '',
+			'before' => '',
+			'after' => '',
+			'show_home' => true,
+		));
 	}
 }
 ?>

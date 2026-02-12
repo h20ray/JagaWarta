@@ -17,7 +17,7 @@ if (empty($ids)) {
 	return;
 }
 ?>
-<section class="bg-surface" aria-labelledby="latest-stories-heading">
+<section class="bg-surface mt-12 md:mt-16" aria-labelledby="latest-stories-heading">
 	<div class="mx-auto max-w-screen-xl px-4 pb-8">
 		<div class="flex items-end justify-between">
 			<h2 id="latest-stories-heading" class="text-title-large text-on-surface">
@@ -33,7 +33,10 @@ if (empty($ids)) {
 
 		<div class="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
 			<?php foreach ($ids as $post_id): ?>
-				<?php jagawarta_part('template-parts/cards/shared/post-default', null, array('post_id' => $post_id)); ?>
+				<?php jagawarta_part('template-parts/cards/shared/post-default', null, array(
+		'post_id' => $post_id,
+		'hide_excerpt' => true,
+	)); ?>
 			<?php
 endforeach; ?>
 		</div>

@@ -43,6 +43,7 @@ function jagawarta_setup()
 	));
 	register_nav_menus(array(
 		'primary' => __('Primary', 'jagawarta'),
+		'hamburger' => __('Hamburger Menu', 'jagawarta'),
 		'footer-categories' => __('Footer Categories', 'jagawarta'),
 		'footer-links' => __('Footer Links', 'jagawarta'),
 	));
