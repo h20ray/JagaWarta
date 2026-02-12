@@ -18,7 +18,7 @@ $author_url = get_author_posts_url($author_id);
 $avatar = get_avatar_url($author_id, array('size' => 48));
 $read_time = jagawarta_read_time_label($post_id);
 ?>
-<header class="pt-spacing-12 pb-spacing-10 flex flex-col">
+<header class="pt-spacing-8 md:pt-spacing-12 pb-0 md:pb-spacing-10 flex flex-col">
 	<!-- 1. Title Block -->
 	<div class="mx-auto max-w-page-max w-full px-spacing-4 order-1">
 		<?php jagawarta_part('template-parts/breadcrumb'); ?>
@@ -93,7 +93,7 @@ endif; ?>
 	
 	<!-- 5. Author + Share -->
 	<div class="mx-auto max-w-page-max w-full px-spacing-4 order-5 md:order-3">
-		<div class="layout-article-inner flex flex-col sm:flex-row sm:items-center justify-between gap-y-spacing-6 mb-spacing-10">
+		<div class="layout-article-inner flex flex-col sm:flex-row sm:items-center justify-between gap-y-spacing-6 mb-spacing-4 md:mb-spacing-10">
 			<div class="flex items-center gap-spacing-3">
 				<?php if ($avatar): ?>
 					<img src="<?php echo esc_url($avatar); ?>" alt="<?php echo esc_attr($author); ?>" class="w-10 h-10 rounded-full bg-surface-variant shadow-elevation-1" loading="lazy">
