@@ -9,9 +9,9 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 ?>
-<header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface-low shadow-elevation-1 border-b border-outline-variant transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav>
-	<div class="w-full h-full px-4 md:px-6 flex items-center pointer-events-auto relative" style="min-height: 64px;">
-		<div id="header-main-content" class="relative z-40 w-full h-full grid grid-cols-[1fr_auto] gap-4 items-center">
+<header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface-low shadow-elevation-1 border-b border-outline-variant transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav x-data="{ openMenu: null }" x-init="$watch('openMenu', value => { if (value) { document.body.classList.add('jw-no-scroll'); document.documentElement.classList.add('jw-no-scroll'); } else { document.body.classList.remove('jw-no-scroll'); document.documentElement.classList.remove('jw-no-scroll'); } })">
+	<div class="w-full h-full px-4 md:px-6 flex items-center pointer-events-auto" style="min-height: 64px;" @click.away="openMenu = null">
+		<div id="header-main-content" class="z-50 w-full h-full grid grid-cols-[1fr_auto] gap-4 items-center">
 			<div class="flex items-center gap-2 md:gap-6 min-w-0 order-1">
 				<button id="mobile-menu-btn" type="button" data-jagawarta-nav-toggle class="md:hidden inline-flex h-12 w-12 items-center justify-center rounded-full text-on-surface hover:bg-surface-high focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 transition-opacity duration-short flex-shrink-0" aria-controls="mobile-nav-panel" aria-expanded="false" aria-label="<?php esc_attr_e('Menu', 'jagawarta'); ?>">
 					<svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="currentColor"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>
@@ -34,7 +34,7 @@ if (has_custom_logo()) {
 						</span>
 					</a>
 				</div>
-				<nav id="header-nav" class="hidden md:flex md:ml-8 transition-all duration-expand ease-[cubic-bezier(0.2,0.0,0,1.0)] transform translate-x-0" aria-label="<?php esc_attr_e('Primary', 'jagawarta'); ?>">
+				<nav id="header-nav" class="hidden md:flex md:ml-8 transition-all duration-expand ease-[cubic-bezier(0.2,0.0,0,1.0)]" aria-label="<?php esc_attr_e('Primary', 'jagawarta'); ?>">
 					<ul class="jw-nav-menu flex items-center gap-1 list-none m-0 p-0" role="menubar">
 						<?php
 if (has_nav_menu('primary')) {
