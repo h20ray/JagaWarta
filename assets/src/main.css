@@ -356,6 +356,25 @@
     @apply static;
   }
 
+  /* Mega menu should never render open by default (Alpine may be absent on some pages). */
+  .jw-nav-menu > li > .jw-mega-menu-container {
+    display: none;
+  }
+
+  @screen md {
+    .jw-nav-menu > li.menu-item-has-children:hover > .jw-mega-menu-container {
+      display: block;
+    }
+  }
+
+  .jw-nav-menu > li.is-open > .jw-mega-menu-container {
+    display: block;
+  }
+
+  .jw-nav-menu > li.is-open .jw-nav-chevron {
+    transform: rotate(180deg);
+  }
+
   /* Full-width container needs relative parent to be the screen width */
   @screen md {
     .jw-nav-menu {
@@ -367,13 +386,15 @@
     position: absolute;
     top: 100%;
     left: 0;
-    width: 100vw;
+    right: 0;
+    width: 100%;
     background-color: var(--md-color-surface);
     box-shadow: inset 0 1px 0 0 var(--md-color-outline-variant), var(--md-sys-elevation-2);
     border-bottom: 1px solid var(--md-color-outline-variant);
     z-index: 50;
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
   }
 
   /* Precise Google-style transitions */

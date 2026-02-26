@@ -9,7 +9,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 ?>
-<header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface-low shadow-elevation-1 border-b border-outline-variant transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav x-data="{ openMenu: null }" x-init="$watch('openMenu', value => { if (value) { document.body.classList.add('jw-no-scroll'); document.documentElement.classList.add('jw-no-scroll'); } else { document.body.classList.remove('jw-no-scroll'); document.documentElement.classList.remove('jw-no-scroll'); } })">
+<header id="site-header" class="jw-site-header sticky top-0 z-50 bg-surface-low shadow-elevation-1 border-b border-outline-variant transition-shadow duration-short ease-standard relative" role="banner" data-jagawarta-header data-jagawarta-nav x-data="{ openMenu: null }" @keydown.window.escape="openMenu = null">
 	<div class="w-full h-full px-4 md:px-6 flex items-center pointer-events-auto" style="min-height: 64px;" @click.away="openMenu = null">
 		<div id="header-main-content" class="z-50 w-full h-full grid grid-cols-[1fr_auto] gap-4 items-center">
 			<div class="flex items-center gap-2 md:gap-6 min-w-0 order-1">

@@ -15,20 +15,34 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu
 	function start_lvl(&$output, $depth = 0, $args = null)
 	{
 		$indent = str_repeat("\t", $depth);
-		$output .= "\n$indent<div class=\"jw-mega-menu-container absolute left-0 right-0 top-full bg-surface z-40 overflow-hidden\" x-show=\"openMenu === " . esc_attr($this->current_item_id) . "\" x-transition:enter=\"jw-mega-menu-enter\" x-transition:enter-start=\"opacity-0 -translate-y-2\" x-transition:enter-end=\"opacity-100 translate-y-0\" x-transition:leave=\"jw-mega-menu-leave\" x-transition:leave-start=\"opacity-100 translate-y-0\" x-transition:leave-end=\"opacity-0 -translate-y-2\" @click.away=\"if (openMenu === " . esc_attr($this->current_item_id) . ") openMenu = null\" x-cloak>\n";
-		$output .= "$indent\t<div class=\"max-w-page-max mx-auto px-6 pb-12 pt-20 relative\">\n";
-		$output .= "$indent\t\t<button type=\"button\" @click.stop=\"openMenu = null\" class=\"jw-mega-menu-close absolute top-6 right-6 p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-high rounded-full transition-colors flex items-center justify-center shadow-elevation-1\" aria-label=\"Close\" title=\"" . esc_attr__('Close Menu', 'jagawarta') . "\">\n";
-		$output .= "$indent\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 -960 960 960\" width=\"24\" fill=\"currentColor\"><path d=\"m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z\"/></svg>\n";
-		$output .= "$indent\t\t</button>\n";
-		$output .= "$indent\t\t<ul class=\"sub-menu jw-mega-menu grid grid-cols-1 md:grid-cols-4 gap-8 list-none m-0 p-0\" role=\"menu\">\n";
+
+		// Top-level submenu becomes the full-width mega menu container.
+		if ($depth === 0) {
+			$output .= "\n$indent<div class=\"jw-mega-menu-container\">\n";
+			$output .= "$indent\t<div class=\"max-w-page-max mx-auto px-6 pb-12 pt-20 relative\">\n";
+			$output .= "$indent\t\t<button type=\"button\" class=\"jw-mega-menu-close absolute top-6 right-6 p-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-high rounded-full transition-colors flex items-center justify-center shadow-elevation-1\" aria-label=\"Close\" title=\"" . esc_attr__('Close Menu', 'jagawarta') . "\">\n";
+			$output .= "$indent\t\t\t<svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24\" viewBox=\"0 -960 960 960\" width=\"24\" fill=\"currentColor\"><path d=\"m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z\"/></svg>\n";
+			$output .= "$indent\t\t</button>\n";
+			$output .= "$indent\t\t<ul class=\"sub-menu jw-mega-menu\" role=\"menu\">\n";
+			return;
+		}
+
+		// Deeper levels render as standard nested lists inside mega menu columns.
+		$output .= "\n$indent<ul class=\"sub-menu\" role=\"menu\">\n";
 	}
 
 	function end_lvl(&$output, $depth = 0, $args = null)
 	{
 		$indent = str_repeat("\t", $depth);
-		$output .= "$indent\t\t</ul>\n";
-		$output .= "$indent\t</div>\n";
-		$output .= "$indent</div>\n";
+
+		if ($depth === 0) {
+			$output .= "$indent\t\t</ul>\n";
+			$output .= "$indent\t</div>\n";
+			$output .= "$indent</div>\n";
+			return;
+		}
+
+		$output .= "$indent</ul>\n";
 	}
 
 	private $current_item_id = 0;
@@ -50,7 +64,7 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu
 		$id = apply_filters('nav_menu_item_id', 'menu-item-' . $item->ID, $item, $args);
 		$id = $id ? ' id="' . esc_attr($id) . '"' : '';
 
-		$output .= $indent . '<li' . $id . $class_names . ' :class="{ \'is-open\': openMenu === ' . $item->ID . ' }">';
+		$output .= $indent . '<li' . $id . $class_names . '>';
 
 		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
@@ -62,7 +76,7 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu
 
 		$append_attrs = '';
 		if ($has_children && $depth === 0) {
-			$append_attrs = ' @click.prevent="openMenu = (openMenu === ' . $item->ID . ' ? null : ' . $item->ID . ')" :aria-expanded="openMenu === ' . $item->ID . '" aria-haspopup="true"';
+			$append_attrs = ' aria-expanded="false" aria-haspopup="true"';
 		}
 
 		$item_output = isset($args->before) ? $args->before : '';
@@ -70,7 +84,7 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu
 		$item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
 
 		if ($has_children && $depth === 0) {
-			$item_output .= '<svg class="jw-nav-chevron ml-1 h-4 w-4 inline-block transition-transform duration-short ease-standard" :class="{ \'rotate-180\': openMenu === ' . $item->ID . ' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/></svg>';
+			$item_output .= '<svg class="jw-nav-chevron ml-1 h-4 w-4 inline-block transition-transform duration-short ease-standard" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/></svg>';
 		}
 
 		$item_output .= '</a>';
@@ -88,11 +102,24 @@ class JagaWarta_Nav_Walker extends Walker_Nav_Menu
 class JagaWarta_Mobile_Nav_Walker extends Walker_Nav_Menu
 {
 	private $current_parent_id = 0;
+	private $current_parent_item = null;
 
 	function start_lvl(&$output, $depth = 0, $args = null)
 	{
 		$indent = str_repeat("\t", $depth);
 		$output .= "\n$indent<ul class=\"sub-menu jw-mobile-submenu\" role=\"menu\" id=\"submenu-" . esc_attr($this->current_parent_id) . "\" hidden>\n";
+
+		if ($depth === 0 && $this->current_parent_item instanceof WP_Post && !empty($this->current_parent_item->url)) {
+			$output .= "$indent\t<li class=\"menu-item-see-all\">\n";
+			$output .= "$indent\t\t<a class=\"jw-nav-link font-normal rounded-full\" href=\"" . esc_url($this->current_parent_item->url) . "\">";
+			$output .= esc_html(sprintf(
+				/* translators: %s: menu item title */
+				__('See all %s', 'jagawarta'),
+				$this->current_parent_item->title
+			));
+			$output .= "</a>\n";
+			$output .= "$indent\t</li>\n";
+		}
 	}
 
 	function end_lvl(&$output, $depth = 0, $args = null)
@@ -131,6 +158,7 @@ class JagaWarta_Mobile_Nav_Walker extends Walker_Nav_Menu
 
 		if ($has_children) {
 			$this->current_parent_id = $item->ID;
+			$this->current_parent_item = $item;
 			$item_output .= '<button type="button" class="jw-mobile-submenu-toggle ' . esc_attr($link_classes) . '" aria-expanded="false" aria-controls="submenu-' . esc_attr($item->ID) . '">';
 			$item_output .= (isset($args->link_before) ? $args->link_before : '') . apply_filters('the_title', $item->title, $item->ID) . (isset($args->link_after) ? $args->link_after : '');
 			$item_output .= '<svg class="jw-mobile-chevron ml-auto h-5 w-5 transition-transform duration-short ease-standard" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="currentColor"><path d="M480-345 240-585l56-56 184 184 184-184 56 56-240 240Z"/></svg>';
