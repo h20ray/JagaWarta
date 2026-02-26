@@ -42,14 +42,13 @@
 
         if (shouldFocus && tabs[nextIndex]) {
           tabs[nextIndex].focus();
-        }
-
-        if (tablist && tabs[nextIndex]) {
-          tabs[nextIndex].scrollIntoView({
-            behavior: 'smooth',
-            inline: 'center',
-            block: 'nearest',
-          });
+          if (tablist) {
+            tabs[nextIndex].scrollIntoView({
+              behavior: 'smooth',
+              inline: 'center',
+              block: 'nearest',
+            });
+          }
         }
 
         if (select) {
