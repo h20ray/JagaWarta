@@ -217,6 +217,7 @@
   .jw-home-category-mobile-picker {
     display: block;
     margin-bottom: var(--md-sys-spacing-3);
+    position: relative;
   }
 
   .jw-home-category-select {
@@ -228,7 +229,24 @@
     box-shadow: var(--md-sys-elevation-1);
     color: var(--md-color-on-surface);
     padding: 0 var(--md-sys-spacing-4);
+    padding-right: var(--md-sys-spacing-8);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
     @apply text-label-large font-medium;
+  }
+
+  .jw-home-category-mobile-picker::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: var(--md-sys-spacing-4);
+    width: 0.55rem;
+    height: 0.55rem;
+    border-right: 1px solid var(--md-color-on-surface-variant);
+    border-bottom: 1px solid var(--md-color-on-surface-variant);
+    transform: translateY(-50%) rotate(45deg);
+    pointer-events: none;
   }
 
   .jw-home-category-select:focus-visible {

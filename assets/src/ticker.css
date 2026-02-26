@@ -5,7 +5,7 @@
 .breaking-ticker__inner {
   display: flex;
   width: max-content;
-  animation: jagawarta-ticker 40s linear infinite;
+  animation: jagawarta-ticker 80s linear infinite;
 }
 .breaking-ticker__wrap:hover .breaking-ticker__inner,
 .breaking-ticker__inner.ticker-paused {

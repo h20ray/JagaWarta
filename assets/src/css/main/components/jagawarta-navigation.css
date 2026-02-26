@@ -90,6 +90,13 @@
     @apply block rounded-full px-3 py-3 text-label-large font-normal text-on-surface transition-colors duration-short ease-standard hover:bg-surface-high hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
   }
 
+  /* Ensure mobile submenu toggle keeps flex layout even when sharing jw-nav-link styles */
+  .jw-mobile-submenu-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
   @screen md {
     .jw-nav-link {
       @apply px-3 py-2;
