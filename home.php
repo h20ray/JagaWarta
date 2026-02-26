@@ -12,7 +12,7 @@ get_header();
 
 $ticker_on = (bool)get_theme_mod('jagawarta_ticker_on_front', true);
 $ticker_count = (int)get_theme_mod('jagawarta_ticker_count', 5);
-$breaking_ids = (is_front_page() && $ticker_on) ? jagawarta_get_breaking_posts($ticker_count) : array();
+$breaking_ids = $ticker_on ? jagawarta_get_breaking_posts($ticker_count) : array();
 ?>
 
 <main id="main" class="site-main layout-content layout-section flex flex-col gap-10">

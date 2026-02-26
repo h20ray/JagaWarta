@@ -18,6 +18,83 @@
 
   fallbackImages();
 
+  const initCategoryTabs = () => {
+    const tabRoots = document.querySelectorAll('[data-jw-category-tabs]');
+    if (!tabRoots.length) return;
+
+    tabRoots.forEach((root) => {
+      const tabs = Array.from(root.querySelectorAll('[data-jw-tab]'));
+      const panels = Array.from(root.querySelectorAll('[data-jw-panel]'));
+      if (!tabs.length || !panels.length) return;
+      const tablist = root.querySelector('[role="tablist"]');
+      const select = root.querySelector('[data-jw-tab-select]');
+
+      const activateTab = (nextIndex, shouldFocus = false) => {
+        tabs.forEach((tab, index) => {
+          const isActive = index === nextIndex;
+          tab.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          tab.setAttribute('tabindex', isActive ? '0' : '-1');
+          tab.classList.toggle('is-active', isActive);
+          if (panels[index]) {
+            panels[index].hidden = !isActive;
+          }
+        });
+
+        if (shouldFocus && tabs[nextIndex]) {
+          tabs[nextIndex].focus();
+        }
+
+        if (tablist && tabs[nextIndex]) {
+          tabs[nextIndex].scrollIntoView({
+            behavior: 'smooth',
+            inline: 'center',
+            block: 'nearest',
+          });
+        }
+
+        if (select) {
+          select.value = String(nextIndex);
+        }
+      };
+
+      tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => activateTab(index));
+        tab.addEventListener('keydown', (event) => {
+          let nextIndex = index;
+          if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+            nextIndex = (index + 1) % tabs.length;
+          } else if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') {
+            nextIndex = (index - 1 + tabs.length) % tabs.length;
+          } else if (event.key === 'Home') {
+            nextIndex = 0;
+          } else if (event.key === 'End') {
+            nextIndex = tabs.length - 1;
+          } else {
+            return;
+          }
+          event.preventDefault();
+          activateTab(nextIndex, true);
+        });
+      });
+
+      if (select) {
+        select.addEventListener('change', () => {
+          const nextIndex = Number.parseInt(select.value, 10);
+          if (!Number.isNaN(nextIndex) && nextIndex >= 0 && nextIndex < tabs.length) {
+            activateTab(nextIndex, false);
+          }
+        });
+      }
+
+      const activeIndex = tabs.findIndex((tab) => tab.getAttribute('aria-selected') === 'true');
+      if (activeIndex >= 0) {
+        activateTab(activeIndex, false);
+      }
+    });
+  };
+
+  initCategoryTabs();
+
   const nav = document.querySelector('[data-jagawarta-nav]');
   if (!nav) {
     return;

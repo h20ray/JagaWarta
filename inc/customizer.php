@@ -102,6 +102,31 @@ function jagawarta_customize_register( WP_Customize_Manager $wp_customize ): voi
 		'input_attrs' => array( 'min' => 1, 'max' => 30, 'step' => 1 ),
 	) );
 
+	$wp_customize->add_setting( 'jagawarta_front_tab_categories', array(
+		'default'           => '',
+		'sanitize_callback' => 'jagawarta_sanitize_category_slugs_csv',
+		'transport'         => 'refresh',
+	) );
+	$wp_customize->add_control( 'jagawarta_front_tab_categories', array(
+		'label'       => __( 'Category tabs (slugs)', 'jagawarta' ),
+		'description' => __( 'Comma-separated category slugs. Leave empty to use all categories.', 'jagawarta' ),
+		'section'     => 'jagawarta_front_page',
+		'type'        => 'text',
+	) );
+
+	$wp_customize->add_setting( 'jagawarta_front_tab_post_count', array(
+		'default'           => 10,
+		'sanitize_callback' => 'absint',
+		'transport'         => 'refresh',
+	) );
+	$wp_customize->add_control( 'jagawarta_front_tab_post_count', array(
+		'label'       => __( 'Category tabs posts count', 'jagawarta' ),
+		'description' => __( 'Number of posts shown in the right panel for each tab.', 'jagawarta' ),
+		'section'     => 'jagawarta_front_page',
+		'type'        => 'number',
+		'input_attrs' => array( 'min' => 1, 'max' => 30, 'step' => 1 ),
+	) );
+
 	// Colors Section (Seed-based MD3 Palette)
 	$wp_customize->add_section( 'jagawarta_colors', array(
 		'title'       => __( 'Colors (MD3 Palette)', 'jagawarta' ),
@@ -264,3 +289,25 @@ function jagawarta_output_palette_css(): void {
 	echo '</style>' . "\n";
 }
 
+/**
+ * Sanitize comma-separated category slugs.
+ *
+ * @param string $value Raw input.
+ * @return string
+ */
+function jagawarta_sanitize_category_slugs_csv( $value ): string {
+	$parts = preg_split( '/\s*,\s*/', strtolower( (string) $value ) );
+	if ( ! is_array( $parts ) ) {
+		return '';
+	}
+	$slugs = array();
+	foreach ( $parts as $part ) {
+		$slug = sanitize_title( $part );
+		if ( '' === $slug ) {
+			continue;
+		}
+		$slugs[] = $slug;
+	}
+	$slugs = array_values( array_unique( $slugs ) );
+	return implode( ',', $slugs );
+}

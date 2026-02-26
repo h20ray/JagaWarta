@@ -49,7 +49,7 @@ function jagawarta_get_featured_slider_ids(int $limit = 5): array
  */
 function jagawarta_get_latest_ids_excluding(int $limit = 2, array $exclude_ids = array()): array
 {
-	$limit = max(1, min($limit, 10));
+	$limit = max(1, min($limit, 30));
 	$exclude_ids = array_values(array_filter(array_map('intval', $exclude_ids)));
 
 	$q = new WP_Query(array(

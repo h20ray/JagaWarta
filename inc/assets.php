@@ -146,7 +146,7 @@ function jagawarta_enqueue_assets(): void
 
 function jagawarta_needs_ticker(): bool
 {
-	if (is_front_page() && get_theme_mod('jagawarta_ticker_on_front', true)) {
+	if ((is_front_page() || is_home()) && get_theme_mod('jagawarta_ticker_on_front', true)) {
 		return true;
 	}
 	if (is_singular()) {
